@@ -1,14 +1,14 @@
 const actions = {
-  GIT_SEARCH: 'GIT_SEARCH',
-  GIT_SUCCESS_RESULT: 'GIT_SUCCESS_RESULT',
-  GIT_ERROR_RESULT: 'GIT_ERROR_RESULT',
-  gitSearch: searcText => ({
+  GIT_SEARCH: "GIT_SEARCH",
+  GIT_SUCCESS_RESULT: "GIT_SUCCESS_RESULT",
+  GIT_ERROR_RESULT: "GIT_ERROR_RESULT",
+  gitSearch: searchText => ({
     type: actions.GIT_SEARCH,
-    payload: { searcText, page: 1 }
+    payload: { searchText, page: 1 }
   }),
-  onPageChange: (searcText, page) => ({
+  onPageChange: (searchText, page) => ({
     type: actions.GIT_SEARCH,
-    payload: { searcText, page }
+    payload: { searchText, page }
   }),
   gitSearchSuccess: (result, total_count, page) => ({
     type: actions.GIT_SUCCESS_RESULT,

@@ -1,9 +1,14 @@
 import styled from 'styled-components';
-import { palette } from 'styled-theme';
-import { borderRadius, transition } from '../../settings/style-util';
+import {
+  palette
+} from 'styled-theme';
+import {
+  borderRadius,
+  transition
+} from '../../settings/style-util';
 import WithDirection from '../../settings/withDirection';
 
-const WDGithubResultListStyleWrapper = styled.div`
+const WDGithubResultListStyleWrapper = styled.div `
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -120,7 +125,7 @@ const WDGithubResultListStyleWrapper = styled.div`
     }
   }
 `;
-const GithubResultStyleWrapper = styled.div`
+const GithubResultStyleWrapper = styled.div `
   margin-top: 30px;
 
   .isoTotalRepository {
@@ -151,4 +156,7 @@ const GithubResultListStyleWrapper = WithDirection(
   WDGithubResultListStyleWrapper
 );
 
-export { GithubResultListStyleWrapper, GithubResultStyleWrapper };
+export {
+  GithubResultListStyleWrapper,
+  GithubResultStyleWrapper
+};

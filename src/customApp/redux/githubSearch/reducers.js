@@ -1,7 +1,7 @@
-import actions from './actions';
+import actions from "./actions";
 
 const initState = {
-  searcText: 'react',
+  searchText: "react",
   total_count: 0,
   page: 1,
   result: [],
@@ -15,7 +15,7 @@ export default function reducer(state = initState, action) {
       return {
         ...state,
         loading: true,
-        searcText: action.payload.searcText
+        searchText: action.payload.searchText
       };
     case actions.GIT_SUCCESS_RESULT:
       return {

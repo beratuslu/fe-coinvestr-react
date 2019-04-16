@@ -1,14 +1,14 @@
 const actions = {
-  YOUTUBE_SEARCH: 'YOUTUBE_SEARCH',
-  YOUTUBE_SUCCESS_RESULT: 'YOUTUBE_SUCCESS_RESULT',
-  YOUTUBE_ERROR_RESULT: 'YOUTUBE_ERROR_RESULT',
-  youtubeSearch: searcText => ({
+  YOUTUBE_SEARCH: "YOUTUBE_SEARCH",
+  YOUTUBE_SUCCESS_RESULT: "YOUTUBE_SUCCESS_RESULT",
+  YOUTUBE_ERROR_RESULT: "YOUTUBE_ERROR_RESULT",
+  youtubeSearch: searchText => ({
     type: actions.YOUTUBE_SEARCH,
-    payload: { searcText }
+    payload: { searchText }
   }),
-  onPageChange: (searcText, pageToken) => ({
+  onPageChange: (searchText, pageToken) => ({
     type: actions.YOUTUBE_SEARCH,
-    payload: { searcText, pageToken }
+    payload: { searchText, pageToken }
   }),
   youtubeSearchSuccess: (
     result,

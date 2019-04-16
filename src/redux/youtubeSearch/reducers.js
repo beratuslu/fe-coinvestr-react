@@ -1,7 +1,7 @@
-import actions from './actions';
+import actions from "./actions";
 
 const initState = {
-  searcText: 'React JS Conf',
+  searchText: "React JS Conf",
   total_count: 0,
   result: [],
   loading: false,
@@ -14,7 +14,7 @@ export default function reducer(state = initState, action) {
       return {
         ...state,
         loading: true,
-        searcText: action.payload.searcText
+        searchText: action.payload.searchText
       };
     case actions.YOUTUBE_SUCCESS_RESULT:
       return {

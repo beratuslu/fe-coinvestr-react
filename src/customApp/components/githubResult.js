@@ -1,19 +1,19 @@
-import React from 'react';
-import Loader from '../../components/utility/loader';
-import HelperText from '../../components/utility/helper-text';
-import Pagination from '../../components/uielements/pagination';
-import { per_page } from '../redux/githubSearch/sagas';
+import React from "react";
+import Loader from "../../components/utility/loader";
+import HelperText from "../../components/utility/helper-text";
+import Pagination from "../../components/uielements/pagination";
+import { per_page } from "../redux/githubSearch/sagas";
 import {
   GithubResultListStyleWrapper,
-  GithubResultStyleWrapper,
-} from './githubResult.style';
+  GithubResultStyleWrapper
+} from "./githubResult.style";
 
 function SearchList(result) {
   return (
     <GithubResultListStyleWrapper className="isoGithubResultList">
       {result.map(item => {
         const onClick = () => {
-          window.open(item.html_url, '_blank');
+          window.open(item.html_url, "_blank");
         };
         const updateDate = new Date(item.updated_at).toDateString();
         return (
@@ -28,15 +28,15 @@ function SearchList(result) {
               {item.language ? (
                 <span className="language">{item.language}</span>
               ) : (
-                ''
+                ""
               )}
               {item.stargazers_count ? (
                 <span className="totalStars">{item.stargazers_count}</span>
               ) : (
-                ''
+                ""
               )}
             </div>
-            {item.description ? <p>{item.description}</p> : ''}
+            {item.description ? <p>{item.description}</p> : ""}
             <span className="updateDate">Updated on {updateDate}</span>
           </div>
         );
@@ -45,8 +45,8 @@ function SearchList(result) {
   );
 }
 const GitResult = ({ GitSearch, onPageChange }) => {
-  const { searcText, result, loading, error, page, total_count } = GitSearch;
-  if (!searcText) {
+  const { searchText, result, loading, error, page, total_count } = GitSearch;
+  if (!searchText) {
     return <div />;
   }
   if (loading) {
@@ -71,7 +71,7 @@ const GitResult = ({ GitSearch, onPageChange }) => {
           defaultCurrent={page}
           total={pageCount}
           onChange={page => {
-            onPageChange(searcText, page);
+            onPageChange(searchText, page);
           }}
         />
       </div>

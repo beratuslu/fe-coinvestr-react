@@ -1,25 +1,25 @@
-import { all, takeEvery, put, call } from 'redux-saga/effects';
-import actions from './actions';
-import { youtubeSearchApi } from '../../settings';
+import { all, takeEvery, put, call } from "redux-saga/effects";
+import actions from "./actions";
+import { youtubeSearchApi } from "../../settings";
 export const per_page = 10;
 const maxResults = 10;
 const youtubeSearchURL = `https://www.googleapis.com/youtube/v3/search?maxResults=${maxResults}&type=video&key=${youtubeSearchApi}&part=snippet`;
 
-const onSearchReqeust = async (searcText, pageToken) =>
+const onSearchReqeust = async (searchText, pageToken) =>
   await fetch(
-    `${youtubeSearchURL}&q=${encodeURIComponent(searcText)}${pageToken}`
+    `${youtubeSearchURL}&q=${encodeURIComponent(searchText)}${pageToken}`
   )
     .then(res => res.json())
     .then(res => res)
     .catch(error => error);
 
 function* searchRequest({ payload }) {
-  const { searcText, pageToken } = payload;
+  const { searchText, pageToken } = payload;
   try {
     const searchResult = yield call(
       onSearchReqeust,
-      searcText,
-      pageToken ? `&pageToken=${pageToken}` : ''
+      searchText,
+      pageToken ? `&pageToken=${pageToken}` : ""
     );
     if (searchResult.items) {
       yield put(

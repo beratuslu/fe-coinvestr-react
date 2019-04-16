@@ -24,7 +24,7 @@ class YoutubeSearch extends Component {
     }
   };
   componentDidMount() {
-    this.onSearch(this.props.YoutubeSearch.searcText);
+    this.onSearch(this.props.YoutubeSearch.searchText);
   }
   render() {
     const { rowStyle, colStyle, gutter } = basicStyle;
@@ -40,7 +40,7 @@ class YoutubeSearch extends Component {
               <Box style={{ minHeight: 220 }}>
                 <InputSearch
                   placeholder="Search on Youtube"
-                  defaultValue={this.props.YoutubeSearch.searcText}
+                  defaultValue={this.props.YoutubeSearch.searchText}
                   onSearch={this.onSearch}
                 />
                 <YoutubeResult
