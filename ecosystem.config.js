@@ -4,7 +4,8 @@ module.exports = {
       name: "app",
       script: "npx",
       interpreter: "none",
-      args: "serve -p 5000 -T"
+      // args: "serve -p 5000 -T"
+      args: "serve -s build"
 
       // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
       // args: "one two",
