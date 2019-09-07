@@ -11,6 +11,7 @@
     "classnames": "^2.2.5",
     "clone": "^2.1.1",
     "connected-react-router": "^6.1.0",
+    "cra-append-sw": "^2.6.1",
     "d3-shape": "^1.0.6",
     "enzyme-adapter-react-16": "^1.7.1",
     "enzyme-react-intl": "^2.0.3",
@@ -100,7 +101,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cra-append-sw --skip-compile ./public/custom-sw.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
