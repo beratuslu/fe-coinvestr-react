@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Input from '../../components/uielements/input';
-import Checkbox from '../../components/uielements/checkbox';
-import Button from '../../components/uielements/button';
-import authAction from '../../redux/auth/actions';
-import appAction from '../../redux/app/actions';
-import Auth0 from '../../helpers/auth0';
-import Firebase from '../../helpers/firebase';
-import FirebaseLogin from '../../components/firebase';
-import IntlMessages from '../../components/utility/intlMessages';
-import SignInStyleWrapper from './signin.style';
+import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import Input from "../../components/uielements/input";
+import Checkbox from "../../components/uielements/checkbox";
+import Button from "../../components/uielements/button";
+import authAction from "../../redux/auth/actions";
+import appAction from "../../redux/app/actions";
+import Auth0 from "../../helpers/auth0";
+import Firebase from "../../helpers/firebase";
+import FirebaseLogin from "../../components/firebase";
+import IntlMessages from "../../components/utility/intlMessages";
+import SignInStyleWrapper from "./signin.style";
 
 const { login } = authAction;
 const { clearMenu } = appAction;
 
 class SignIn extends Component {
   state = {
-    redirectToReferrer: false,
+    redirectToReferrer: false
   };
   componentWillReceiveProps(nextProps) {
     if (
@@ -30,16 +30,18 @@ class SignIn extends Component {
   handleLogin = (token = false) => {
     const { login, clearMenu } = this.props;
     if (token) {
+      console.log("1");
       login(token);
     } else {
+      console.log("2");
       login();
     }
     clearMenu();
-    this.props.history.push('/dashboard');
+    this.props.history.push("/dashboard");
   };
   render() {
     const { history } = this.props;
-    const from = { pathname: '/dashboard' };
+    const from = { pathname: "/dashboard" };
     const { redirectToReferrer } = this.state;
 
     if (redirectToReferrer) {
@@ -116,6 +118,9 @@ class SignIn extends Component {
                 <Link to="/signup">
                   <IntlMessages id="page.signInCreateAccount" />
                 </Link>
+                <Link to="/dashboard">
+                  <IntlMessages id="page.signInCreateAccount" />
+                </Link>
               </div>
             </div>
           </div>
@@ -127,7 +132,7 @@ class SignIn extends Component {
 
 export default connect(
   state => ({
-    isLoggedIn: state.Auth.idToken !== null ? true : false,
+    isLoggedIn: state.Auth.idToken !== null ? true : false
   }),
   { login, clearMenu }
 )(SignIn);
