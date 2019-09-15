@@ -75,12 +75,12 @@ class SignIn extends Component {
                 </Button>
               </div>
 
-              <p className="isoHelperText">
+              {/* <p className="isoHelperText">
                 <IntlMessages id="page.signInPreview" />
-              </p>
+              </p> */}
 
               <div className="isoInputWrapper isoOtherLogin">
-                <Button
+                {/* <Button
                   onClick={this.handleLogin}
                   type="primary"
                   className="btnFacebook"
@@ -109,16 +109,14 @@ class SignIn extends Component {
 
                 {Firebase.isValid && (
                   <FirebaseLogin history={history} login={this.props.login} />
-                )}
+                )} */}
               </div>
+
               <div className="isoCenterComponent isoHelperWrapper">
                 <Link to="/forgotpassword" className="isoForgotPass">
                   <IntlMessages id="page.signInForgotPass" />
                 </Link>
                 <Link to="/signup">
-                  <IntlMessages id="page.signInCreateAccount" />
-                </Link>
-                <Link to="/dashboard">
                   <IntlMessages id="page.signInCreateAccount" />
                 </Link>
               </div>
