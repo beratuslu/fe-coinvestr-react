@@ -10,7 +10,9 @@ import Auth0 from "../../helpers/auth0";
 import Firebase from "../../helpers/firebase";
 import FirebaseLogin from "../../components/firebase";
 import IntlMessages from "../../components/utility/intlMessages";
+import Form from "../../components/uielements/form";
 import SignInStyleWrapper from "./signin.style";
+const FormItem = Form.Item;
 
 const { login } = authAction;
 const { clearMenu } = appAction;
@@ -27,22 +29,39 @@ class SignIn extends Component {
       this.setState({ redirectToReferrer: true });
     }
   }
-  handleLogin = (token = false) => {
+  // handleLogin = (token = false) => {
+  //   const { login, clearMenu } = this.props;
+  //   if (token) {
+  //     console.log("1");
+  //     login(token);
+  //   } else {
+  //     console.log("2");
+  //     login();
+  //   }
+  //   clearMenu();
+  //   this.props.history.push("/dashboard");
+  // };
+
+  handleLogin = e => {
+    e.preventDefault();
     const { login, clearMenu } = this.props;
-    if (token) {
-      console.log("1");
-      login(token);
-    } else {
-      console.log("2");
-      login();
-    }
-    clearMenu();
-    this.props.history.push("/dashboard");
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log("geldi mi?");
+        // Notification(
+        //   "success",
+        //   "Received values of form",
+        //   JSON.stringify(values)
+        // );
+        login({ email: values.email, password: values.password });
+      }
+    });
   };
   render() {
     const { history } = this.props;
     const from = { pathname: "/dashboard" };
     const { redirectToReferrer } = this.state;
+    const { getFieldDecorator } = this.props.form;
 
     if (redirectToReferrer) {
       return <Redirect to={from} />;
@@ -56,31 +75,75 @@ class SignIn extends Component {
                 <IntlMessages id="page.signInTitle" />
               </Link>
             </div>
+            <Form onSubmit={this.handleSubmit}>
+              <div className="isoSignInForm">
+                <div className="isoInputWrapper">
+                  {/* <Input size="large" placeholder="Username" /> */}
 
-            <div className="isoSignInForm">
-              <div className="isoInputWrapper">
-                <Input size="large" placeholder="Username" />
-              </div>
+                  <FormItem hasFeedback>
+                    {getFieldDecorator("email", {
+                      rules: [
+                        {
+                          type: "email",
+                          message: "The input is not valid E-mail!"
+                        },
+                        {
+                          required: true,
+                          message: "Please input your E-mail!"
+                        }
+                      ]
+                    })(
+                      <Input
+                        size="large"
+                        name="email"
+                        placeholder="E-mail"
+                        id="email"
+                      />
+                    )}
+                  </FormItem>
+                </div>
+                <div className="isoInputWrapper">
+                  {/* <Input size="large" placeholder="Username" /> */}
 
-              <div className="isoInputWrapper">
-                <Input size="large" type="password" placeholder="Password" />
-              </div>
+                  <FormItem hasFeedback>
+                    {getFieldDecorator("password", {
+                      rules: [
+                        {
+                          required: true,
+                          message: "Please input your password!"
+                        }
+                      ]
+                    })(
+                      <Input
+                        size="large"
+                        placeholder="Password"
+                        name="password"
+                        id="password"
+                        type="password"
+                      />
+                    )}
+                  </FormItem>
+                </div>
 
-              <div className="isoInputWrapper isoLeftRightComponent">
-                <Checkbox>
-                  <IntlMessages id="page.signInRememberMe" />
-                </Checkbox>
-                <Button type="primary" onClick={this.handleLogin}>
-                  <IntlMessages id="page.signInButton" />
-                </Button>
-              </div>
+                {/* <div className="isoInputWrapper">
+                  <Input size="large" type="password" placeholder="Password" />
+                </div> */}
 
-              {/* <p className="isoHelperText">
+                <div className="isoInputWrapper isoLeftRightComponent">
+                  <Checkbox>
+                    <IntlMessages id="page.signInRememberMe" />
+                  </Checkbox>
+                  <Button type="primary" onClick={this.handleLogin}>
+                    <IntlMessages id="page.signInButton" />
+                  </Button>
+                </div>
+
+                {/* <p className="isoHelperText">
                 <IntlMessages id="page.signInPreview" />
               </p> */}
 
-              <div className="isoInputWrapper isoOtherLogin">
-                {/* <Button
+                <div className="isoInputWrapper isoOtherLogin">
+                  {/* <Button
                   onClick={this.handleLogin}
                   type="primary"
                   className="btnFacebook"
@@ -110,17 +173,18 @@ class SignIn extends Component {
                 {Firebase.isValid && (
                   <FirebaseLogin history={history} login={this.props.login} />
                 )} */}
-              </div>
+                </div>
 
-              <div className="isoCenterComponent isoHelperWrapper">
-                <Link to="/forgotpassword" className="isoForgotPass">
-                  <IntlMessages id="page.signInForgotPass" />
-                </Link>
-                <Link to="/signup">
-                  <IntlMessages id="page.signInCreateAccount" />
-                </Link>
+                <div className="isoCenterComponent isoHelperWrapper">
+                  <Link to="/forgotpassword" className="isoForgotPass">
+                    <IntlMessages id="page.signInForgotPass" />
+                  </Link>
+                  <Link to="/signup">
+                    <IntlMessages id="page.signInCreateAccount" />
+                  </Link>
+                </div>
               </div>
-            </div>
+            </Form>
           </div>
         </div>
       </SignInStyleWrapper>
@@ -130,7 +194,7 @@ class SignIn extends Component {
 
 export default connect(
   state => ({
-    isLoggedIn: state.Auth.idToken !== null ? true : false
+    isLoggedIn: state.Auth.token !== null ? true : false
   }),
   { login, clearMenu }
-)(SignIn);
+)(Form.create()(SignIn));

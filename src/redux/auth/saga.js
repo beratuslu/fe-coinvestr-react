@@ -7,7 +7,6 @@ const loginUrl = `http://35.246.165.86/api/Account/Login`;
 const fakeApiCall = true; // auth0 or express JWT
 
 const onLoginRequest = async credentials => {
-  console.log("TCL: credentials", credentials);
   return await fetch(`${loginUrl}`, {
     method: "POST",
     headers: {
@@ -17,8 +16,10 @@ const onLoginRequest = async credentials => {
         "nkM+r4QxK0END2A9p/DpzV4dZ6uTbBcKjSBNYLv1LwVAUQkrW77FzGc3TqsO/v4Et0mVhNhD0rk2nkTumHwSrinxv3NxnXUKAy83JZ8D2zJeAv/gd6W2pyqaJYlrLuZoMOOwxuAW2GOi0Bj7jdg1MFjJOgr+l4kdUUBc+JOw+i6789TWYO5hK6RIeS8y/Ub8"
     },
     body: JSON.stringify({
-      Email: "tanerparcali@gmail.com",
-      Password: "!Taner7674226"
+      // Email: "tanerparcali@gmail.com",
+      // Password: "!Taner7674226"
+      Email: credentials.email,
+      Password: credentials.password
     })
   })
     .then(res => res.json())
@@ -30,7 +31,6 @@ export function* loginRequest() {
   yield takeEvery("LOGIN_REQUEST", function*({ credentials }) {
     try {
       const loginResult = yield call(onLoginRequest, credentials);
-      console.log("TCL: yieldtakeEvery -> loginResult", loginResult);
       if (loginResult.Success) {
         //response.success
 
@@ -51,7 +51,6 @@ export function* loginRequest() {
 
 export function* loginSuccess() {
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
-    console.log("TCL: yieldtakeEvery -> payload", payload);
     yield localStorage.setItem("token", payload.token);
     yield put(push("/dashboard"));
     // this.props.history.push('/dashboard');
@@ -60,8 +59,6 @@ export function* loginSuccess() {
 
 export function* loginError() {
   yield takeEvery(actions.LOGIN_ERROR, function*() {
-    console.log("burada error gostermek lazim.");
-
     notifications.error({
       message: "Login Error",
       description: "Email or Password Invalid."
