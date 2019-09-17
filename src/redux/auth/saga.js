@@ -3,7 +3,7 @@ import { push } from "react-router-redux";
 import { getToken, clearToken } from "../../helpers/utility";
 import actions from "./actions";
 import notifications from "../../components/feedback/notification";
-const loginUrl = `http://35.246.165.86/api/Account/Login`;
+const loginUrl = `http://localhost:5001/public/login`;
 const fakeApiCall = true; // auth0 or express JWT
 
 const onLoginRequest = async credentials => {
@@ -11,15 +11,11 @@ const onLoginRequest = async credentials => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
-      ApiToken:
-        "nkM+r4QxK0END2A9p/DpzV4dZ6uTbBcKjSBNYLv1LwVAUQkrW77FzGc3TqsO/v4Et0mVhNhD0rk2nkTumHwSrinxv3NxnXUKAy83JZ8D2zJeAv/gd6W2pyqaJYlrLuZoMOOwxuAW2GOi0Bj7jdg1MFjJOgr+l4kdUUBc+JOw+i6789TWYO5hK6RIeS8y/Ub8"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      // Email: "tanerparcali@gmail.com",
-      // Password: "!Taner7674226"
-      Email: credentials.email,
-      Password: credentials.password
+      email: credentials.email,
+      password: credentials.password
     })
   })
     .then(res => res.json())
@@ -31,13 +27,14 @@ export function* loginRequest() {
   yield takeEvery("LOGIN_REQUEST", function*({ credentials }) {
     try {
       const loginResult = yield call(onLoginRequest, credentials);
-      if (loginResult.Success) {
+      if (loginResult.status) {
+        console.log("TCL: yieldtakeEvery -> loginResult", loginResult);
         //response.success
 
         yield put({
           type: actions.LOGIN_SUCCESS,
-          token: loginResult.Token,
-          user: loginResult.user
+          token: loginResult.data.token,
+          user: loginResult.data.user
         });
       } else {
         //user not found or wrong password
@@ -52,6 +49,7 @@ export function* loginRequest() {
 export function* loginSuccess() {
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
     yield localStorage.setItem("token", payload.token);
+    yield put(actions.startSocket(payload.token));
     yield put(push("/dashboard"));
     // this.props.history.push('/dashboard');
   });

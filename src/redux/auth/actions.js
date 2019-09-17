@@ -9,6 +9,11 @@ const actions = {
     type: actions.LOGIN_REQUEST,
     credentials
   }),
+  startSocket: token => ({
+    type: "START_CHANNEL",
+    token
+  }),
+
   logout: () => ({
     type: actions.LOGOUT
   })
