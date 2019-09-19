@@ -24,7 +24,7 @@ function connect() {
 
 function subscribe(socket) {
   return eventChannel(emit => {
-    socket.on("asdasd", data => {
+    socket.on("newNotif", data => {
       console.log("TCL: subscribe -> data", data);
       // emit(addUser({ username }));
     });
