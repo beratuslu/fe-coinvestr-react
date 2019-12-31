@@ -57,7 +57,7 @@ export function* loginSuccess() {
 
 export function* loginError() {
   yield takeEvery(actions.LOGIN_ERROR, function*() {
-    notifications.error({
+    yield notifications.error({
       message: "Login Error",
       description: "Email or Password Invalid."
     });
