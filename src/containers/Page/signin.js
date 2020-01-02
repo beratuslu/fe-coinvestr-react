@@ -58,7 +58,7 @@ class SignIn extends Component {
     });
   };
   render() {
-    const { history } = this.props;
+    // const { history } = this.props;
     const from = { pathname: "/dashboard" };
     const { redirectToReferrer } = this.state;
     const { getFieldDecorator } = this.props.form;

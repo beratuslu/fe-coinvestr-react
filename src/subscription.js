@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const convertedVapidKey = urlBase64ToUint8Array(
   process.env.REACT_APP_PUBLIC_VAPID_KEY
 );
