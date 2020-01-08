@@ -5,7 +5,7 @@ module.exports = {
       script: "npx",
       interpreter: "none",
       // args: "serve -p 5000 -T"
-      args: "serve -s build",
+      args: "serve -s build"
 
       // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
       // args: "one two",
@@ -25,11 +25,7 @@ module.exports = {
       // env_production: {
       //   NODE_ENV: "production",
       //   PUBLIC_URL: "/dashboard"
-      // },
-      env: {
-        NODE_ENV: "production",
-        PUBLIC_URL: "/dashboard"
-      }
+      // }
     }
     // {
     //   name: "ah",
