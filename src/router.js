@@ -13,12 +13,13 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
       isLoggedIn ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{
-            pathname: "/pages/authentication/login-basic",
-            state: { from: props.location }
-          }}
-        />
+        // <Redirect
+        //   to={{
+        //     pathname: "/pages/authentication/login-basic",
+        //     state: { from: props.location }
+        //   }}
+        // />
+        (window.location.href = "/pages/authentication/login-basic")
       )
     }
   />
