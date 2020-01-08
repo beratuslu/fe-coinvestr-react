@@ -22,7 +22,11 @@ module.exports = {
       //     "BNfDaGHc5DGwjvZjVMHRIsiTnubsj2VCnHobbvIZA87RS3grAehcUusMx8euLC6lvGGMw9Fsq-DrpcHlKKHGjRw",
       //   PRIVATE_VAPID_KEY: "_RBtiBepwL7-FZf_S1W3WVPsk82LawF_qvPH2TCCt4w"
       // },
-      env_production: {
+      // env_production: {
+      //   NODE_ENV: "production",
+      //   PUBLIC_URL: "/dashboard"
+      // },
+      env: {
         NODE_ENV: "production",
         PUBLIC_URL: "/dashboard"
       }
