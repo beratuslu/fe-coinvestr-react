@@ -24,7 +24,7 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 function sendSubscription(subscription) {
-  return fetch(`${process.env.REACT_APP_API_URL}/public/web-push-subscribe`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/web-push/subscribe`, {
     method: "POST",
     body: JSON.stringify(subscription),
     headers: {

@@ -1,3 +1,3 @@
 export default {
-  baseURL: "http://cedeosapi.test.svc.bitci.com/api"
+  baseURL: "http://localhost:5001"
 };
