@@ -277,6 +277,11 @@ const routes = [
     component: asyncComponent(() => import("../ScrumBoard")),
     exact: false
   },
+  {
+    path: "profile",
+    component: asyncComponent(() => import("../Profile/Profile")),
+    exact: false
+  },
   ...customRoutes
 ];
 
