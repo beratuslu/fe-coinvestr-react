@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import 'antd/dist/antd.css';
+import { createGlobalStyle } from "styled-components";
+import "antd/dist/antd.css";
 
 const GlobalStyles = createGlobalStyle`
   .header {
@@ -135,7 +135,46 @@ const GlobalStyles = createGlobalStyle`
 
 /*-----------------------------------------------*/ 
   // style for Drawer [ScrumBoard]
-  /*-----------------------------------------------*/
+/*-----------------------------------------------*/
+
+
+
+/* Instagram Modal */
+
+.ant-modal-wrap.instagram-modal .ant-modal {
+  max-width: 935px;
+  width: 100% !important;
+}
+
+@media only screen and (max-width: 991px) {
+  .ant-modal-wrap.instagram-modal .ant-modal {
+    padding: 0 60px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ant-modal-wrap.instagram-modal .ant-modal {
+    max-width: 580px;
+  }
+}
+
+.ant-modal-wrap.instagram-modal .ant-modal-content {
+  border-radius: 0;
+}
+
+.ant-modal-wrap.instagram-modal .ant-modal-content button.ant-modal-close {
+  position: fixed;
+  color: #fff;
+}
+
+.ant-modal-wrap.instagram-modal .ant-modal-content button.ant-modal-close i {
+  font-size: 24px;
+}
+
+.ant-modal-wrap.instagram-modal .ant-modal-content .ant-modal-body {
+  padding: 0;
+}
+
 
   
 
