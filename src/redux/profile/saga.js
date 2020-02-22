@@ -1,7 +1,7 @@
 // saga.js
-import { all, takeEvery, put } from 'redux-saga/effects';
-import profileActions from './actions';
-import DemoProfileData from './profile.data';
+import { all, takeEvery, put } from "redux-saga/effects";
+import profileActions from "./actions";
+import DemoProfileData from "./profile.data";
 
 function* fetchProfileDataEffect() {
   try {
@@ -14,6 +14,6 @@ function* fetchProfileDataEffect() {
 
 export default function* profileSaga() {
   yield all([
-    takeEvery(profileActions.FETCH_PROFILE_DATA_START, fetchProfileDataEffect),
+    takeEvery(profileActions.FETCH_PROFILE_DATA_START, fetchProfileDataEffect)
   ]);
 }

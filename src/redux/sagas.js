@@ -14,6 +14,7 @@ import devSagas from "../customApp/redux/sagas";
 import articles from "./articles/sagas";
 import investors from "./investors/sagas";
 import scrumBoardSaga from "./scrumBoard/saga";
+import profileSaga from "./profile/saga";
 
 export default function* rootSaga(getState) {
   yield all([
@@ -31,6 +32,7 @@ export default function* rootSaga(getState) {
     devSagas(),
     articles(),
     investors(),
+    profileSaga(),
     scrumBoardSaga()
   ]);
 }

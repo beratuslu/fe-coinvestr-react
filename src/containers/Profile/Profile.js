@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+// import React, { useState, useEffect, useCallback } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import Spin from "../../ui/Antd/Spin/Spin";
 import Modal from "../../ui/Antd/Modal/Modal";
 import Container from "../../ui/UI/Container/Container";
@@ -7,119 +9,132 @@ import Posts from "./Posts/Posts";
 import Followers from "./Followers/Followers";
 import Following from "./Following/Following";
 import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import profileActions from "../../redux/profile/actions";
 
-const MyProfile = () => {
-  const data = useSelector(state => state.profile.data);
-  const loading = useSelector(state => state.profile.loading);
-  const dispatch = useDispatch();
-  const getProfile = useCallback(
-    () => dispatch(profileActions.fetchProfileDataStart()),
-    [dispatch]
-  );
+class MyProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleMenu = this.handleMenu.bind(this);
+    this.state = {
+      active: "post",
+      visible: false
+    };
+  }
 
-  const [active, setActive] = useState("post");
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    getProfile();
-  }, [getProfile]);
-
-  const handleMenu = type => {
+  componentDidMount() {
+    this.props.dispatch(profileActions.fetchProfileDataStart());
+  }
+  handleCancel() {
+    this.setState({ visible: false, active: "post" });
+  }
+  handleMenu(type) {
     if (type === "post") {
-      setActive(type);
+      // setActive(type);
+      this.setState({ active: type });
     }
     if (type === "followers") {
-      setActive(type);
-      setVisible(true);
+      // setActive(type);
+      // setVisible(true);
+      this.setState({ active: type, visible: true });
     }
     if (type === "following") {
-      setActive(type);
-      setVisible(true);
+      // setActive(type);
+      // setVisible(true);
+      this.setState({ active: type, visible: true });
     }
-  };
+  }
+  render() {
+    // const { view, height } = this.props;
+    console.log("TCL: MyProfile -> render -> this.props", this.props);
+    return (
+      <Wrapper>
+        {this.props.loading !== true ? (
+          <>
+            <Banner
+              className="profile-banner"
+              style={{ backgroundImage: `url(${this.props.data.profile_bg})` }}
+            >
+              <Container className="container">
+                <AvatarCard
+                  avatar={this.props.data.avatar}
+                  name={this.props.data.name}
+                  username={this.props.data.username}
+                />
+              </Container>
+            </Banner>
 
-  const handleCancel = () => {
-    setVisible(false);
-    setActive("post");
-  };
+            <Navigation className="navigation">
+              <Container className="container">
+                <ul className="menu">
+                  <li
+                    className={this.state.active === "post" ? "active" : ""}
+                    onClick={() => this.handleMenu("post")}
+                  >
+                    <strong>{this.props.data.post.length}</strong> Posts
+                  </li>
+                  <li
+                    className={
+                      this.state.active === "followers" ? "active" : ""
+                    }
+                    onClick={() => this.handleMenu("followers")}
+                  >
+                    <strong>{this.props.data.followers.length}</strong>{" "}
+                    Followers
+                  </li>
+                  <li
+                    className={
+                      this.state.active === "following" ? "active" : ""
+                    }
+                    onClick={() => this.handleMenu("following")}
+                  >
+                    <strong>{this.props.data.following.length}</strong>{" "}
+                    Following
+                  </li>
+                </ul>
+              </Container>
+            </Navigation>
 
-  return (
-    <Wrapper>
-      {loading !== true ? (
-        <>
-          <Banner
-            className="profile-banner"
-            style={{ backgroundImage: `url(${data.profile_bg})` }}
+            <ContentWrapper>
+              <Container className="container">
+                <Posts
+                  avatar={this.props.data.avatar}
+                  username={this.props.data.username}
+                  data={this.props.data.post}
+                />
+                <Modal
+                  wrapClassName="follow-modal"
+                  visible={this.state.visible}
+                  onCancel={this.handleCancel}
+                  footer={null}
+                >
+                  {this.state.active === "followers" && (
+                    <Followers data={this.props.data.followers} />
+                  )}
+                  {this.state.active === "following" && (
+                    <Following data={this.props.data.following} />
+                  )}
+                </Modal>
+              </Container>
+            </ContentWrapper>
+          </>
+        ) : (
+          <div
+            style={{
+              minHeight: "150px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
           >
-            <Container className="container">
-              <AvatarCard
-                avatar={data.avatar}
-                name={data.name}
-                username={data.username}
-              />
-            </Container>
-          </Banner>
-
-          <Navigation className="navigation">
-            <Container className="container">
-              <ul className="menu">
-                <li
-                  className={active === "post" ? "active" : ""}
-                  onClick={() => handleMenu("post")}
-                >
-                  <strong>{data.post.length}</strong> Posts
-                </li>
-                <li
-                  className={active === "followers" ? "active" : ""}
-                  onClick={() => handleMenu("followers")}
-                >
-                  <strong>{data.followers.length}</strong> Followers
-                </li>
-                <li
-                  className={active === "following" ? "active" : ""}
-                  onClick={() => handleMenu("following")}
-                >
-                  <strong>{data.following.length}</strong> Following
-                </li>
-              </ul>
-            </Container>
-          </Navigation>
-
-          <ContentWrapper>
-            <Container className="container">
-              <Posts
-                avatar={data.avatar}
-                username={data.username}
-                data={data.post}
-              />
-              <Modal
-                wrapClassName="follow-modal"
-                visible={visible}
-                onCancel={handleCancel}
-                footer={null}
-              >
-                {active === "followers" && <Followers data={data.followers} />}
-                {active === "following" && <Following data={data.following} />}
-              </Modal>
-            </Container>
-          </ContentWrapper>
-        </>
-      ) : (
-        <div
-          style={{
-            minHeight: "150px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          <Spin />
-        </div>
-      )}
-    </Wrapper>
-  );
-};
-
-export default MyProfile;
+            <Spin />
+          </div>
+        )}
+      </Wrapper>
+    );
+  }
+}
+export default connect(state => ({
+  ...state.Profile
+}))(MyProfile);
