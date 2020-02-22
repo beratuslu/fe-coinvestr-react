@@ -2,8 +2,8 @@ import getDevSidebar from "../../customApp/sidebar";
 const options = [
   {
     key: "profile",
-    label: "sidebar.email",
-    leftIcon: "ion-android-mail"
+    label: "sidebar.profile",
+    leftIcon: "ion-android-person"
   },
   {
     key: "mailbox",
