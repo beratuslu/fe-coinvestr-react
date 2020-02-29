@@ -97,7 +97,7 @@ class Cards extends Component {
             <Box>
               <ButtonWrapper className="isoButtonWrapper">
                 <Button type="primary" className="" onClick={this.addColumn}>
-                  Add New Card
+                  Add New Card-
                 </Button>
               </ButtonWrapper>
 

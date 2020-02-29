@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import notification from '../../components/notification';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import notification from "../../components/notification";
 // import Box from '../../components/utility/box';
-import HelperText from '../../components/utility/helper-text';
-import LayoutWrapper from '../../components/utility/layoutWrapper';
-import PageHeader from '../../components/utility/pageHeader';
-import IntlMessages from '../../components/utility/intlMessages';
-import Scrollbars from '../../components/utility/customScrollBar';
-import Button from '../../components/uielements/button';
-import invoiceActions from '../../redux/invoice/actions';
-import CardWrapper, { Box, StatusTag } from './invoice.style';
-import TableWrapper from '../Tables/antTables/antTable.style';
+import HelperText from "../../components/utility/helper-text";
+import LayoutWrapper from "../../components/utility/layoutWrapper";
+import PageHeader from "../../components/utility/pageHeader";
+import IntlMessages from "../../components/utility/intlMessages";
+import Scrollbars from "../../components/utility/customScrollBar";
+import Button from "../../components/uielements/button";
+import invoiceActions from "../../redux/invoice/actions";
+import CardWrapper, { Box, StatusTag } from "./invoice.style";
+import TableWrapper from "../Tables/antTables/antTable.style";
 
 class Invoices extends Component {
   state = {
-    selected: [],
+    selected: []
   };
   componentDidMount() {
     const { initialInvoices, initData } = this.props;
@@ -25,75 +25,75 @@ class Invoices extends Component {
   }
   columns = [
     {
-      title: 'Number',
-      dataIndex: 'number',
-      rowKey: 'number',
-      width: '15%',
-      render: text => <span>{text}</span>,
+      title: "Number",
+      dataIndex: "number",
+      rowKey: "number",
+      width: "15%",
+      render: text => <span>{text}</span>
     },
     {
-      title: 'Bill From',
-      dataIndex: 'billFrom',
-      rowKey: 'billFrom',
-      width: '25%',
-      render: text => <span>{text}</span>,
+      title: "Bill From",
+      dataIndex: "billFrom",
+      rowKey: "billFrom",
+      width: "25%",
+      render: text => <span>{text}</span>
     },
     {
-      title: 'Bill TO',
-      dataIndex: 'billTo',
-      rowKey: 'billTo',
-      width: '22%',
-      render: text => <span>{text}</span>,
+      title: "Bill TO",
+      dataIndex: "billTo",
+      rowKey: "billTo",
+      width: "22%",
+      render: text => <span>{text}</span>
     },
     {
-      title: 'Total Cost',
-      dataIndex: 'totalCost',
-      rowKey: 'totalCost',
-      width: '15%',
-      render: text => <span>{text}</span>,
+      title: "Total Cost",
+      dataIndex: "totalCost",
+      rowKey: "totalCost",
+      width: "15%",
+      render: text => <span>{text}</span>
     },
     {
-      title: 'Status',
-      dataIndex: 'orderStatus',
-      rowKey: 'orderStatus',
-      width: '13%',
+      title: "Status",
+      dataIndex: "orderStatus",
+      rowKey: "orderStatus",
+      width: "13%",
       render: (text, orderStatus) => {
         let className;
-        if (text === 'shipped' || text === 'Shipped' || text === 'SHIPPED') {
-          className = 'shipped';
+        if (text === "shipped" || text === "Shipped" || text === "SHIPPED") {
+          className = "shipped";
         } else if (
-          text === 'delivered' ||
-          text === 'Delivered' ||
-          text === 'DELIVERED'
+          text === "delivered" ||
+          text === "Delivered" ||
+          text === "DELIVERED"
         ) {
-          className = 'delivered';
+          className = "delivered";
         } else if (
-          text === 'pending' ||
-          text === 'Pending' ||
-          text === 'PENDING'
+          text === "pending" ||
+          text === "Pending" ||
+          text === "PENDING"
         ) {
-          className = 'pending';
+          className = "pending";
         }
         return <StatusTag className={className}>{text}</StatusTag>;
-      },
+      }
     },
     {
-      title: '',
-      dataIndex: 'view',
-      rowKey: 'view',
-      width: '10%',
+      title: "",
+      dataIndex: "view",
+      rowKey: "view",
+      width: "10%",
       render: (text, invoice) => (
         <div className="isoInvoiceBtnView">
           <Link to={`${this.props.match.path}/${invoice.id}`}>
             <Button color="primary" className="invoiceViewBtn">
               View
             </Button>
-          </Link>{' '}
+          </Link>{" "}
           <Button
             className="invoiceDltBtn"
             // icon="delete"
             onClick={() => {
-              notification('error', '1 invoice deleted');
+              notification("error", "1 invoice deleted");
               this.props.deleteInvoice([invoice.key]);
               this.setState({ selected: [] });
             }}
@@ -101,8 +101,8 @@ class Invoices extends Component {
             <i className="ion-android-delete" />
           </Button>
         </div>
-      ),
-    },
+      )
+    }
   ];
   getnewInvoiceId = () => new Date().getTime();
   render() {
@@ -114,31 +114,31 @@ class Invoices extends Component {
       onChange: selected => this.setState({ selected }),
       selections: [
         {
-          key: 'all-data',
-          text: 'Select All Invoices',
+          key: "all-data",
+          text: "Select All Invoices",
           onSelect: () =>
             this.setState({
-              selected: this.props.invoices.map(invoice => invoice.key),
-            }),
+              selected: this.props.invoices.map(invoice => invoice.key)
+            })
         },
         {
-          key: 'no-data',
-          text: 'Unselect all',
-          onSelect: () => this.setState({ selected: [] }),
+          key: "no-data",
+          text: "Unselect all",
+          onSelect: () => this.setState({ selected: [] })
         },
         {
-          key: 'delete-selected',
-          text: 'Delete selected',
+          key: "delete-selected",
+          text: "Delete selected",
           onSelect: changableRowKeys => {
             if (selected.length > 0) {
               deleteInvoice(selected);
               this.setState({ selected: [] });
-              notification('error', `${selected.length} invoices deleted`);
+              notification("error", `${selected.length} invoices deleted`);
             }
-          },
-        },
+          }
+        }
       ],
-      onSelection: selected => this.setState({ selected }),
+      onSelection: selected => this.setState({ selected })
     };
     return (
       <LayoutWrapper>
@@ -159,7 +159,7 @@ class Invoices extends Component {
               <HelperText text="No Invoices" />
             ) : (
               <div className="isoInvoiceTable">
-                <Scrollbars style={{ width: '100%' }}>
+                <Scrollbars style={{ width: "100%" }}>
                   <TableWrapper
                     rowSelection={rowSelection}
                     dataSource={invoices}
@@ -179,10 +179,7 @@ class Invoices extends Component {
 
 function mapStateToProps(state) {
   return {
-    ...state.Invoices,
+    ...state.Invoices
   };
 }
-export default connect(
-  mapStateToProps,
-  invoiceActions
-)(Invoices);
+export default connect(mapStateToProps, invoiceActions)(Invoices);

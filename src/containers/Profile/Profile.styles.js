@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { palette } from 'styled-theme';
+import styled from "styled-components";
+import { palette } from "styled-theme";
 
 const Wrapper = styled.div``;
 
@@ -10,7 +10,7 @@ export const Banner = styled.div`
   height: 400px;
   position: relative;
   &::after {
-    content: '';
+    content: "";
     height: 160px;
     width: 100%;
     position: absolute;
@@ -29,18 +29,18 @@ export const Banner = styled.div`
       left: 30px;
       pointer-events: none;
       width: calc(100% - 60px);
-      @media only screen and (max-width: 767px) {
+      @media only screen and (max-width: 820px) {
         bottom: -35px;
       }
-      @media only screen and (max-width: 667px) {
+      @media only screen and (max-width: 820px) {
         bottom: 20px;
       }
       .avatar {
-        @media only screen and (max-width: 767px) {
+        @media only screen and (max-width: 820px) {
           width: 160px;
           height: 160px;
         }
-        @media only screen and (max-width: 667px) {
+        @media only screen and (max-width: 820px) {
           width: 140px;
           height: 140px;
         }
@@ -91,38 +91,54 @@ export const Navigation = styled.div`
   background-color: #ffffff;
   pointer-events: all;
   box-shadow: 0 1px 2px #e5e5e5;
-  ul.menu {
+  .innerWrapper {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    @media only screen and (max-width: 667px) {
-      justify-content: flex-start;
+    justify-content: space-between;
+    ul.menu {
+      display: flex;
+      align-items: center;
+      margin-left: 182px;
+      @media only screen and (max-width: 820px) {
+        margin-left: 0px;
+      }
+      li {
+        margin: 0 15px;
+        display: block;
+        padding: 18px 15px 19px;
+        color: ${palette("secondary", 5)};
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        strong {
+          font-size: 18px;
+          font-weight: 600;
+          margin-right: 4px;
+        }
+        &.active {
+          border-bottom: 2px solid ${palette("secondary", 5)};
+        }
+
+        @media only screen and (max-width: 570px) {
+          margin: 0 0px;
+          padding: 18px 7px 10px;
+          text-align: center;
+
+          strong {
+            font-size: 14px;
+          }
+        }
+      }
     }
-    li {
-      margin: 0 15px;
-      display: block;
-      padding: 18px 15px 19px;
-      color: ${palette('secondary', 5)};
-      font-size: 14px;
-      font-weight: 400;
-      cursor: pointer;
-      @media only screen and (max-width: 320px) {
-        margin: 0 7px;
-      }
-      &:first-child {
-        margin-left: 0;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-      strong {
-        font-size: 18px;
-        font-weight: 600;
-        margin-right: 4px;
-      }
-      &.active {
-        border-bottom: 2px solid ${palette('secondary', 5)};
-      }
+    ul.buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
   }
 `;

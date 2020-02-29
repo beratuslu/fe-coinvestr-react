@@ -279,7 +279,7 @@ const routes = [
   },
   {
     path: "profile",
-    component: asyncComponent(() => import("../Profile/Profile")),
+    component: asyncComponent(() => import("../Profile/Profile1")),
     exact: false
   },
   ...customRoutes
