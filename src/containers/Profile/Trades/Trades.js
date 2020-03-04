@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Button from "../../components/uielements/button";
-import Checkbox from "../../components/uielements/checkbox";
-import { RadioButton, RadioGroup } from "../../components/uielements/radio";
-import { timeDifference } from "../../helpers/utility";
+import Button from "../../../components/uielements/button";
+import Checkbox from "../../../components/uielements/checkbox";
+import { RadioButton, RadioGroup } from "../../../components/uielements/radio";
+import { timeDifference } from "../../../helpers/utility";
 import {
   notification,
   ColorChoser,
   EditableComponent
-} from "../../components/";
-import { TodoListWrapper } from "./todo.style";
+} from "../../../components/";
+import { TodoListWrapper } from "./Trades.style";
 
 function filterTodos(todos, search) {
   const selectedTodos =
