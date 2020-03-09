@@ -1,8 +1,8 @@
 import { all, takeEvery, put, fork, call } from "redux-saga/effects";
 import { push } from "react-router-redux";
+import notifications from "../../components/feedback/notification";
 import { getToken, clearToken } from "../../helpers/utility";
 import actions from "./actions";
-import notifications from "../../components/feedback/notification";
 import axios from "axios";
 
 const onLoginRequest = async credentials => {
@@ -28,9 +28,10 @@ export function* loginRequest() {
         yield put({ type: actions.LOGIN_ERROR });
       }
     } catch (error) {
-      console.log("TCL: yieldtakeEvery -> error", error);
-      console.log("error e dustu");
-      //an error occured.
+      notifications.error({
+        message: "Login Failed",
+        description: error.message
+      });
     }
   });
 }
