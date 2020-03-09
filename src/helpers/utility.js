@@ -8,7 +8,7 @@ export function clearToken() {
 export function getToken() {
   try {
     const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user"));
     const objToReturn = { token, user };
 
     return objToReturn;

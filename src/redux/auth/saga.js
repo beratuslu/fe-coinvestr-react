@@ -32,6 +32,7 @@ export function* loginRequest() {
         message: "Login Failed",
         description: error.message
       });
+      // yield put({ type: actions.LOGIN_ERROR });
     }
   });
 }
@@ -39,6 +40,7 @@ export function* loginRequest() {
 export function* loginSuccess() {
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
     yield localStorage.setItem("token", payload.token);
+    yield localStorage.setItem("user", JSON.stringify(payload.user));
     yield put(actions.startSocket(payload.token));
     yield put(push("/dashboard"));
     // this.props.history.push('/dashboard');
