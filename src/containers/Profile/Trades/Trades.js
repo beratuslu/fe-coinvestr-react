@@ -23,7 +23,7 @@ function filterTodos(todos, search) {
   });
   return { selectedTodos, completed };
 }
-export default class TodoList extends Component {
+export default class Trades extends Component {
   constructor(props) {
     super(props);
     this.singleTodo = this.singleTodo.bind(this);
@@ -82,9 +82,8 @@ export default class TodoList extends Component {
             onChange={this.onChange}
             className="isoTodoStatus"
           >
-            <RadioButton value="All">All</RadioButton>
-            <RadioButton value="Uncompleted">Uncompleted</RadioButton>
-            <RadioButton value="Completed">Completed</RadioButton>
+            <RadioButton value="MyTrades">My Trades</RadioButton>
+            <RadioButton value="CopiedTrades">Copied Trades</RadioButton>
           </RadioGroup>
         </div>
 

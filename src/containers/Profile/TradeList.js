@@ -7,7 +7,7 @@ import BoardListCard from "./BoardListCard/BoardListCard";
 import AppLayout from "../../AppLayout/AppLayout";
 import { filterProjects } from "../../../../helpers/filterProjects";
 import { Table } from "./BoardList.style";
-function BoardLists({
+function TradeList({
   boards,
   deleteBoardWatcher,
   editBoard,
@@ -49,4 +49,4 @@ export default connect(
     boards: filterProjects(state.scrumBoard.boards, state.scrumBoard.searchText)
   }),
   { ...scrumBoardActions }
-)(BoardLists);
+)(TradeList);

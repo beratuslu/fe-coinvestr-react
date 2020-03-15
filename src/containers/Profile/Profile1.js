@@ -2,14 +2,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spin from "../../ui/Antd/Spin/Spin";
+import { Row, Col } from "antd";
 import Modal from "../../ui/Antd/Modal/Modal";
 import Container from "../../ui/UI/Container/Container";
 import AvatarCard from "../../components/AvatarCard/AvatarCard";
 import Button from "../../components/uielements/button";
-import Posts from "./Trades/Posts";
-import Trades from "./Trades/Trades";
+// import Posts from "./Trades/Posts";
+// import Trades from "./Trades/Trades";
+import Box from "../../components/utility/box";
+import LayoutWrapper from "../../components/utility/layoutWrapper";
 import Followers from "./Followers/Followers";
 import Following from "./Following/Following";
+import basicStyle from "../../settings/basicStyle";
+import TradeList from "./TradeList2";
 import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
 // import { useSelector, useDispatch } from "react-redux";
 import profileActions from "../../redux/profile/actions";
@@ -96,6 +101,7 @@ class MyProfile extends Component {
       }
     ];
     const colors = ["#7ED321", "#de1b1b", "#511E78", "#ff9009", "#42a5f5"];
+    const { rowStyle, colStyle, gutter } = basicStyle;
     return (
       <Wrapper>
         {this.props.profile.loading !== true ? (
@@ -158,32 +164,9 @@ class MyProfile extends Component {
               </Container>
             </Navigation>
 
-            <ContentWrapper>
-              <Container className="container">
-                <a href="http://localhost:3000/dashboard/scrum-board">
-                  http://localhost:3000/dashboard/scrum-board
-                </a>
-                <br />
-                <a href="http://localhost:3000/dashboard/invoice">
-                  http://localhost:3000/dashboard/invoice
-                </a>
-                <br />
-                <a href="http://localhost:3000/dashboard/cart">
-                  http://localhost:3000/dashboard/cart
-                </a>
-                <br />
-                <a href="http://localhost:3000/dashboard/card">
-                  http://localhost:3000/dashboard/card
-                </a>
-                <hr />
-                --<a>HOT_BTC</a>
-                <a>20/12/2020 15:30:05</a>
-                --<a>0.000000004</a>
-                --<a>0.000000005</a>
-                --<a>0.000000003</a>
-                --<a>PROFIT / STILL / LOSS</a>
-                <br />
-                <Trades todos={todos} colors={colors} />
+            <LayoutWrapper>
+              <Box className="container">
+                <TradeList />
                 <Modal
                   wrapClassName="follow-modal"
                   visible={this.state.visible}
@@ -197,8 +180,8 @@ class MyProfile extends Component {
                     <Following data={this.props.profile.data.following} />
                   )}
                 </Modal>
-              </Container>
-            </ContentWrapper>
+              </Box>
+            </LayoutWrapper>
           </>
         ) : (
           <div

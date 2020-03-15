@@ -1,11 +1,11 @@
-import scrumBoardActions from './actions';
+import scrumBoardActions from "./actions";
 
 const initialState = {
   boards: {},
   columns: {},
   tasks: {},
-  searchText: '',
-  labels: {},
+  searchText: "",
+  labels: {}
 };
 export default function scrumBoardReducer(state = initialState, action) {
   switch (action.type) {
@@ -19,7 +19,7 @@ export default function scrumBoardReducer(state = initialState, action) {
       return {
         ...state,
         tasks: action.payload.tasks,
-        columns: action.payload.columns,
+        columns: action.payload.columns
       };
 
     case scrumBoardActions.EDIT_TASK:
@@ -29,9 +29,9 @@ export default function scrumBoardReducer(state = initialState, action) {
           ...state.tasks,
           [action.payload.id]: {
             ...action.payload,
-            editing: true,
-          },
-        },
+            editing: true
+          }
+        }
       };
 
     case scrumBoardActions.CANCEL_EDIT_TASK:
@@ -41,35 +41,35 @@ export default function scrumBoardReducer(state = initialState, action) {
           ...state.tasks,
           [action.payload.id]: {
             ...action.payload,
-            editing: false,
-          },
-        },
+            editing: false
+          }
+        }
       };
 
     case scrumBoardActions.DELETE_TASK:
       return {
         ...state,
         tasks: action.payload.tasks,
-        columns: action.payload.columns,
+        columns: action.payload.columns
       };
 
     case scrumBoardActions.SET_SEARCH_TEXT:
       return {
         ...state,
-        searchText: action.payload,
+        searchText: action.payload
       };
 
     case scrumBoardActions.SET_MOVED_TASK:
       return {
         ...state,
         columns: action.payload.columns,
-        tasks: action.payload.tasks,
+        tasks: action.payload.tasks
       };
 
     case scrumBoardActions.RESET_TASK: {
       return {
         ...state,
-        task: initialState.task,
+        task: initialState.task
       };
     }
 
@@ -78,7 +78,7 @@ export default function scrumBoardReducer(state = initialState, action) {
       return {
         ...state,
         columns: action.payload.columns,
-        boards: action.payload.boards,
+        boards: action.payload.boards
       };
     case scrumBoardActions.EDIT_COLUMN:
       return {
@@ -87,9 +87,9 @@ export default function scrumBoardReducer(state = initialState, action) {
           ...state.columns,
           [action.payload.id]: {
             ...action.payload,
-            editing: true,
-          },
-        },
+            editing: true
+          }
+        }
       };
 
     case scrumBoardActions.CANCEL_EDIT_COLUMN:
@@ -99,27 +99,27 @@ export default function scrumBoardReducer(state = initialState, action) {
           ...state.columns,
           [action.payload.id]: {
             ...action.payload,
-            editing: false,
-          },
-        },
+            editing: false
+          }
+        }
       };
     case scrumBoardActions.DELETE_COLUMN:
       return {
         ...state,
         columns: action.payload.columns,
-        boards: action.payload.boards,
+        boards: action.payload.boards
       };
 
     case scrumBoardActions.SET_MOVED_COLUMN:
       return {
         ...state,
-        boards: action.payload,
+        boards: action.payload
       };
 
     case scrumBoardActions.CREATE_OR_UPDATE_BOARD:
       return {
         ...state,
-        boards: action.payload,
+        boards: action.payload
       };
     case scrumBoardActions.EDIT_BOARD:
       return {
@@ -128,14 +128,14 @@ export default function scrumBoardReducer(state = initialState, action) {
           ...state.boards,
           [action.payload.id]: {
             ...action.payload,
-            editing: true,
-          },
-        },
+            editing: true
+          }
+        }
       };
     case scrumBoardActions.DELETE_BOARD:
       return {
         ...state,
-        boards: action.payload,
+        boards: action.payload
       };
 
     case scrumBoardActions.CREATE_OR_UPDATE_LABEL:
@@ -143,8 +143,8 @@ export default function scrumBoardReducer(state = initialState, action) {
         ...state,
         labels: {
           ...state.labels,
-          [action.payload.id]: action.payload,
-        },
+          [action.payload.id]: action.payload
+        }
       };
     case scrumBoardActions.EDIT_LABEL:
       return {
@@ -153,18 +153,18 @@ export default function scrumBoardReducer(state = initialState, action) {
           ...state.labels,
           [action.payload.id]: {
             ...action.payload,
-            editing: true,
-          },
-        },
+            editing: true
+          }
+        }
       };
     case scrumBoardActions.DELETE_LABEL:
       const LABELS = {
-        ...state.labels,
+        ...state.labels
       };
       delete LABELS[action.payload];
       return {
         ...state,
-        labels: LABELS,
+        labels: LABELS
       };
     default:
       return state;
