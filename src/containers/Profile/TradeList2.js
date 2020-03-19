@@ -125,7 +125,7 @@ class TradeList extends Component {
                     </Panel>
                     <Panel
                       header={<TradeCollapseHeader item={boards[0]} />}
-                      key="1"
+                      key="2"
                     >
                       <br />
                       <Timeline>
@@ -153,7 +153,7 @@ class TradeList extends Component {
                     </Panel>
                     <Panel
                       header={<TradeCollapseHeader item={boards[0]} />}
-                      key="1"
+                      key="3"
                     >
                       <br />
                       <Timeline>
@@ -181,7 +181,7 @@ class TradeList extends Component {
                     </Panel>
                     <Panel
                       header={<TradeCollapseHeader item={boards[0]} />}
-                      key="1"
+                      key="4"
                     >
                       <br />
                       <Timeline>
