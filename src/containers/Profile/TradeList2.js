@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
 import scrumBoardActions from "../../redux/scrumBoard/actions";
 import Collapses from "../../components/uielements/collapse";
+
+import Timeline, { TimelineItem } from "../../components/uielements/timeline";
 import { RadioButton, RadioGroup } from "../../components/uielements/radio";
 
 import Box from "../../components/utility/box";
@@ -97,25 +99,113 @@ class TradeList extends Component {
                       header={<TradeCollapseHeader item={boards[0]} />}
                       key="1"
                     >
-                      <p>{text}</p>
+                      <br />
+                      <Timeline>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.createServiceSite" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.technicalTesting" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
+                          }
+                        </TimelineItem>
+                      </Timeline>
                     </Panel>
                     <Panel
                       header={<TradeCollapseHeader item={boards[0]} />}
                       key="1"
                     >
-                      <p>{text}</p>
+                      <br />
+                      <Timeline>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.createServiceSite" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.technicalTesting" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
+                          }
+                        </TimelineItem>
+                      </Timeline>
                     </Panel>
                     <Panel
                       header={<TradeCollapseHeader item={boards[0]} />}
                       key="1"
                     >
-                      <p>{text}</p>
+                      <br />
+                      <Timeline>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.createServiceSite" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.technicalTesting" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
+                          }
+                        </TimelineItem>
+                      </Timeline>
                     </Panel>
                     <Panel
                       header={<TradeCollapseHeader item={boards[0]} />}
                       key="1"
                     >
-                      <p>{text}</p>
+                      <br />
+                      <Timeline>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.createServiceSite" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.technicalTesting" />
+                          }
+                        </TimelineItem>
+                        <TimelineItem>
+                          {
+                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
+                          }
+                        </TimelineItem>
+                      </Timeline>
                     </Panel>
                   </Collapse>
                 </div>
