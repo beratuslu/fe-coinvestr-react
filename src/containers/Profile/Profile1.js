@@ -9,8 +9,6 @@ import AvatarCard from "../../components/AvatarCard/AvatarCard";
 import Button from "../../components/uielements/button";
 // import Posts from "./Trades/Posts";
 // import Trades from "./Trades/Trades";
-import Box from "../../components/utility/box";
-import LayoutWrapper from "../../components/utility/layoutWrapper";
 import Followers from "./Followers/Followers";
 import Following from "./Following/Following";
 import basicStyle from "../../settings/basicStyle";
@@ -164,24 +162,21 @@ class MyProfile extends Component {
               </Container>
             </Navigation>
 
-            <LayoutWrapper>
-              <Box className="container">
-                <TradeList />
-                <Modal
-                  wrapClassName="follow-modal"
-                  visible={this.state.visible}
-                  onCancel={this.handleCancel}
-                  footer={null}
-                >
-                  {this.state.active === "followers" && (
-                    <Followers data={this.props.profile.data.followers} />
-                  )}
-                  {this.state.active === "following" && (
-                    <Following data={this.props.profile.data.following} />
-                  )}
-                </Modal>
-              </Box>
-            </LayoutWrapper>
+            <TradeList />
+
+            <Modal
+              wrapClassName="follow-modal"
+              visible={this.state.visible}
+              onCancel={this.handleCancel}
+              footer={null}
+            >
+              {this.state.active === "followers" && (
+                <Followers data={this.props.profile.data.followers} />
+              )}
+              {this.state.active === "following" && (
+                <Following data={this.props.profile.data.following} />
+              )}
+            </Modal>
           </>
         ) : (
           <div

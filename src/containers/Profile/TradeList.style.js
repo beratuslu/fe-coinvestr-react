@@ -6,6 +6,11 @@ import WithDirection from "../../settings/withDirection";
 const WDTradeListWrapper = styled.div`
   width: 100%;
   display: flex;
+
+  @media only screen and (min-width: 1575px) {
+    /* width: 1250px; */
+  }
+
   flex-direction: column;
   .collapseWrapper {
     overflow: hidden;

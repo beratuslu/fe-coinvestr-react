@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
 import scrumBoardActions from "../../redux/scrumBoard/actions";
 import Collapses from "../../components/uielements/collapse";
+
+import Box from "../../components/utility/box";
+import LayoutWrapper from "../../components/utility/layoutWrapper";
 import { filterProjects } from "../../helpers/filterProjects";
 import CollapseWrapper from "./collapse.style";
 import { TradeListWrapper, Table } from "./TradeList.style";
@@ -54,67 +57,73 @@ class TradeList extends Component {
   }
   render() {
     return (
-      <TradeListWrapper className="helelele">
-        {!isEmpty(["a"]) ? (
-          <>
-            <div className="isoTradeTypeTab">
-              <RadioGroup
-                value={this.state.search}
-                onChange={this.onChange}
-                className="isoTradeType"
-              >
-                <RadioButton value="MyTrades">My Trades</RadioButton>
-                <RadioButton value="CopiedTrades">Copied Trades</RadioButton>
-              </RadioGroup>
-            </div>
-            <div className="collapseWrapper">
-              <Table>
-                <tbody>
-                  <tr>
-                    <td>
-                      <span>User</span>
-                    </td>
-                    <td>Pair</td>
-                    <td>Create Date</td>
-                    <td>Buy Price</td>
-                    <td>Profit Price</td>
-                    <td>Stop Price</td>
-                    <td>Status</td>
-                  </tr>
-                </tbody>
-              </Table>
-              <Collapse>
-                <Panel
-                  header={<TradeCollapseHeader item={boards[0]} />}
-                  key="1"
-                >
-                  <p>{text}</p>
-                </Panel>
-                <Panel
-                  header={<TradeCollapseHeader item={boards[0]} />}
-                  key="1"
-                >
-                  <p>{text}</p>
-                </Panel>
-                <Panel
-                  header={<TradeCollapseHeader item={boards[0]} />}
-                  key="1"
-                >
-                  <p>{text}</p>
-                </Panel>
-                <Panel
-                  header={<TradeCollapseHeader item={boards[0]} />}
-                  key="1"
-                >
-                  <p>{text}</p>
-                </Panel>
-              </Collapse>
-            </div>
-          </>
-        ) : (
-          <div>Board Not found</div>
-        )}
-      </TradeListWrapper>
+      <LayoutWrapper>
+        <Box className="container">
+          <TradeListWrapper className="helelele">
+            {!isEmpty(["a"]) ? (
+              <>
+                <div className="isoTradeTypeTab">
+                  <RadioGroup
+                    value={this.state.search}
+                    onChange={this.onChange}
+                    className="isoTradeType"
+                  >
+                    <RadioButton value="MyTrades">My Trades</RadioButton>
+                    <RadioButton value="CopiedTrades">
+                      Copied Trades
+                    </RadioButton>
+                  </RadioGroup>
+                </div>
+                <div className="collapseWrapper">
+                  <Table>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span>User</span>
+                        </td>
+                        <td>Pair</td>
+                        <td>Create Date</td>
+                        <td>Buy Price</td>
+                        <td>Profit Price</td>
+                        <td>Stop Price</td>
+                        <td>Status</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                  <Collapse>
+                    <Panel
+                      header={<TradeCollapseHeader item={boards[0]} />}
+                      key="1"
+                    >
+                      <p>{text}</p>
+                    </Panel>
+                    <Panel
+                      header={<TradeCollapseHeader item={boards[0]} />}
+                      key="1"
+                    >
+                      <p>{text}</p>
+                    </Panel>
+                    <Panel
+                      header={<TradeCollapseHeader item={boards[0]} />}
+                      key="1"
+                    >
+                      <p>{text}</p>
+                    </Panel>
+                    <Panel
+                      header={<TradeCollapseHeader item={boards[0]} />}
+                      key="1"
+                    >
+                      <p>{text}</p>
+                    </Panel>
+                  </Collapse>
+                </div>
+              </>
+            ) : (
+              <div>No trades.</div>
+            )}
+          </TradeListWrapper>
+        </Box>
+      </LayoutWrapper>
     );
   }
 }
