@@ -3,17 +3,21 @@ import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
 import scrumBoardActions from "../../redux/scrumBoard/actions";
 import Collapses from "../../components/uielements/collapse";
+import { RadioButton, RadioGroup } from "../../components/uielements/radio";
 
 import Box from "../../components/utility/box";
 import LayoutWrapper from "../../components/utility/layoutWrapper";
 import { filterProjects } from "../../helpers/filterProjects";
 import CollapseWrapper from "./collapse.style";
-import { TradeListWrapper, Table } from "./TradeList.style";
+import {
+  TradeListWrapper,
+  Table,
+  SwitchButtonsWrapper
+} from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
 import SimpleTable from "..//Tables/antTables/tableViews/simpleView";
 
 import IntlMessages from "../../components/utility/intlMessages";
-import { RadioButton, RadioGroup } from "../../components/uielements/radio";
 
 const text = <IntlMessages id="uiElements.collapse.text" />;
 const Panel = Collapses.Panel;
@@ -58,22 +62,20 @@ class TradeList extends Component {
   render() {
     return (
       <LayoutWrapper>
+        <SwitchButtonsWrapper>
+          <RadioGroup
+            value={this.state.search}
+            onChange={this.onChange}
+            className="isoTradeType"
+          >
+            <RadioButton value="MyTrades">My Trades</RadioButton>
+            <RadioButton value="CopiedTrades">Copied Trades</RadioButton>
+          </RadioGroup>
+        </SwitchButtonsWrapper>
         <Box className="container">
           <TradeListWrapper className="helelele">
             {!isEmpty(["a"]) ? (
               <>
-                <div className="isoTradeTypeTab">
-                  <RadioGroup
-                    value={this.state.search}
-                    onChange={this.onChange}
-                    className="isoTradeType"
-                  >
-                    <RadioButton value="MyTrades">My Trades</RadioButton>
-                    <RadioButton value="CopiedTrades">
-                      Copied Trades
-                    </RadioButton>
-                  </RadioGroup>
-                </div>
                 <div className="collapseWrapper">
                   <Table>
                     <tbody>

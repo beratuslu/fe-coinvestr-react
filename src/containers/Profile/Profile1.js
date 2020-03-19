@@ -7,8 +7,8 @@ import Modal from "../../ui/Antd/Modal/Modal";
 import Container from "../../ui/UI/Container/Container";
 import AvatarCard from "../../components/AvatarCard/AvatarCard";
 import Button from "../../components/uielements/button";
-// import Posts from "./Trades/Posts";
-// import Trades from "./Trades/Trades";
+import { RadioButton, RadioGroup } from "../../components/uielements/radio";
+
 import Followers from "./Followers/Followers";
 import Following from "./Following/Following";
 import basicStyle from "../../settings/basicStyle";
@@ -161,6 +161,17 @@ class MyProfile extends Component {
                 </div>
               </Container>
             </Navigation>
+
+            {/* <div className="isoTradeTypeTab">
+              <RadioGroup
+                value={this.state.search}
+                onChange={this.onChange}
+                className="isoTradeType"
+              >
+                <RadioButton value="MyTrades">My Trades</RadioButton>
+                <RadioButton value="CopiedTrades">Copied Trades</RadioButton>
+              </RadioGroup>
+            </div> */}
 
             <TradeList />
 

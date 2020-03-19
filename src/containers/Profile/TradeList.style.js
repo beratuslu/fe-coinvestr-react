@@ -3,6 +3,68 @@ import { palette } from "styled-theme";
 import { transition, borderRadius, boxShadow } from "../../settings/style-util";
 import WithDirection from "../../settings/withDirection";
 
+const SwitchButtonsWrapper = styled.div`
+  margin-bottom: 20px;
+  margin-left: 20px;
+  display: flex;
+
+  @media only screen and (max-width: 580px) {
+    margin-top: 10px;
+  }
+
+  .isoTradeType {
+    margin-left: ${props => (props["data-rtl"] === "rtl" ? "auto" : "inherit")};
+    margin-right: ${props =>
+      props["data-rtl"] === "rtl" ? "inherit" : "auto"};
+    margin-left: 0;
+
+    .ant-radio-button-wrapper {
+      margin: 0;
+      height: auto;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.65);
+      display: inline-block;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 0;
+      background: transparent;
+      padding: 0 15px;
+      ${boxShadow("none")};
+
+      &:last-child {
+        padding-right: ${props => (props["data-rtl"] === "rtl" ? "15px" : "0")};
+        padding-left: ${props => (props["data-rtl"] === "rtl" ? "0" : "15px")};
+      }
+
+      &:first-child {
+        padding-left: ${props => (props["data-rtl"] === "rtl" ? "15px" : "0")};
+        padding-right: ${props => (props["data-rtl"] === "rtl" ? "0" : "15px")};
+      }
+
+      &:not(:first-child)::before {
+        left: ${props => (props["data-rtl"] === "rtl" ? "inherit" : "-1px")};
+        right: ${props => (props["data-rtl"] === "rtl" ? "-1px" : "inherit")};
+      }
+
+      span {
+        font-size: 14px;
+        font-weight: 400;
+        color: ${palette("text", 3)};
+      }
+    }
+
+    .ant-radio-button-wrapper-checked {
+      :not(.ant-radio-button-wrapper-disabled)::before {
+        background-color: #d9d9d9 !important;
+        opacity: 1;
+      }
+      span {
+        color: ${palette("primary", 0)};
+      }
+    }
+  }
+`;
+
 const WDTradeListWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -15,63 +77,6 @@ const WDTradeListWrapper = styled.div`
   .collapseWrapper {
     overflow: hidden;
     overflow-x: auto;
-  }
-
-  .isoTradeTypeTab {
-    margin-bottom: 20px;
-    display: flex;
-
-    .isoTradeType {
-      margin-left: ${props =>
-        props["data-rtl"] === "rtl" ? "auto" : "inherit"};
-      margin-right: ${props =>
-        props["data-rtl"] === "rtl" ? "inherit" : "auto"};
-
-      .ant-radio-button-wrapper {
-        margin: 0;
-        height: auto;
-        line-height: 1.5;
-        color: rgba(0, 0, 0, 0.65);
-        display: inline-block;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: 0;
-        background: transparent;
-        padding: 0 15px;
-        ${boxShadow("none")};
-
-        &:last-child {
-          padding-right: ${props =>
-            props["data-rtl"] === "rtl" ? "15px" : "0"};
-          padding-left: ${props =>
-            props["data-rtl"] === "rtl" ? "0" : "15px"};
-        }
-
-        &:first-child {
-          padding-left: ${props =>
-            props["data-rtl"] === "rtl" ? "15px" : "0"};
-          padding-right: ${props =>
-            props["data-rtl"] === "rtl" ? "0" : "15px"};
-        }
-
-        &:not(:first-child)::before {
-          left: ${props => (props["data-rtl"] === "rtl" ? "inherit" : "-1px")};
-          right: ${props => (props["data-rtl"] === "rtl" ? "-1px" : "inherit")};
-        }
-
-        span {
-          font-size: 14px;
-          font-weight: 400;
-          color: ${palette("text", 3)};
-        }
-      }
-
-      .ant-radio-button-wrapper-checked {
-        span {
-          color: ${palette("primary", 0)};
-        }
-      }
-    }
   }
 
   .isoTradeListWrapper {
@@ -358,4 +363,4 @@ const Table = styled.table`
 `;
 
 const TradeListWrapper = WithDirection(WDTradeListWrapper);
-export { TradeListWrapper, Table };
+export { TradeListWrapper, Table, SwitchButtonsWrapper };
