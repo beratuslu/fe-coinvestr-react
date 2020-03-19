@@ -36,6 +36,8 @@ const CollapseWrapper = styled.div`
         background-color: ${palette("grayscale", 6)};
         ${transition(0.4)};
         ${borderRadius("4px 4px 0 0")};
+        padding-bottom:0;
+        padding-top:0;
 
         .arrow {
           font-size: 12px;

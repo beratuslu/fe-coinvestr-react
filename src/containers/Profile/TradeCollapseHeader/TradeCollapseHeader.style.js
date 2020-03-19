@@ -55,7 +55,7 @@ export const Table = styled.table`
   width: 1000px;
   tr {
     td {
-      padding: 20px;
+      padding: 15px;
       text-align: left;
       width: 150px;
       /* @media (min-width: 768px) {
