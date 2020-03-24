@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
-import scrumBoardActions from "../../redux/scrumBoard/actions";
-import Collapses from "../../components/uielements/collapse";
+import scrumBoardActions from "../../../redux/scrumBoard/actions";
+import Collapses from "../../../components/uielements/collapse";
 
-import Timeline, { TimelineItem } from "../../components/uielements/timeline";
-import { RadioButton, RadioGroup } from "../../components/uielements/radio";
+import Timeline, {
+  TimelineItem
+} from "../../../components/uielements/timeline";
+import { RadioButton, RadioGroup } from "../../../components/uielements/radio";
 
-import Box from "../../components/utility/box";
-import LayoutWrapper from "../../components/utility/layoutWrapper";
-import { filterProjects } from "../../helpers/filterProjects";
+import Box from "../../../components/utility/box";
+import LayoutWrapper from "../../../components/utility/layoutWrapper";
+import { filterProjects } from "../../../helpers/filterProjects";
 import CollapseWrapper from "./collapse.style";
 import {
   TradeListWrapper,
@@ -17,9 +19,8 @@ import {
   SwitchButtonsWrapper
 } from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
-import SimpleTable from "..//Tables/antTables/tableViews/simpleView";
 
-import IntlMessages from "../../components/utility/intlMessages";
+import IntlMessages from "../../../components/utility/intlMessages";
 
 const text = <IntlMessages id="uiElements.collapse.text" />;
 const Panel = Collapses.Panel;

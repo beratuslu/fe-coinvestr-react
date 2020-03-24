@@ -13,13 +13,13 @@ import {
   ProgressWrapper
 } from "./TradeCollapseHeader.style";
 
-import { IconSvg } from "../../../components/ScrumBoard/IconSvg/IconSvg";
-import MoreIcon from "../../../static/Images/16.svg";
-import PrivateIcon from "../../../static/Images/18.svg";
-import PublicIcon from "../../../static/Images/19.svg";
-import PlusIcon from "../../../static/Images/24.svg";
-import SoftwareIcon from "../../../static/Images/20.svg";
-import AvatarIcon from "../../../static/Images/08-icon.svg";
+import { IconSvg } from "../../../../components/ScrumBoard/IconSvg/IconSvg";
+import MoreIcon from "../../../../static/Images/16.svg";
+import PrivateIcon from "../../../../static/Images/18.svg";
+import PublicIcon from "../../../../static/Images/19.svg";
+import PlusIcon from "../../../../static/Images/24.svg";
+import SoftwareIcon from "../../../../static/Images/20.svg";
+import AvatarIcon from "../../../../static/Images/08-icon.svg";
 
 export default function BoardListCard({ item, onDelete, onEdit }) {
   const MoreActions = (

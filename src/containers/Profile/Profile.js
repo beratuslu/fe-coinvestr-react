@@ -12,7 +12,7 @@ import { RadioButton, RadioGroup } from "../../components/uielements/radio";
 import Followers from "./Followers/Followers";
 import Following from "./Following/Following";
 import basicStyle from "../../settings/basicStyle";
-import TradeList from "./TradeList";
+import TradeList from "./TradeList/TradeList";
 import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
 // import { useSelector, useDispatch } from "react-redux";
 import profileActions from "../../redux/profile/actions";
