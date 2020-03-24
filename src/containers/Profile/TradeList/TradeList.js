@@ -200,7 +200,7 @@ class TradeList extends Component {
           <PaginationWrapper>
             <Pagination
               defaultCurrent={6}
-              total={500}
+              total={60}
               onChange={page => {
                 // onPageChange(searchText, page);
               }}
