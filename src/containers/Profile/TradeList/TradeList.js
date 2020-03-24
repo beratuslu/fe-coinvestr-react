@@ -12,20 +12,20 @@ import { RadioButton, RadioGroup } from "../../../components/uielements/radio";
 import Box from "../../../components/utility/box";
 import LayoutWrapper from "../../../components/utility/layoutWrapper";
 import { filterProjects } from "../../../helpers/filterProjects";
-import CollapseWrapper from "./collapse.style";
+// import CollapseWrapper from "./collapse.style";
 import {
   TradeListWrapper,
   Table,
-  SwitchButtonsWrapper
+  SwitchButtonsWrapper,
+  CollapseWrapper
 } from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
 
 import IntlMessages from "../../../components/utility/intlMessages";
 
-const text = <IntlMessages id="uiElements.collapse.text" />;
 const Panel = Collapses.Panel;
 const Collapse = props => (
-  <CollapseWrapper className="werwer234">
+  <CollapseWrapper>
     <Collapses {...props}>{props.children}</Collapses>
   </CollapseWrapper>
 );
