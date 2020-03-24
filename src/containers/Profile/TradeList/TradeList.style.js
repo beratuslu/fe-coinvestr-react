@@ -438,10 +438,30 @@ const WDCollapseWrapper = styled.div`
     }
   }
 `;
+const PaginationWrapper = styled.div`
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0 10px;
+
+  .ant-pagination {
+    display: -webkit-inline-flex;
+    display: -ms-inline-flex;
+    display: inline-flex;
+  }
+`;
 
 export default WithDirection(CollapseWrapper);
 
 const TradeListWrapper = WithDirection(WDTradeListWrapper);
 const CollapseWrapper = WithDirection(WDCollapseWrapper);
 
-export { TradeListWrapper, Table, SwitchButtonsWrapper, CollapseWrapper };
+export {
+  TradeListWrapper,
+  Table,
+  SwitchButtonsWrapper,
+  CollapseWrapper,
+  PaginationWrapper
+};

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
 import scrumBoardActions from "../../../redux/scrumBoard/actions";
 import Collapses from "../../../components/uielements/collapse";
-
+import Pagination from "../../../components/uielements/pagination";
 import Timeline, {
   TimelineItem
 } from "../../../components/uielements/timeline";
@@ -17,7 +17,8 @@ import {
   TradeListWrapper,
   Table,
   SwitchButtonsWrapper,
-  CollapseWrapper
+  CollapseWrapper,
+  PaginationWrapper
 } from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
 
@@ -30,27 +31,7 @@ const Collapse = props => (
   </CollapseWrapper>
 );
 
-const boards = [
-  {
-    id: 1,
-    user: {
-      name: "My user"
-    },
-    pair: "HOT_BTC",
-    createdDate: "20/12/2020 15:30:05",
-    buyPrice: "0.000000004",
-    profitPrice: "0.000000005",
-    stopPrice: "0.000000003",
-    status: {
-      completed: false,
-      stopLoss: 10,
-      profit: 50,
-      remaining: 40
-    }
-  }
-];
 class TradeList extends Component {
-  s;
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
@@ -63,6 +44,7 @@ class TradeList extends Component {
     this.setState({ search: event.target.value });
   }
   render() {
+    const { trades } = this.props;
     return (
       <LayoutWrapper>
         <SwitchButtonsWrapper>
@@ -77,7 +59,7 @@ class TradeList extends Component {
         </SwitchButtonsWrapper>
         <Box className="container">
           <TradeListWrapper className="helelele">
-            {!isEmpty(["a"]) ? (
+            {!isEmpty(trades) ? (
               <>
                 <div className="collapseWrapper">
                   <Table>
@@ -97,7 +79,7 @@ class TradeList extends Component {
                   </Table>
                   <Collapse>
                     <Panel
-                      header={<TradeCollapseHeader item={boards[0]} />}
+                      header={<TradeCollapseHeader item={trades[0]} />}
                       key="1"
                     >
                       <br />
@@ -125,7 +107,7 @@ class TradeList extends Component {
                       </Timeline>
                     </Panel>
                     <Panel
-                      header={<TradeCollapseHeader item={boards[0]} />}
+                      header={<TradeCollapseHeader item={trades[0]} />}
                       key="2"
                     >
                       <br />
@@ -153,7 +135,7 @@ class TradeList extends Component {
                       </Timeline>
                     </Panel>
                     <Panel
-                      header={<TradeCollapseHeader item={boards[0]} />}
+                      header={<TradeCollapseHeader item={trades[0]} />}
                       key="3"
                     >
                       <br />
@@ -181,7 +163,7 @@ class TradeList extends Component {
                       </Timeline>
                     </Panel>
                     <Panel
-                      header={<TradeCollapseHeader item={boards[0]} />}
+                      header={<TradeCollapseHeader item={trades[0]} />}
                       key="4"
                     >
                       <br />
@@ -215,6 +197,15 @@ class TradeList extends Component {
               <div>No trades.</div>
             )}
           </TradeListWrapper>
+          <PaginationWrapper>
+            <Pagination
+              defaultCurrent={6}
+              total={500}
+              onChange={page => {
+                // onPageChange(searchText, page);
+              }}
+            />
+          </PaginationWrapper>
         </Box>
       </LayoutWrapper>
     );

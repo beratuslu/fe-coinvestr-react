@@ -51,55 +51,28 @@ class MyProfile extends Component {
     }
   }
   render() {
-    // const { view, height } = this.props.profile;
-    console.log(
-      "TCL: MyProfile -> render -> this.props.profile",
-      this.props.profile
-    );
-    const todos = [
-      {
-        id: 6903,
-        todo:
-          "Ut corrupti eum. Magnam culpa et itaque voluptas maiores et sed molestiae ad. Ut earum est tempore enim odio hic architecto et iure. Qui dolore velit illo velit atque reprehenderit sed cupiditate.",
-        createTime: "2016-12-26T15:52:07.773Z",
-        color: 1,
-        completed: true
-      },
-      {
-        id: 47977,
-        todo:
-          "Eos quas doloremque iste aut. Harum doloribus atque. Natus quis odio eaque ea. Ut recusandae occaecati. Consequuntur deleniti qui perspiciatis veniam ut.",
-        createTime: "2016-08-15T06:09:48.506Z",
-        color: 3,
-        completed: false
-      },
-      {
-        id: 81193,
-        todo:
-          "Est quod in vel. Consequatur consequatur ipsa. Odio ea repellat aut quibusdam autem quibusdam. Ad ea quo in.",
-        createTime: "2016-09-10T03:59:20.370Z",
-        color: 2,
-        completed: true
-      },
-      {
-        id: 23485,
-        todo:
-          "Omnis non iste. Delectus omnis quaerat dicta in aut. Id velit est aliquid ut voluptas eligendi numquam.",
-        createTime: "2016-07-04T04:40:50.001Z",
-        color: 3,
-        completed: false
-      },
-      {
-        id: 61833,
-        todo:
-          "Exercitationem qui quia. Laborum suscipit qui voluptatum suscipit est accusamus. Placeat illo dolorem placeat totam.",
-        createTime: "2017-06-18T00:51:31.881Z",
-        color: 4,
-        completed: true
-      }
-    ];
-    const colors = ["#7ED321", "#de1b1b", "#511E78", "#ff9009", "#42a5f5"];
-    const { rowStyle, colStyle, gutter } = basicStyle;
+    const { trades } = this.props.profile;
+
+    // const trades = [
+    //   {
+    //     id: 1,
+    //     user: {
+    //       name: "My user"
+    //     },
+    //     pair: "HOT_BTC",
+    //     createdDate: "20/12/2020 15:30:05",
+    //     buyPrice: "0.000000004",
+    //     profitPrice: "0.000000005",
+    //     stopPrice: "0.000000003",
+    //     status: {
+    //       completed: false,
+    //       stopLoss: 10,
+    //       profit: 50,
+    //       remaining: 40
+    //     }
+    //   }
+    // ];
+
     return (
       <Wrapper>
         {this.props.profile.loading !== true ? (
@@ -162,7 +135,7 @@ class MyProfile extends Component {
               </Container>
             </Navigation>
 
-            <TradeList />
+            <TradeList trades={trades} />
 
             <Modal
               wrapClassName="follow-modal"

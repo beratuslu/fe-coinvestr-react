@@ -1,7 +1,25 @@
 import profileActions from "./actions";
 
 const INITIAL_DATA = {
-  data: null,
+  trades: [
+    {
+      id: 1,
+      user: {
+        name: "My user"
+      },
+      pair: "HOT_BTC",
+      createdDate: "20/12/2020 15:30:05",
+      buyPrice: "0.000000004",
+      profitPrice: "0.000000005",
+      stopPrice: "0.000000003",
+      status: {
+        completed: false,
+        stopLoss: 10,
+        profit: 50,
+        remaining: 40
+      }
+    }
+  ],
   loading: true,
   error: null
 };
