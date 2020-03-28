@@ -97,16 +97,14 @@ class MyProfile extends Component {
                 <div className="innerWrapper">
                   <ul className="menu">
                     <li
-                      className={this.state.active === "post" ? "active" : ""}
+                      className={"active"}
                       onClick={() => this.handleMenu("post")}
                     >
                       {/* <strong>{this.props.profile.data.post.length}</strong>{" "} */}
                       Trades
                     </li>
                     <li
-                      className={
-                        this.state.active === "followers" ? "active" : ""
-                      }
+                      // className={this.state.active === "followers" ? "active" : ""}
                       onClick={() => this.handleMenu("followers")}
                     >
                       <strong>
@@ -115,9 +113,7 @@ class MyProfile extends Component {
                       Followers
                     </li>
                     <li
-                      className={
-                        this.state.active === "following" ? "active" : ""
-                      }
+                      // className={this.state.active === "following" ? "active" : ""}
                       onClick={() => this.handleMenu("following")}
                     >
                       <strong>

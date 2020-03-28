@@ -39,12 +39,25 @@ class TradeList extends Component {
       search: "All"
     };
   }
+  colors = {
+    buyOrder: "#a4c196",
+    bought: "green",
+    profitSellOrder: "#a4c196",
+    profitSell: "green",
+    stopSellOrder: "#a4c196",
+    stopSell: "red",
+    cancel: "gray"
+  };
+
+  items = [{}];
 
   onChange(event) {
     this.setState({ search: event.target.value });
   }
+  renderTimeLineChildren(items) {}
   render() {
     const { trades } = this.props;
+
     return (
       <LayoutWrapper>
         <SwitchButtonsWrapper>
@@ -84,12 +97,12 @@ class TradeList extends Component {
                     >
                       <br />
                       <Timeline>
-                        <TimelineItem>
+                        <TimelineItem color="#a4c196">
                           {
                             <IntlMessages id="uiElements.timeline.createServiceSite" />
                           }
                         </TimelineItem>
-                        <TimelineItem>
+                        <TimelineItem color="red">
                           {
                             <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
                           }
