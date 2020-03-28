@@ -39,22 +39,86 @@ class TradeList extends Component {
       search: "All"
     };
   }
-  colors = {
-    buyOrder: "#a4c196",
-    bought: "green",
-    profitSellOrder: "#a4c196",
-    profitSell: "green",
-    stopSellOrder: "#a4c196",
-    stopSell: "red",
-    cancel: "gray"
-  };
-
-  items = [{}];
 
   onChange(event) {
     this.setState({ search: event.target.value });
   }
-  renderTimeLineChildren(items) {}
+  colors = {
+    buyOrder: "#a4c196",
+    buyOrderPartiallyFilled: "green",
+    buyOrderFilled: "green",
+
+    profitSellOrder: "#a4c196",
+    profitSellOrderPartiallyFilled: "green",
+    profitSellOrderFilled: "green",
+
+    stopSellOrder: "#faad14",
+    stopSellOrderPartiallyFilled: "red",
+    stopSellOrderFilled: "red",
+
+    profitSellOrderCanceled: "gray",
+    stopSellOrderCanceled: "gray"
+  };
+
+  renderTradeActivities(activities) {
+    return activities.map(item => {
+      let text = "";
+      if (item.activity == "buyOrder") {
+        text = `Buy Order Placed: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+      if (item.activity == "buyOrderPartiallyFilled") {
+        text = `Buy Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+      if (item.activity == "buyOrderFilled") {
+        text = `Buy Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+
+      if (item.activity == "profitSellOrder") {
+        text = `Profit Sell Order: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+      if (item.activity == "profitSellOrderPartiallyFilled") {
+        text = `Profit Sell Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+      if (item.activity == "profitSellOrderFilled") {
+        text = `Profit Sell Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+
+      if (item.activity == "stopSellOrder") {
+        text = `Stop Sell Order: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+      if (item.activity == "stopSellOrderPartiallyFilled") {
+        text = `Stop Sell Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+      if (item.activity == "stopSellOrderFilled") {
+        text = `Stop Sell Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+
+      if (item.activity == "profitSellOrderCanceled") {
+        text = `Profit Sell Order Canceled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+      if (item.activity == "stopSellOrderCanceled") {
+        text = `Stop Sell Order Canceled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+      }
+
+      return (
+        <TimelineItem key={item.createDate} color={this.colors[item.activity]}>
+          {text}
+        </TimelineItem>
+      );
+    });
+  }
+
+  renderTrades(trades) {
+    const tradesJsx = trades.map(trade => {
+      return (
+        <Panel header={<TradeCollapseHeader item={trade} />} key={trade.id}>
+          <br />
+          <Timeline>{this.renderTradeActivities(trade.activities)}</Timeline>
+        </Panel>
+      );
+    });
+    return <Collapse>{tradesJsx}</Collapse>;
+  }
   render() {
     const { trades } = this.props;
 
@@ -71,7 +135,7 @@ class TradeList extends Component {
           </RadioGroup>
         </SwitchButtonsWrapper>
         <Box className="container">
-          <TradeListWrapper className="helelele">
+          <TradeListWrapper>
             {!isEmpty(trades) ? (
               <>
                 <div className="collapseWrapper">
@@ -79,7 +143,7 @@ class TradeList extends Component {
                     <tbody>
                       <tr>
                         <td>
-                          <span>User</span>
+                          <span>User-</span>
                         </td>
                         <td>Pair</td>
                         <td>Create Date</td>
@@ -90,120 +154,7 @@ class TradeList extends Component {
                       </tr>
                     </tbody>
                   </Table>
-                  <Collapse>
-                    <Panel
-                      header={<TradeCollapseHeader item={trades[0]} />}
-                      key="1"
-                    >
-                      <br />
-                      <Timeline>
-                        <TimelineItem color="#a4c196">
-                          {
-                            <IntlMessages id="uiElements.timeline.createServiceSite" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem color="red">
-                          {
-                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.technicalTesting" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
-                          }
-                        </TimelineItem>
-                      </Timeline>
-                    </Panel>
-                    <Panel
-                      header={<TradeCollapseHeader item={trades[0]} />}
-                      key="2"
-                    >
-                      <br />
-                      <Timeline>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.createServiceSite" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.technicalTesting" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
-                          }
-                        </TimelineItem>
-                      </Timeline>
-                    </Panel>
-                    <Panel
-                      header={<TradeCollapseHeader item={trades[0]} />}
-                      key="3"
-                    >
-                      <br />
-                      <Timeline>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.createServiceSite" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.technicalTesting" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
-                          }
-                        </TimelineItem>
-                      </Timeline>
-                    </Panel>
-                    <Panel
-                      header={<TradeCollapseHeader item={trades[0]} />}
-                      key="4"
-                    >
-                      <br />
-                      <Timeline>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.createServiceSite" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.solveInitialNetwork" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.technicalTesting" />
-                          }
-                        </TimelineItem>
-                        <TimelineItem>
-                          {
-                            <IntlMessages id="uiElements.timeline.networkProblemSolved" />
-                          }
-                        </TimelineItem>
-                      </Timeline>
-                    </Panel>
-                  </Collapse>
+                  {this.renderTrades(trades)}
                 </div>
               </>
             ) : (
