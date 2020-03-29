@@ -4,6 +4,7 @@ import isEmpty from "lodash/isEmpty";
 import scrumBoardActions from "../../../redux/scrumBoard/actions";
 import Collapses from "../../../components/uielements/collapse";
 import Pagination from "../../../components/uielements/pagination";
+import { Icon } from "antd";
 import Timeline, {
   TimelineItem
 } from "../../../components/uielements/timeline";
@@ -44,11 +45,11 @@ class TradeList extends Component {
     this.setState({ search: event.target.value });
   }
   colors = {
-    buyOrder: "#a4c196",
+    buyOrder: "blue",
     buyOrderPartiallyFilled: "green",
     buyOrderFilled: "green",
 
-    profitSellOrder: "#a4c196",
+    profitSellOrder: "blue",
     profitSellOrderPartiallyFilled: "green",
     profitSellOrderFilled: "green",
 
@@ -63,45 +64,54 @@ class TradeList extends Component {
   renderTradeActivities(activities) {
     return activities.map(item => {
       let text = "";
+      let dot = null;
       if (item.activity === "buyOrder") {
-        text = `Buy Order Placed: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Buy Order Placed | ${item.qty} ${item.symbol}`;
       }
       if (item.activity === "buyOrderPartiallyFilled") {
-        text = `Buy Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Buy Order Partially Filled | ${item.qty} ${item.symbol}`;
       }
       if (item.activity === "buyOrderFilled") {
-        text = `Buy Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Buy Order Filled | ${item.qty} ${item.symbol}`;
       }
 
       if (item.activity === "profitSellOrder") {
-        text = `Profit Sell Order: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Profit Sell Order | ${item.qty} ${item.symbol}`;
       }
       if (item.activity === "profitSellOrderPartiallyFilled") {
-        text = `Profit Sell Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Profit Sell Order Partially Filled | ${item.qty} ${item.symbol}`;
+        dot = <Icon type="plus-circle" style={{ fontSize: "14px" }} />;
       }
       if (item.activity === "profitSellOrderFilled") {
-        text = `Profit Sell Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Profit Sell Order Filled | ${item.qty} ${item.symbol}`;
+        dot = <Icon type="check-circle" style={{ fontSize: "16px" }} />;
       }
 
       if (item.activity === "stopSellOrder") {
-        text = `Stop Sell Order: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} |  Stop Sell Order | ${item.qty} ${item.symbol}`;
       }
       if (item.activity === "stopSellOrderPartiallyFilled") {
-        text = `Stop Sell Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Stop Sell Order Partially Filled | ${item.qty} ${item.symbol}`;
+        dot = <Icon type="minus-circle" style={{ fontSize: "14px" }} />;
       }
       if (item.activity === "stopSellOrderFilled") {
-        text = `Stop Sell Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Stop Sell Order Filled | ${item.qty} ${item.symbol}`;
+        dot = <Icon type="close-circle" style={{ fontSize: "16px" }} />;
       }
 
       if (item.activity === "profitSellOrderCanceled") {
-        text = `Profit Sell Order Canceled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Profit Sell Order Canceled | ${item.qty} ${item.symbol}`;
       }
       if (item.activity === "stopSellOrderCanceled") {
-        text = `Stop Sell Order Canceled: ${item.createDate} | ${item.qty} ${item.symbol}`;
+        text = `${item.createDate} | Stop Sell Order Canceled | ${item.qty} ${item.symbol}`;
       }
 
       return (
-        <TimelineItem key={item.createDate} color={this.colors[item.activity]}>
+        <TimelineItem
+          dot={dot}
+          key={item.createDate}
+          color={this.colors[item.activity]}
+        >
           {text}
         </TimelineItem>
       );
