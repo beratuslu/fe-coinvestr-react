@@ -63,40 +63,40 @@ class TradeList extends Component {
   renderTradeActivities(activities) {
     return activities.map(item => {
       let text = "";
-      if (item.activity == "buyOrder") {
+      if (item.activity === "buyOrder") {
         text = `Buy Order Placed: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
-      if (item.activity == "buyOrderPartiallyFilled") {
+      if (item.activity === "buyOrderPartiallyFilled") {
         text = `Buy Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
-      if (item.activity == "buyOrderFilled") {
+      if (item.activity === "buyOrderFilled") {
         text = `Buy Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
 
-      if (item.activity == "profitSellOrder") {
+      if (item.activity === "profitSellOrder") {
         text = `Profit Sell Order: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
-      if (item.activity == "profitSellOrderPartiallyFilled") {
+      if (item.activity === "profitSellOrderPartiallyFilled") {
         text = `Profit Sell Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
-      if (item.activity == "profitSellOrderFilled") {
+      if (item.activity === "profitSellOrderFilled") {
         text = `Profit Sell Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
 
-      if (item.activity == "stopSellOrder") {
+      if (item.activity === "stopSellOrder") {
         text = `Stop Sell Order: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
-      if (item.activity == "stopSellOrderPartiallyFilled") {
+      if (item.activity === "stopSellOrderPartiallyFilled") {
         text = `Stop Sell Order Partially Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
-      if (item.activity == "stopSellOrderFilled") {
+      if (item.activity === "stopSellOrderFilled") {
         text = `Stop Sell Order Filled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
 
-      if (item.activity == "profitSellOrderCanceled") {
+      if (item.activity === "profitSellOrderCanceled") {
         text = `Profit Sell Order Canceled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
-      if (item.activity == "stopSellOrderCanceled") {
+      if (item.activity === "stopSellOrderCanceled") {
         text = `Stop Sell Order Canceled: ${item.createDate} | ${item.qty} ${item.symbol}`;
       }
 
