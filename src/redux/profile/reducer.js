@@ -20,68 +20,68 @@ const INITIAL_DATA = {
       },
       activities: [
         {
-          activity: "buyOrder",
-          createDate: "20/12/2020 15:30:05",
+          activity: "buyOrderPlaced",
+          createDate: "20/12/2020 15:30:21",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "buyOrderPartiallyFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:22",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "buyOrderFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:23",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrder",
-          createDate: "20/12/2020 15:30:05",
+          activity: "profitSellOrderPlaced",
+          createDate: "20/12/2020 15:30:24",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "profitSellOrderPartiallyFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:25",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "profitSellOrderFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:26",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrder",
-          createDate: "20/12/2020 15:30:05",
+          activity: "stopSellOrderPlaced",
+          createDate: "20/12/2020 15:30:27",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "stopSellOrderPartiallyFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:28",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "stopSellOrderFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:29",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "profitSellOrderCanceled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:30",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "stopSellOrderCanceled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:31",
           symbol: "HOT_BTC",
           qty: 50000
         }
@@ -105,26 +105,26 @@ const INITIAL_DATA = {
       },
       activities: [
         {
-          activity: "buyOrder",
-          createDate: "20/12/2020 15:30:05",
+          activity: "buyOrderPlaced",
+          createDate: "20/12/2020 15:30:01",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "buyOrderPartiallyFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:02",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "buyOrderFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:03",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrder",
-          createDate: "20/12/2020 15:30:05",
+          activity: "profitSellOrderPlaced",
+          createDate: "20/12/2020 15:30:04",
           symbol: "HOT_BTC",
           qty: 50000
         },
@@ -136,37 +136,37 @@ const INITIAL_DATA = {
         },
         {
           activity: "profitSellOrderFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:06",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrder",
-          createDate: "20/12/2020 15:30:05",
+          activity: "stopSellOrderPlaced",
+          createDate: "20/12/2020 15:30:07",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "stopSellOrderPartiallyFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:08",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "stopSellOrderFilled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:09",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "profitSellOrderCanceled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:10",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
           activity: "stopSellOrderCanceled",
-          createDate: "20/12/2020 15:30:05",
+          createDate: "20/12/2020 15:30:11",
           symbol: "HOT_BTC",
           qty: 50000
         }

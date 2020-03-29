@@ -327,7 +327,7 @@ const WDTradeListWrapper = styled.div`
 const Table = styled.table`
   table-layout: fixed;
   width: 1000px;
-  margin-left: 40px;
+  margin-left: 36px;
   tr {
     td {
       padding: 20px;
@@ -452,6 +452,20 @@ const PaginationWrapper = styled.div`
     display: inline-flex;
   }
 `;
+const ActivityWrapper = styled.div`
+  * {
+    display: inline-block;
+  }
+  .activity {
+    width: 200px;
+  }
+  .amountSymbol {
+    width: 150px;
+  }
+  .createDate {
+    width: 200px;
+  }
+`;
 
 export default WithDirection(CollapseWrapper);
 
@@ -463,5 +477,6 @@ export {
   Table,
   SwitchButtonsWrapper,
   CollapseWrapper,
-  PaginationWrapper
+  PaginationWrapper,
+  ActivityWrapper
 };

@@ -47,10 +47,10 @@ export default function BoardListCard({ item, onDelete, onEdit }) {
             </Link>
           </td>
           <td>HOT_BTC</td>
-          <td>20/12/2020 15:30:05</td>
           <td>0.000000004</td>
           <td>0.000000005</td>
           <td>0.000000003</td>
+          <td>20/12/2020 15:30:05</td>
           <td>
             <ProgressWrapper>
               <Progress
