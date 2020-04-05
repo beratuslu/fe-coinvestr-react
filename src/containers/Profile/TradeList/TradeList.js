@@ -65,169 +65,41 @@ class TradeList extends Component {
     profitSellOrderCanceled: "gray",
     stopSellOrderCanceled: "gray"
   };
-
+  renderTradeActivityText(activity) {
+    return (
+      <ActivityWrapper>
+        <span className="activity">{activity.title}</span>
+        <span className="amountSymbol">
+          {activity.qty} {activity.symbol.split("_")[0]}
+        </span>
+        <span className="createDate">{activity.createDate}</span>
+      </ActivityWrapper>
+    );
+  }
   renderTradeActivities(activities) {
-    return activities.map(item => {
-      let text = "";
+    return activities.map(activity => {
+      const text = this.renderTradeActivityText(activity);
       let dot = null;
-      if (item.activity === "buyOrderPlaced") {
-        text = `${item.createDate} | Buy Order Placed | ${item.qty} ${item.symbol}`;
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Buy Order Placed</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
-      }
-      if (item.activity === "buyOrderPartiallyFilled") {
-        text = `${item.createDate} | Buy Order Partially Filled | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Buy Order Partially Filled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
-      }
-      if (item.activity === "buyOrderFilled") {
-        text = `${item.createDate} | Buy Order Filled | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Buy Order Filled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
-      }
-
-      if (item.activity === "profitSellOrderPlaced") {
-        text = `${item.createDate} | Profit Sell Order Placed | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Profit Sell Order Placed</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
-      }
-      if (item.activity === "profitSellOrderPartiallyFilled") {
-        text = `${item.createDate} | Profit Sell Order Partially Filled | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Profit Sell Order Partially Filled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
+      if (activity.type === "profitSellOrderPartiallyFilled") {
         dot = <Icon type="plus-circle" style={{ fontSize: "14px" }} />;
       }
-      if (item.activity === "profitSellOrderFilled") {
-        text = `${item.createDate} | Profit Sell Order Filled | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Profit Sell Order Filled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
+      if (activity.type === "profitSellOrderFilled") {
         dot = <Icon type="check-circle" style={{ fontSize: "16px" }} />;
       }
 
-      if (item.activity === "stopSellOrderPlaced") {
-        text = `${item.createDate} |  Stop Sell Order Placed | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Stop Sell Order Placed</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
-      }
-      if (item.activity === "stopSellOrderPartiallyFilled") {
-        text = `${item.createDate} | Stop Sell Order Partially Filled | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Stop Sell Order Partially Filled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
+      if (activity.type === "stopSellOrderPartiallyFilled") {
         dot = <Icon type="minus-circle" style={{ fontSize: "14px" }} />;
       }
-      if (item.activity === "stopSellOrderFilled") {
-        text = `${item.createDate} | Stop Sell Order Filled | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Stop Sell Order Filled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
+      if (activity.type === "stopSellOrderFilled") {
         dot = <Icon type="close-circle" style={{ fontSize: "16px" }} />;
-      }
-
-      if (item.activity === "profitSellOrderCanceled") {
-        text = `${item.createDate} | Profit Sell Order Canceled | ${item.qty} ${
-          item.symbol.split("_")[0]
-        }`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Profit Sell Order Canceled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
-      }
-      if (item.activity === "stopSellOrderCanceled") {
-        text = `${item.createDate} | Stop Sell Order Canceled | ${item.qty} ${item.symbol}`;
-
-        text = (
-          <ActivityWrapper>
-            <span className="activity">Stop Sell Order Canceled</span>
-            <span className="amountSymbol">
-              {item.qty} {item.symbol.split("_")[0]}
-            </span>
-            <span className="createDate">{item.createDate}</span>
-          </ActivityWrapper>
-        );
       }
 
       return (
         <TimelineItem
           className="activity"
           dot={dot}
-          key={item.createDate}
-          color={this.colors[item.activity]}
+          key={activity.createDate}
+          color={this.colors[activity.type]}
         >
           {text}
         </TimelineItem>
@@ -256,9 +128,10 @@ class TradeList extends Component {
             value={this.state.search}
             onChange={this.onChange}
             className="isoTradeType"
+            defaultValue="myTrades"
           >
-            <RadioButton value="MyTrades">My Trades</RadioButton>
-            <RadioButton value="CopiedTrades">Copied Trades</RadioButton>
+            <RadioButton value="myTrades">My Trades</RadioButton>
+            <RadioButton value="copiedTrades">Copied Trades</RadioButton>
           </RadioGroup>
         </SwitchButtonsWrapper>
         <Box className="container">

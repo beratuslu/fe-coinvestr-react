@@ -21,67 +21,78 @@ const INITIAL_DATA = {
       },
       activities: [
         {
-          activity: "buyOrderPlaced",
+          type: "buyOrderPlaced",
+          title: "Buy Order Placed",
           createDate: "20/12/2020 15:30:21",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "buyOrderPartiallyFilled",
+          type: "buyOrderPartiallyFilled",
+          title: "Buy Order Partially Filled",
           createDate: "20/12/2020 15:30:22",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "buyOrderFilled",
+          type: "buyOrderFilled",
+          title: "Buy Order Filled",
           createDate: "20/12/2020 15:30:23",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderPlaced",
+          type: "profitSellOrderPlaced",
+          title: "Profit Sell Order Placed",
           createDate: "20/12/2020 15:30:24",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderPartiallyFilled",
+          type: "profitSellOrderPartiallyFilled",
+          title: "Profit Sell Order Partially Filled",
           createDate: "20/12/2020 15:30:25",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderFilled",
+          type: "profitSellOrderFilled",
+          title: "Profit Sell Order Filled",
           createDate: "20/12/2020 15:30:26",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderPlaced",
+          type: "stopSellOrderPlaced",
+          title: "Stop Sell Order Placed",
           createDate: "20/12/2020 15:30:27",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderPartiallyFilled",
+          type: "stopSellOrderPartiallyFilled",
+          title: "Stop Sell Order Partially Filled",
           createDate: "20/12/2020 15:30:28",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderFilled",
+          type: "stopSellOrderFilled",
+          title: "Stop Sell Order Filled",
           createDate: "20/12/2020 15:30:29",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderCanceled",
+          type: "profitSellOrderCanceled",
+          title: "Profit Sell Order Canceled",
           createDate: "20/12/2020 15:30:30",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderCanceled",
+          type: "stopSellOrderCanceled",
+          title: "Stop Sell Order Canceled",
           createDate: "20/12/2020 15:30:31",
           symbol: "HOT_BTC",
           qty: 50000
@@ -106,67 +117,78 @@ const INITIAL_DATA = {
       },
       activities: [
         {
-          activity: "buyOrderPlaced",
+          type: "buyOrderPlaced",
+          title: "Buy Order Placed",
           createDate: "20/12/2020 15:30:01",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "buyOrderPartiallyFilled",
+          type: "buyOrderPartiallyFilled",
+          title: "Buy Order Partially Filled",
           createDate: "20/12/2020 15:30:02",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "buyOrderFilled",
+          type: "buyOrderFilled",
+          title: "Buy Order Filled",
           createDate: "20/12/2020 15:30:03",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderPlaced",
+          type: "profitSellOrderPlaced",
+          title: "Profit Sell Order Placed",
           createDate: "20/12/2020 15:30:04",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderPartiallyFilled",
+          type: "profitSellOrderPartiallyFilled",
+          title: "Profit Sell Order Partially Filled",
           createDate: "20/12/2020 15:30:05",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderFilled",
+          type: "profitSellOrderFilled",
+          title: "Profit Sell Order Filled",
           createDate: "20/12/2020 15:30:06",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderPlaced",
+          type: "stopSellOrderPlaced",
+          title: "Stop Sell Order Placed",
           createDate: "20/12/2020 15:30:07",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderPartiallyFilled",
+          type: "stopSellOrderPartiallyFilled",
+          title: "Stop Sell Order Partially Filled",
           createDate: "20/12/2020 15:30:08",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderFilled",
+          type: "stopSellOrderFilled",
+          title: "Stop Sell Order Filled",
           createDate: "20/12/2020 15:30:09",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "profitSellOrderCanceled",
+          type: "profitSellOrderCanceled",
+          title: "Profit Sell Order Canceled",
           createDate: "20/12/2020 15:30:10",
           symbol: "HOT_BTC",
           qty: 50000
         },
         {
-          activity: "stopSellOrderCanceled",
+          type: "stopSellOrderCanceled",
+          title: "Stop Sell Order Canceled",
           createDate: "20/12/2020 15:30:11",
           symbol: "HOT_BTC",
           qty: 50000

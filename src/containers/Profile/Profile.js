@@ -17,7 +17,7 @@ import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
 // import { useSelector, useDispatch } from "react-redux";
 import actions from "../../redux/profile/actions";
 
-class MyProfile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
     this.handleCancel = this.handleCancel.bind(this);
@@ -165,5 +165,5 @@ class MyProfile extends Component {
 }
 export default connect(state => ({
   profile: state.Profile,
-  auth: state.auth
-}))(MyProfile);
+  auth: state.Auth
+}))(Profile);
