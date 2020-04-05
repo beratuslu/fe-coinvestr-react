@@ -7,18 +7,15 @@ import axios from "axios";
 import actions from "./actions";
 const BASE_URL = `/api/v1/trades`;
 
-const userTradesRequest = async credentials => {
-  return axios.post(`${BASE_URL}/user-trades`, {
-    email: credentials.email,
-    password: credentials.password
-  });
+const userTradesRequest = async payload => {
+  return axios.post(`${BASE_URL}/user-trades`, payload);
 };
 
 export function* userTrades() {
-  yield takeEvery(actions.FETCH_USER_TRADES_START, function*({ credentials }) {
+  yield takeEvery(actions.FETCH_USER_TRADES_START, function*({ payload }) {
     try {
-      const loginResult = yield call(userTradesRequest, credentials);
-      if (loginResult.success) {
+      const loginResult = yield call(userTradesRequest, payload);
+      if (loginResult.status === "success") {
         yield put({
           type: actions.LOGIN_SUCCESS,
           token: loginResult.data.token,
@@ -31,7 +28,7 @@ export function* userTrades() {
     } catch (error) {
       notifications.error({
         message: "Login Failed",
-        description: error.message
+        description: error.response.data.message
       });
       // yield put({ type: actions.LOGIN_ERROR });
     }

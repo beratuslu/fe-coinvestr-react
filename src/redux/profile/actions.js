@@ -8,7 +8,8 @@ const profileActions = {
   FETCH_PROFILE_DATA_FAILURE: "FETCH_PROFILE_DATA_FAILURE",
 
   fetchUserTradesStart: payload => ({
-    type: profileActions.FETCH_USER_TRADES_START
+    type: profileActions.FETCH_USER_TRADES_START,
+    payload
   }),
   fetchUserTradesSuccess: profile => ({
     type: profileActions.FETCH_USER_TRADES_SUCCESS,

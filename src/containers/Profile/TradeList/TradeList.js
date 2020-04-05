@@ -37,18 +37,38 @@ const Collapse = props => (
 class TradeList extends Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
+    this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
+    this.onPageChange = this.onPageChange.bind(this);
+
     this.state = {
-      search: "All"
+      recordType: "myTrades",
+      pageSize: 10,
+      pageNumber: 1
     };
   }
   componentDidMount() {
-    // this.props.dispatch(actions.fetchUserTradesStart());
+    this.makeDataRequest();
   }
 
-  onChange(event) {
-    this.setState({ search: event.target.value });
+  makeDataRequest() {
+    const { recordType, pageSize, pageNumber } = this.state;
+    const obj = {
+      recordType,
+      pagination: { pageSize, pageNumber }
+    };
+    this.props.fetchUserTradesStart(obj);
   }
+  onRecordTypeChange(event) {
+    this.setState({ recordType: event.target.value }, () => {
+      this.props.makeDataRequest();
+    });
+  }
+  onPageChange(pageNumber) {
+    this.setState({ pageNumber }, () => {
+      this.props.makeDataRequest();
+    });
+  }
+
   colors = {
     buyOrderPlaced: "blue",
     buyOrderPartiallyFilled: "green",
@@ -86,7 +106,6 @@ class TradeList extends Component {
       if (activity.type === "profitSellOrderFilled") {
         dot = <Icon type="check-circle" style={{ fontSize: "16px" }} />;
       }
-
       if (activity.type === "stopSellOrderPartiallyFilled") {
         dot = <Icon type="minus-circle" style={{ fontSize: "14px" }} />;
       }
@@ -119,16 +138,15 @@ class TradeList extends Component {
     return <Collapse>{tradesJsx}</Collapse>;
   }
   render() {
-    const { trades } = this.props;
+    const { trades } = this.props.profile;
 
     return (
       <LayoutWrapper>
         <SwitchButtonsWrapper>
           <RadioGroup
-            value={this.state.search}
-            onChange={this.onChange}
+            value={this.state.recordType}
+            onChange={this.onRecordTypeChange}
             className="isoTradeType"
-            defaultValue="myTrades"
           >
             <RadioButton value="myTrades">My Trades</RadioButton>
             <RadioButton value="copiedTrades">Copied Trades</RadioButton>
@@ -165,9 +183,7 @@ class TradeList extends Component {
             <Pagination
               defaultCurrent={4}
               total={60}
-              onChange={page => {
-                // onPageChange(searchText, page);
-              }}
+              onChange={this.onPageChange}
             />
           </PaginationWrapper>
         </Box>
@@ -178,7 +194,12 @@ class TradeList extends Component {
 
 export default connect(
   state => ({
-    boards: filterProjects(state.scrumBoard.boards, state.scrumBoard.searchText)
+    profile: state.Profile,
+    auth: state.Auth
   }),
-  { ...scrumBoardActions }
+  { ...actions }
 )(TradeList);
+
+// state => ({
+//   boards: filterProjects(state.scrumBoard.boards, state.scrumBoard.searchText)
+// }),
