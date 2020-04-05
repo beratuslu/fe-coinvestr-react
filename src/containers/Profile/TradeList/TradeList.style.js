@@ -460,7 +460,7 @@ const ActivityWrapper = styled.div`
     width: 200px;
   }
   .amountSymbol {
-    width: 150px;
+    width: 120px;
   }
   .createDate {
     width: 200px;

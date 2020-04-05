@@ -14,6 +14,7 @@ import Box from "../../../components/utility/box";
 import LayoutWrapper from "../../../components/utility/layoutWrapper";
 import { filterProjects } from "../../../helpers/filterProjects";
 // import CollapseWrapper from "./collapse.style";
+import actions from "../../../redux/profile/actions";
 import {
   TradeListWrapper,
   Table,
@@ -40,6 +41,9 @@ class TradeList extends Component {
     this.state = {
       search: "All"
     };
+  }
+  componentDidMount() {
+    this.props.dispatch(actions.fetchUserTradesStart());
   }
 
   onChange(event) {
@@ -286,7 +290,7 @@ class TradeList extends Component {
           </TradeListWrapper>
           <PaginationWrapper>
             <Pagination
-              defaultCurrent={6}
+              defaultCurrent={4}
               total={60}
               onChange={page => {
                 // onPageChange(searchText, page);

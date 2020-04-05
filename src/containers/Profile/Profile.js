@@ -15,7 +15,7 @@ import basicStyle from "../../settings/basicStyle";
 import TradeList from "./TradeList/TradeList";
 import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
 // import { useSelector, useDispatch } from "react-redux";
-import profileActions from "../../redux/profile/actions";
+import actions from "../../redux/profile/actions";
 
 class MyProfile extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class MyProfile extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(profileActions.fetchProfileDataStart());
+    // this.props.dispatch(actions.fetchUserTradesStart());
   }
   handleCancel() {
     this.setState({ visible: false, active: "post" });

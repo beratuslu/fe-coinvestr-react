@@ -1,6 +1,7 @@
 import profileActions from "./actions";
 
 const INITIAL_DATA = {
+  items: [],
   trades: [
     {
       id: 1,

@@ -5,18 +5,17 @@ import { getToken, clearToken } from "../../helpers/utility";
 import actions from "./actions";
 import axios from "axios";
 
-const onLoginRequest = async credentials => {
+const onLoginRequest = async payload => {
   return axios.post("/public/login", {
-    email: credentials.email,
-    password: credentials.password
+    email: payload.email,
+    password: payload.password
   });
 };
 
 export function* loginRequest() {
-  yield takeEvery("LOGIN_REQUEST", function*({ credentials }) {
+  yield takeEvery(actions.LOGIN_REQUEST, function*({ payload }) {
     try {
-      const loginResult = yield call(onLoginRequest, credentials);
-      console.log("TCL: yieldtakeEvery -> loginResult", loginResult);
+      const loginResult = yield call(onLoginRequest, payload);
       if (loginResult.success) {
         yield put({
           type: actions.LOGIN_SUCCESS,

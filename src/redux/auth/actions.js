@@ -1,13 +1,13 @@
 const actions = {
   CHECK_AUTHORIZATION: "CHECK_AUTHORIZATION",
   LOGIN_REQUEST: "LOGIN_REQUEST",
-  LOGOUT: "LOGOUT",
   LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_ERROR: "LOGIN_ERROR",
+  LOGOUT: "LOGOUT",
   checkAuthorization: () => ({ type: actions.CHECK_AUTHORIZATION }),
-  login: credentials => ({
+  login: payload => ({
     type: actions.LOGIN_REQUEST,
-    credentials
+    payload
   }),
   startSocket: token => ({
     type: "START_CHANNEL",
