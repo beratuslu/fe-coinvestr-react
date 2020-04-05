@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Input from "../../components/uielements/input";
 import Checkbox from "../../components/uielements/checkbox";
 import Button from "../../components/uielements/button";
-import authAction from "../../redux/auth/actions";
+import authActions from "../../redux/auth/actions";
 import appAction from "../../redux/app/actions";
 import Auth0 from "../../helpers/auth0";
 import Firebase from "../../helpers/firebase";
@@ -14,7 +14,7 @@ import Form from "../../components/uielements/form";
 import SignInStyleWrapper from "./signin.style";
 const FormItem = Form.Item;
 
-const { login } = authAction;
+const { login } = authActions;
 const { clearMenu } = appAction;
 
 class SignIn extends Component {

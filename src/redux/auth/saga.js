@@ -6,6 +6,7 @@ import actions from "./actions";
 import axios from "axios";
 
 const onLoginRequest = async payload => {
+  console.log("payload", payload);
   return axios.post("/public/login", {
     email: payload.email,
     password: payload.password
@@ -14,6 +15,7 @@ const onLoginRequest = async payload => {
 
 export function* loginRequest() {
   yield takeEvery(actions.LOGIN_REQUEST, function*({ payload }) {
+    console.log("yieldtakeEvery -> payload", payload);
     try {
       const loginResult = yield call(onLoginRequest, payload);
       if (loginResult.success) {

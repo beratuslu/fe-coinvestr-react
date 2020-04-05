@@ -49,8 +49,8 @@ function* fetchProfileDataEffect() {
 
 export default function* profileSaga() {
   yield all([
-    fork(userTrades)
-    // fork(loginRequest),
+    fork(userTrades),
+    fork(fetchProfileDataEffect)
     // fork(loginSuccess),
     // fork(loginError),
     // fork(logout)

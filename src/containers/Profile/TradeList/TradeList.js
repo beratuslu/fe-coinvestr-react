@@ -43,7 +43,7 @@ class TradeList extends Component {
     };
   }
   componentDidMount() {
-    this.props.dispatch(actions.fetchUserTradesStart());
+    // this.props.dispatch(actions.fetchUserTradesStart());
   }
 
   onChange(event) {
