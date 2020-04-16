@@ -60,12 +60,12 @@ class TradeList extends Component {
   }
   onRecordTypeChange(event) {
     this.setState({ recordType: event.target.value }, () => {
-      this.props.makeDataRequest();
+      this.makeDataRequest();
     });
   }
   onPageChange(pageNumber) {
     this.setState({ pageNumber }, () => {
-      this.props.makeDataRequest();
+      this.makeDataRequest();
     });
   }
 
@@ -90,9 +90,10 @@ class TradeList extends Component {
       <ActivityWrapper>
         <span className="activity">{activity.title}</span>
         <span className="amountSymbol">
-          {activity.qty} {activity.symbol.split("_")[0]}
+          {activity.symbol.split("BTC")[0]} <strong>{activity.qty}</strong>
         </span>
-        <span className="createDate">{activity.createDate}</span>
+        {/* TODO: createTime i moment ile formatlayalim */}
+        <span className="createDate">{activity.createTime}</span>
       </ActivityWrapper>
     );
   }
@@ -117,7 +118,7 @@ class TradeList extends Component {
         <TimelineItem
           className="activity"
           dot={dot}
-          key={activity.createDate}
+          key={activity.id}
           color={this.colors[activity.type]}
         >
           {text}
@@ -167,7 +168,7 @@ class TradeList extends Component {
                         <td>Buy Price</td>
                         <td>Profit Price</td>
                         <td>Stop Price</td>
-                        <td>Create Date</td>
+                        <td>Create Time</td>
                         <td>Status</td>
                       </tr>
                     </tbody>

@@ -214,6 +214,13 @@ export default function profileReducer(state = INITIAL_DATA, action) {
         loading: false,
         error: action.payload
       };
+    case profileActions.FETCH_USER_TRADES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        trades: action.payload
+      };
     default:
       return state;
   }

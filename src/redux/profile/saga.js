@@ -15,21 +15,13 @@ export function* userTrades() {
   yield takeEvery(actions.FETCH_USER_TRADES_START, function*({ payload }) {
     try {
       const loginResult = yield call(userTradesRequest, payload);
-      if (loginResult.status === "success") {
-        yield put({
-          type: actions.LOGIN_SUCCESS,
-          token: loginResult.data.token,
-          user: loginResult.data.user
-        });
-      } else {
-        //user not found or wrong password
-        yield put({ type: actions.LOGIN_ERROR });
-      }
-    } catch (error) {
-      notifications.error({
-        message: "Login Failed",
-        description: error.response.data.message
+      console.log("yieldtakeEvery -> loginResult", loginResult);
+
+      yield put({
+        type: actions.FETCH_USER_TRADES_SUCCESS,
+        payload: loginResult.data
       });
+    } catch (error) {
       // yield put({ type: actions.LOGIN_ERROR });
     }
   });
