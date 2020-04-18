@@ -5,7 +5,7 @@ import profileActions from "./actions";
 import DemoProfileData from "./profile.data";
 import axios from "axios";
 import actions from "./actions";
-const BASE_URL = `/api/v1/trades`;
+const BASE_URL = `/api/v1/profile`;
 
 const userTradesRequest = async payload => {
   return axios.post(`${BASE_URL}/user-trades`, payload);
@@ -15,7 +15,6 @@ export function* userTrades() {
   yield takeEvery(actions.FETCH_USER_TRADES_START, function*({ payload }) {
     try {
       const loginResult = yield call(userTradesRequest, payload);
-      console.log("yieldtakeEvery -> loginResult", loginResult);
 
       yield put({
         type: actions.FETCH_USER_TRADES_SUCCESS,

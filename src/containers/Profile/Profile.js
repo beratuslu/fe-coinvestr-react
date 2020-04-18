@@ -14,9 +14,8 @@ import Following from "./Following/Following";
 import basicStyle from "../../settings/basicStyle";
 import TradeList from "./TradeList/TradeList";
 import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
-// import { useSelector, useDispatch } from "react-redux";
 import actions from "../../redux/profile/actions";
-import profileActions from "../../redux/profile/actions";
+import profileActions from "./_redux/actions";
 
 class Profile extends Component {
   constructor(props) {
@@ -32,14 +31,23 @@ class Profile extends Component {
   componentDidMount() {
     // this.props.dispatch(actions.fetchUserTradesStart());
     // this.props.match;
+    // console.log(
+    //   "Profile -> componentDidMount -> this.props.match",
+    //   this.props.match
+    // );
+    const { userName } = this.props.auth.user;
+    const userNameFromRoute = this.props.match.params.userName;
     console.log(
-      "Profile -> componentDidMount -> this.props.match",
-      this.props.match
+      "Profile -> componentDidMount -> this.props.auth.userName",
+      this.props.auth.userName
+    );
+    console.log(
+      "Profile -> componentDidMount -> this.props.match.params.userName",
+      this.props.match.params.userName
     );
 
-    // if (condition) {
-
-    // }
+    const visitingOwnProfile = userName === userNameFromRoute;
+    this.props.setProfileOwner(visitingOwnProfile);
   }
   handleCancel() {
     this.setState({ visible: false, active: "post" });
@@ -62,26 +70,6 @@ class Profile extends Component {
   }
   render() {
     const { trades } = this.props.profile;
-
-    // const trades = [
-    //   {
-    //     id: 1,
-    //     user: {
-    //       name: "My user"
-    //     },
-    //     pair: "HOT_BTC",
-    //     createdDate: "20/12/2020 15:30:05",
-    //     buyPrice: "0.000000004",
-    //     profitPrice: "0.000000005",
-    //     stopPrice: "0.000000003",
-    //     status: {
-    //       completed: false,
-    //       stopLoss: 10,
-    //       profit: 50,
-    //       remaining: 40
-    //     }
-    //   }
-    // ];
 
     return (
       <Wrapper>

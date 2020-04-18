@@ -1,7 +1,7 @@
 import profileActions from "./actions";
 
 const INITIAL_DATA = {
-  selfProfile: null,
+  isSelfProfile: null,
   items: [],
   trades: [],
   loading: true,
@@ -9,6 +9,11 @@ const INITIAL_DATA = {
 };
 export default function profileReducer(state = INITIAL_DATA, action) {
   switch (action.type) {
+    case profileActions.SET_PROFILE_OWNER:
+      return {
+        ...state,
+        isSelfProfile: action.payload
+      };
     case profileActions.FETCH_PROFILE_DATA_SUCCESS:
       return {
         ...state,
