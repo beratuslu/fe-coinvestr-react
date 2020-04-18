@@ -465,6 +465,9 @@ const ActivityWrapper = styled.div`
   .createDate {
     width: 200px;
   }
+  strong {
+    min-width: 80px;
+  }
 `;
 
 export default WithDirection(CollapseWrapper);
