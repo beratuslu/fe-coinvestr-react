@@ -8,11 +8,11 @@ const INITIAL_DATA = {
       user: {
         name: "My user"
       },
-      pair: "HOT_BTC",
+      symbol: "HOT_BTC",
       createdDate: "20/12/2020 15:30:05",
-      buyPrice: "0.000000004",
-      profitPrice: "0.000000005",
-      stopPrice: "0.000000003",
+      buyPrice: 0.000000004,
+      profitPrice: 0.000000005,
+      stopLossPrice: 0.000000003,
       status: {
         completed: false,
         stopLoss: 10,
@@ -104,11 +104,11 @@ const INITIAL_DATA = {
       user: {
         name: "My user"
       },
-      pair: "HOT_BTC",
+      symbol: "HOT_BTC",
       createdDate: "20/12/2020 15:30:05",
-      buyPrice: "0.000000004",
-      profitPrice: "0.000000005",
-      stopPrice: "0.000000003",
+      buyPrice: 0.000000004,
+      profitPrice: 0.000000005,
+      stopLossPrice: 0.000000003,
       status: {
         completed: false,
         stopLoss: 10,

@@ -21,41 +21,33 @@ import PlusIcon from "../../../../static/Images/24.svg";
 import SoftwareIcon from "../../../../static/Images/20.svg";
 import AvatarIcon from "../../../../static/Images/08-icon.svg";
 
-export default function BoardListCard({ item, onDelete, onEdit }) {
-  const MoreActions = (
-    <MoreActionWrapper>
-      <p onClick={onEdit}>Edit Board</p>
-      <p onClick={onDelete}>Delete Board</p>
-    </MoreActionWrapper>
-  );
-
+// export default function BoardListCard({ trade, onDelete, onEdit }) {
+export default function TradeCollapseHeader({ trade }) {
+  console.log("TradeCollapseHeader -> trade", trade);
   return (
     <Table>
       <tbody>
         <tr>
           <td width="300">
-            <Link to={`/dashboard/scrum-board/project/${item.id}`}>
+            <Link to={`/dashboard/scrum-board/project/${trade.id}`}>
               <ProjectInfo>
-                <Avatar src={AvatarIcon} alt={item.name} />
+                <Avatar src={AvatarIcon} alt={trade.name} />
                 <InfoWrapper>
-                  <Title>{item.user.name}</Title>
-                  {/* <CreatedAt>
-                    {moment(item.created_at).format("ddd d, YYYY")}
-                  </CreatedAt> */}
+                  <Title>{trade.user.name}</Title>
                 </InfoWrapper>
               </ProjectInfo>
             </Link>
           </td>
-          <td>HOT_BTC</td>
-          <td>0.000000004</td>
-          <td>0.000000005</td>
-          <td>0.000000003</td>
-          <td>20/12/2020 15:30:05</td>
+          <td>{trade.symbol.split("BTC")[0]}_BTC</td>
+          <td>{trade.buyPrice.toFixed(8)}</td>
+          <td>{trade.profitPrice.toFixed(8)}</td>
+          <td>{trade.stopLossPrice.toFixed(8)}</td>
+          <td>{moment(trade.createTime).format("YYYY-MM-DD HH:mm:ss.SSS")}</td>
           <td>
-            <ProgressWrapper>
+            <ProgressWrapper className="progressWrapper">
               <Progress
-                percent={item.status.stopLoss + item.status.profit}
-                successPercent={item.status.stopLoss}
+                percent={trade.status.stopLoss + trade.status.profit}
+                successPercent={trade.status.stopLoss}
                 strokeColor=""
                 size="small"
                 status="active"

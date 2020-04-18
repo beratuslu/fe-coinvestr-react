@@ -19,8 +19,11 @@ export const InfoWrapper = styled.div`
 `;
 export const ProgressWrapper = styled.div`
   width: 180;
-  .ant-progress-success-bg {
-    background-color: #f5222d;
+  .ant-progress-inner {
+    background-color: #e2e2e2;
+    .ant-progress-success-bg {
+      background-color: #f5222d;
+    }
   }
 `;
 

@@ -5,6 +5,7 @@ import scrumBoardActions from "../../../redux/scrumBoard/actions";
 import Collapses from "../../../components/uielements/collapse";
 import Pagination from "../../../components/uielements/pagination";
 import { Icon } from "antd";
+import moment from "moment";
 import Timeline, {
   TimelineItem
 } from "../../../components/uielements/timeline";
@@ -25,7 +26,7 @@ import {
 } from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
 
-import IntlMessages from "../../../components/utility/intlMessages";
+// import IntlMessages from "../../../components/utility/intlMessages";
 
 const Panel = Collapses.Panel;
 const Collapse = props => (
@@ -93,7 +94,9 @@ class TradeList extends Component {
           {activity.symbol.split("BTC")[0]} <strong>{activity.qty}</strong>
         </span>
         {/* TODO: createTime i moment ile formatlayalim */}
-        <span className="createDate">{activity.createTime}</span>
+        <span className="createDate">
+          {moment(activity.createTime).format("YYYY-MM-DD HH:mm:ss.SSS")}
+        </span>
       </ActivityWrapper>
     );
   }
@@ -130,7 +133,7 @@ class TradeList extends Component {
   renderTrades(trades) {
     const tradesJsx = trades.map(trade => {
       return (
-        <Panel header={<TradeCollapseHeader item={trade} />} key={trade.id}>
+        <Panel header={<TradeCollapseHeader trade={trade} />} key={trade.id}>
           <br />
           <Timeline>{this.renderTradeActivities(trade.activities)}</Timeline>
         </Panel>
@@ -162,7 +165,7 @@ class TradeList extends Component {
                     <tbody>
                       <tr>
                         <td>
-                          <span>User-</span>
+                          <span>User</span>
                         </td>
                         <td>Pair</td>
                         <td>Buy Price</td>
