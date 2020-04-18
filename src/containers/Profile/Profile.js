@@ -6,6 +6,12 @@ import { Row, Col } from "antd";
 import Modal from "../../ui/Antd/Modal/Modal";
 import Container from "../../ui/UI/Container/Container";
 import AvatarCard from "../../components/AvatarCard/AvatarCard";
+import Dropdown, {
+  DropdownMenu,
+  MenuItem
+} from "../../components/uielements/dropdown";
+import ContentHolder from "../../components/utility/contentHolder";
+import { Icon } from "antd";
 import Button from "../../components/uielements/button";
 import { RadioButton, RadioGroup } from "../../components/uielements/radio";
 
@@ -13,7 +19,12 @@ import Followers from "./Followers/Followers";
 import Following from "./Following/Following";
 import basicStyle from "../../settings/basicStyle";
 import TradeList from "./TradeList/TradeList";
-import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
+import {
+  Wrapper,
+  Banner,
+  Navigation,
+  FollowDropDownMenuStyles
+} from "./Profile.styles";
 import actions from "../../redux/profile/actions";
 import profileActions from "./_redux/actions";
 
@@ -22,32 +33,47 @@ class Profile extends Component {
     super(props);
     this.handleCancel = this.handleCancel.bind(this);
     this.handleMenu = this.handleMenu.bind(this);
+    this.addTrade = this.addTrade.bind(this);
+    this.follow = this.follow.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+
     this.state = {
       active: "post",
       visible: false
     };
   }
 
+  addTrade() {
+    console.log("add trade");
+  }
+  follow() {
+    console.log("follow");
+  }
+
   componentDidMount() {
-    // this.props.dispatch(actions.fetchUserTradesStart());
-    // this.props.match;
-    // console.log(
-    //   "Profile -> componentDidMount -> this.props.match",
-    //   this.props.match
-    // );
     const { userName } = this.props.auth.user;
     const userNameFromRoute = this.props.match.params.userName;
-    console.log(
-      "Profile -> componentDidMount -> this.props.auth.userName",
-      this.props.auth.userName
-    );
-    console.log(
-      "Profile -> componentDidMount -> this.props.match.params.userName",
-      this.props.match.params.userName
-    );
 
     const visitingOwnProfile = userName === userNameFromRoute;
     this.props.setProfileOwner(visitingOwnProfile);
+  }
+
+  handleMenuClick(e) {
+    console.log("Profile -> handleMenuClick -> e", e);
+  }
+  renderMenu() {
+    return (
+      <DropdownMenu
+        className="followDropDownMenu"
+        onClick={this.handleMenuClick}
+      >
+        <FollowDropDownMenuStyles />
+        <MenuItem key="1">Edit Copy</MenuItem>
+        <MenuItem className="unfollow" key="2">
+          Unfollow
+        </MenuItem>
+      </DropdownMenu>
+    );
   }
   handleCancel() {
     this.setState({ visible: false, active: "post" });
@@ -69,7 +95,7 @@ class Profile extends Component {
     }
   }
   render() {
-    const { trades } = this.props.profile;
+    const { trades, isSelfProfile, isFollowed } = this.props.profile;
 
     return (
       <Wrapper>
@@ -122,7 +148,21 @@ class Profile extends Component {
                   </ul>
                   <ul className="buttons">
                     <li>
-                      <Button type="primary">Follow</Button>
+                      {isSelfProfile ? (
+                        <Button type="primary" onClick={this.addTrade}>
+                          New Trade
+                        </Button>
+                      ) : !isFollowed ? (
+                        <Dropdown overlay={this.renderMenu()}>
+                          <Button type="primary">
+                            Following <Icon type="down" />
+                          </Button>
+                        </Dropdown>
+                      ) : (
+                        <Button type="primary" onClick={this.follow}>
+                          Follow
+                        </Button>
+                      )}
                     </li>
                   </ul>
                 </div>

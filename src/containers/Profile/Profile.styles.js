@@ -1,6 +1,21 @@
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { palette } from "styled-theme";
 import { transition, borderRadius, boxShadow } from "../../settings/style-util";
+
+export const FollowDropDownMenuStyles = createGlobalStyle`
+  body{
+    .followDropDownMenu{
+      .unfollow{
+        background-color:#ffcac6;
+        &:hover{
+          background-color:#fba9a3
+        }
+      }
+      
+    }
+  } 
+`;
 
 const Wrapper = styled.div`
   .isoTradeTypeTab {
@@ -197,6 +212,9 @@ export const Navigation = styled.div`
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      .unfollow {
+        background-color: red;
+      }
     }
   }
 `;
@@ -205,4 +223,5 @@ export const ContentWrapper = styled.div`
   padding: 30px 0;
 `;
 
-export default Wrapper;
+export { Wrapper };
+// export default Wrapper;
