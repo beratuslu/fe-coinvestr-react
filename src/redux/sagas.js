@@ -14,7 +14,7 @@ import devSagas from "../customApp/redux/sagas";
 import articles from "./articles/sagas";
 import investors from "./investors/sagas";
 import scrumBoardSaga from "./scrumBoard/saga";
-import profileSaga from "./profile/saga";
+import profileSaga from "../containers/Profile/_redux/saga";
 
 export default function* rootSaga(getState) {
   yield all([

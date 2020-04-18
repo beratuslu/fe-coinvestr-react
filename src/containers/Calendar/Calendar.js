@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import moment from 'moment';
-import BigCalendar from 'react-big-calendar';
-import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-import ModalEvents from './modalEvents';
-import notification from '../../components/notification';
-import calendarActions from '../../redux/calendar/actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import moment from "moment";
+import BigCalendar from "react-big-calendar";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import ModalEvents from "./modalEvents";
+import notification from "../../components/notification";
+import calendarActions from "../../redux/calendar/actions";
 
-import { CalendarStyleWrapper } from './calendar.style';
+import { CalendarStyleWrapper } from "./calendar.style";
 
 const Localizer = BigCalendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
@@ -16,7 +16,7 @@ const { changeView, changeEvents } = calendarActions;
 const mapToRBCFormat = e =>
   Object.assign({}, e, {
     start: new Date(e.start),
-    end: new Date(e.end),
+    end: new Date(e.end)
   });
 
 const getIndex = (events, selectedEvent) =>
@@ -26,14 +26,14 @@ class DndCalendar extends Component {
   state = {
     view: this.props.view,
     modalVisible: false,
-    selectedData: undefined,
+    selectedData: undefined
   };
 
   onSelectEvent = selectedData => {
-    this.setState({ modalVisible: 'update', selectedData });
+    this.setState({ modalVisible: "update", selectedData });
   };
   onSelectSlot = selectedData => {
-    this.setState({ modalVisible: 'new', selectedData });
+    this.setState({ modalVisible: "new", selectedData });
   };
 
   onView = view => {
@@ -55,8 +55,8 @@ class DndCalendar extends Component {
     changeEvents(nextEvents);
 
     notification(
-      'success',
-      'Move event successfully',
+      "success",
+      "Move event successfully",
       `${event.title} was dropped onto ${event.start}`
     );
   };
@@ -73,8 +73,8 @@ class DndCalendar extends Component {
     changeEvents(nextEvents);
 
     notification(
-      'success',
-      'Resize event successfully',
+      "success",
+      "Resize event successfully",
       `${event.title} was resized to ${start}-${end}`
     );
   };
@@ -83,12 +83,12 @@ class DndCalendar extends Component {
     const { changeEvents } = this.props;
     const events = [...this.props.events];
     const { modalVisible } = this.state;
-    if (type === 'cancel') {
+    if (type === "cancel") {
       this.setState({
         modalVisible: false,
-        selectedData: undefined,
+        selectedData: undefined
       });
-    } else if (type === 'delete') {
+    } else if (type === "delete") {
       const idx = getIndex(events, selectedData);
       if (idx > -1) {
         events.splice(idx, 1);
@@ -96,12 +96,12 @@ class DndCalendar extends Component {
       changeEvents(events);
       this.setState({
         modalVisible: false,
-        selectedData: undefined,
+        selectedData: undefined
       });
-    } else if (type === 'updateValue') {
+    } else if (type === "updateValue") {
       this.setState({ selectedData });
     } else {
-      if (modalVisible === 'new') {
+      if (modalVisible === "new") {
         events.push(selectedData);
       } else {
         const idx = getIndex(events, selectedData);
@@ -112,7 +112,7 @@ class DndCalendar extends Component {
       changeEvents(events);
       this.setState({
         modalVisible: false,
-        selectedData: undefined,
+        selectedData: undefined
       });
     }
   };
@@ -149,7 +149,6 @@ function mapStateToProps(state) {
   const { events, view } = state.Calendar;
   return { events, view };
 }
-export default connect(
-  mapStateToProps,
-  { changeView, changeEvents }
-)(DndCalendar);
+export default connect(mapStateToProps, { changeView, changeEvents })(
+  DndCalendar
+);

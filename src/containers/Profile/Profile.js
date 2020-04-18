@@ -16,6 +16,7 @@ import TradeList from "./TradeList/TradeList";
 import Wrapper, { Banner, Navigation, ContentWrapper } from "./Profile.styles";
 // import { useSelector, useDispatch } from "react-redux";
 import actions from "../../redux/profile/actions";
+import profileActions from "../../redux/profile/actions";
 
 class Profile extends Component {
   constructor(props) {
@@ -30,6 +31,15 @@ class Profile extends Component {
 
   componentDidMount() {
     // this.props.dispatch(actions.fetchUserTradesStart());
+    // this.props.match;
+    console.log(
+      "Profile -> componentDidMount -> this.props.match",
+      this.props.match
+    );
+
+    // if (condition) {
+
+    // }
   }
   handleCancel() {
     this.setState({ visible: false, active: "post" });
@@ -163,7 +173,11 @@ class Profile extends Component {
     );
   }
 }
-export default connect(state => ({
-  profile: state.Profile,
-  auth: state.Auth
-}))(Profile);
+
+function mapStateToProps(state) {
+  return {
+    profile: state.Profile,
+    auth: state.Auth
+  };
+}
+export default connect(mapStateToProps, { ...profileActions })(Profile);

@@ -18,7 +18,7 @@ import YoutubeSearch from "./youtubeSearch/reducers";
 import DevReducers from "../customApp/redux/reducers";
 import Articles from "./articles/reducers";
 import Investors from "./investors/reducers";
-import Profile from "./profile/reducer";
+import Profile from "../containers/Profile/_redux/reducer";
 import scrumBoard from "./scrumBoard/reducer";
 import drawer from "./drawer/reducer";
 import modal from "./modal/reducer";

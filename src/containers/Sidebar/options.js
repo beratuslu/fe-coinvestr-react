@@ -1,7 +1,7 @@
 import getDevSidebar from "../../customApp/sidebar";
 const options = [
   {
-    key: "profile/1",
+    key: "profile/user1",
     label: "sidebar.profile",
     leftIcon: "ion-android-person"
   },
