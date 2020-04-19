@@ -152,7 +152,7 @@ class Profile extends Component {
                         <Button type="primary" onClick={this.addTrade}>
                           New Trade
                         </Button>
-                      ) : !isFollowed ? (
+                      ) : isFollowed ? (
                         <Dropdown overlay={this.renderMenu()}>
                           <Button type="primary">
                             Following <Icon type="down" />

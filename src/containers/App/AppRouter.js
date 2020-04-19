@@ -5,6 +5,23 @@ import customRoutes from "../../customApp/router";
 
 const routes = [
   {
+    path: "profile/:userName",
+    component: asyncComponent(() => import("../Profile/Profile")),
+    exact: true
+  },
+  {
+    path: "profile/:userName/edit-copy",
+    component: asyncComponent(() =>
+      import("../Profile/CopyCreateOrUpdate/CopyCreateOrUpdate")
+    ),
+    exact: false
+  },
+  {
+    path: "scrum-board",
+    component: asyncComponent(() => import("../ScrumBoard")),
+    exact: false
+  },
+  {
     path: "",
     component: asyncComponent(() => import("../Widgets/index.js"))
   },
@@ -271,16 +288,6 @@ const routes = [
   {
     path: "chat",
     component: asyncComponent(() => import("../Chat"))
-  },
-  {
-    path: "scrum-board",
-    component: asyncComponent(() => import("../ScrumBoard")),
-    exact: false
-  },
-  {
-    path: "profile/:userName",
-    component: asyncComponent(() => import("../Profile/Profile")),
-    exact: false
   },
   ...customRoutes
 ];

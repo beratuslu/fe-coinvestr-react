@@ -1,6 +1,7 @@
 import profileActions from "./actions";
 
 const INITIAL_DATA = {
+  isFollowed: false,
   selfProfile: null,
   items: [],
   trades: [],
