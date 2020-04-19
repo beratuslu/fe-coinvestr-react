@@ -7,9 +7,10 @@ export const FollowDropDownMenuStyles = createGlobalStyle`
   body{
     .followDropDownMenu{
       .unfollow{
-        background-color:#ffcac6;
+        background-color:#F75D81;
+        color:white;
         &:hover{
-          background-color:#fba9a3
+          background-color:#fb436e
         }
       }
       
