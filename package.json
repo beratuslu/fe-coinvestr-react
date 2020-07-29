@@ -20,7 +20,7 @@
     "enzyme-react-intl": "^2.0.3",
     "events": "^3.0.0",
     "express": "^4.16.4",
-    "firebase": "^5.7.2",
+    "firebase": "^7.17.1",
     "formik": "^1.4.2",
     "frappe-charts": "^0.0.8",
     "fuse.js": "^3.3.0",

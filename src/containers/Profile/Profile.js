@@ -8,7 +8,7 @@ import Container from "../../ui/UI/Container/Container";
 import AvatarCard from "../../components/AvatarCard/AvatarCard";
 import Dropdown, {
   DropdownMenu,
-  MenuItem
+  MenuItem,
 } from "../../components/uielements/dropdown";
 import ContentHolder from "../../components/utility/contentHolder";
 import { Icon } from "antd";
@@ -23,7 +23,7 @@ import {
   Wrapper,
   Banner,
   Navigation,
-  FollowDropDownMenuStyles
+  FollowDropDownMenuStyles,
 } from "./Profile.styles";
 import actions from "../../redux/profile/actions";
 import profileActions from "./_redux/actions";
@@ -39,7 +39,7 @@ class Profile extends Component {
 
     this.state = {
       active: "post",
-      visible: false
+      visible: false,
     };
   }
 
@@ -104,7 +104,7 @@ class Profile extends Component {
             <Banner
               className="profile-banner"
               style={{
-                backgroundImage: `url(${this.props.profile.data.profile_bg})`
+                backgroundImage: `url(${this.props.profile.data.profile_bg})`,
               }}
             >
               <Container className="container">
@@ -191,7 +191,7 @@ class Profile extends Component {
               minHeight: "150px",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             <Spin />
@@ -205,7 +205,7 @@ class Profile extends Component {
 function mapStateToProps(state) {
   return {
     profile: state.Profile,
-    auth: state.Auth
+    auth: state.Auth,
   };
 }
 export default connect(mapStateToProps, { ...profileActions })(Profile);

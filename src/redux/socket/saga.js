@@ -13,9 +13,9 @@ function connect() {
   const socket = io(socketServerURL, {
     query:
       "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0cmFkZXIxIiwiZW1haWwiOiJiaW5hbmNldGVzdHVzZXIxQGdtYWlsLmNvbSIsInVzZXJUeXBlIjoidHJhZGVyIiwiZXhwIjoxNTk2MTI2MTgyLCJpYXQiOjE1NjQ1OTAxODJ9.g0B2laB4AtuGulWKZFN-si5goE-bMqEdaXodWrc3eIY",
-    transports: ["websocket", "polling"]
+    transports: ["websocket", "polling"],
   });
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     socket.on("connect", () => {
       resolve(socket);
     });
@@ -23,8 +23,8 @@ function connect() {
 }
 
 function subscribe(socket) {
-  return eventChannel(emit => {
-    socket.on("newNotif", data => {
+  return eventChannel((emit) => {
+    socket.on("newNotif", (data) => {
       console.log("TCL: subscribe -> data", data);
       // emit(addUser({ username }));
     });
