@@ -53,8 +53,13 @@ class TopbarNotification extends Component {
     this.setState({ visible: !this.state.visible });
   }
   render() {
-    const { customizedTheme } = this.props;
+    const { customizedTheme, enums } = this.props;
     const { notifications } = this.props.notifications;
+    const notifEnums = enums.enumsAndConstants.notifications;
+    console.log("TopbarNotification -> render -> notifEnums", notifEnums);
+    if (!notifEnums) {
+      return null;
+    }
     const content = (
       <TopbarDropdownWrapper className="topbarNotification">
         <div className="isoDropdownHeader">
@@ -65,8 +70,8 @@ class TopbarNotification extends Component {
         <div className="isoDropdownBody">
           {notifications.map((notification) => (
             <a className="isoDropdownListItem" key={notification.id} href="# ">
-              <h5>{notification.name}</h5>
-              <p>{notification.notification}</p>
+              <h5>{notifEnums[notification.notifType].title}</h5>
+              <p>{notifEnums[notification.notifType].body}</p>
             </a>
           ))}
         </div>
@@ -99,4 +104,5 @@ export default connect((state) => ({
   ...state.App,
   customizedTheme: state.ThemeSwitcher.topbarTheme,
   notifications: state.notifications,
+  enums: state.enumsAndConstants,
 }))(TopbarNotification);

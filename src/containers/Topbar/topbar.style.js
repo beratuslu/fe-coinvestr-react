@@ -134,7 +134,7 @@ const TopbarWrapper = styled.div`
         &.isoNotify {
           .isoIconWrapper {
             span {
-              background-color: ${palette("primary", 2)};
+              background-color: ${palette("color", 2)};
             }
           }
         }
