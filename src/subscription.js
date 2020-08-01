@@ -2,6 +2,10 @@
 const convertedVapidKey = urlBase64ToUint8Array(
   process.env.REACT_APP_PUBLIC_VAPID_KEY
 );
+console.log(
+  "process.env.REACT_APP_PUBLIC_VAPID_KEY",
+  process.env.REACT_APP_PUBLIC_VAPID_KEY
+);
 
 function urlBase64ToUint8Array(base64String) {
   console.log(
@@ -28,8 +32,8 @@ function sendSubscription(subscription) {
     method: "POST",
     body: JSON.stringify(subscription),
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   });
 }
 
@@ -50,7 +54,7 @@ export function subscribeUser() {
               registration.pushManager
                 .subscribe({
                   applicationServerKey: convertedVapidKey,
-                  userVisibleOnly: true
+                  userVisibleOnly: true,
                 })
                 .then(function(newSubscription) {
                   console.log("New subscription added.");

@@ -9,7 +9,7 @@ import Auth0 from "./helpers/auth0";
 const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       isLoggedIn ? (
         <Component {...props} />
       ) : (
@@ -70,7 +70,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
 
         <Route
           path="/auth0loginCallback"
-          render={props => {
+          render={(props) => {
             Auth0.handleAuthentication(props);
           }}
         />
@@ -84,6 +84,6 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
   );
 };
 
-export default connect(state => ({
-  isLoggedIn: state.Auth.idToken !== null
+export default connect((state) => ({
+  isLoggedIn: state.Auth.idToken !== null,
 }))(PublicRoutes);

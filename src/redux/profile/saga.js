@@ -7,7 +7,7 @@ import axios from "axios";
 import actions from "./actions";
 const BASE_URL = `/api/v1/trades`;
 
-const userTradesRequest = async payload => {
+const userTradesRequest = async (payload) => {
   return axios.post(`${BASE_URL}/user-trades`, payload);
 };
 
@@ -19,7 +19,7 @@ export function* userTrades() {
 
       yield put({
         type: actions.FETCH_USER_TRADES_SUCCESS,
-        payload: loginResult.data
+        payload: loginResult.data,
       });
     } catch (error) {
       // yield put({ type: actions.LOGIN_ERROR });
@@ -39,7 +39,7 @@ function* fetchProfileDataEffect() {
 export default function* profileSaga() {
   yield all([
     fork(userTrades),
-    fork(fetchProfileDataEffect)
+    // fork(fetchProfileDataEffect)
     // fork(loginSuccess),
     // fork(loginError),
     // fork(logout)

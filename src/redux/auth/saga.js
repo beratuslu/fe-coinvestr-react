@@ -5,10 +5,10 @@ import { getToken, clearToken } from "../../helpers/utility";
 import actions from "./actions";
 import axios from "axios";
 
-const onLoginRequest = async payload => {
+const onLoginRequest = async (payload) => {
   return axios.post("/public/login", {
     email: payload.email,
-    password: payload.password
+    password: payload.password,
   });
 };
 
@@ -19,14 +19,14 @@ export function* loginRequest() {
       yield put({
         type: actions.LOGIN_SUCCESS,
         token: loginResult.data.token,
-        user: loginResult.data.user
+        user: loginResult.data.user,
       });
     } catch (error) {
       yield put({
         type: actions.LOGIN_ERROR,
         payload: {
-          message: error.response.data.message || error.message
-        }
+          message: error.response.data.message || error.message,
+        },
       });
     }
   });
@@ -37,10 +37,10 @@ export function* loginSuccess() {
     yield localStorage.setItem("token", payload.token);
     yield localStorage.setItem("user", JSON.stringify(payload.user));
     yield (axios.defaults.headers.common = {
-      Authorization: `Bearer ${payload.token}`
+      Authorization: `Bearer ${payload.token}`,
     });
     yield put(actions.startSocket(payload.token));
-    yield put(push("/dashboard"));
+    // yield put(push("/dashboard"));
   });
 }
 
@@ -48,7 +48,7 @@ export function* loginError() {
   yield takeEvery(actions.LOGIN_ERROR, function({ payload }) {
     notifications.error({
       message: "Login Error",
-      description: payload.message
+      description: payload.message,
     });
   });
 }
@@ -67,7 +67,7 @@ export function* checkAuthorization() {
       yield put({
         type: actions.LOGIN_SUCCESS,
         token,
-        user
+        user,
       });
     }
   });
@@ -78,6 +78,6 @@ export default function* rootSaga() {
     fork(loginRequest),
     fork(loginSuccess),
     fork(loginError),
-    fork(logout)
+    fork(logout),
   ]);
 }

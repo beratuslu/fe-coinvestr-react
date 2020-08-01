@@ -6,7 +6,6 @@ import Checkbox from "../../components/uielements/checkbox";
 import Button from "../../components/uielements/button";
 import authActions from "../../redux/auth/actions";
 import appAction from "../../redux/app/actions";
-import Auth0 from "../../helpers/auth0";
 import Firebase from "../../helpers/firebase";
 import FirebaseLogin from "../../components/firebase";
 import IntlMessages from "../../components/utility/intlMessages";
@@ -19,7 +18,7 @@ const { clearMenu } = appAction;
 
 class SignIn extends Component {
   state = {
-    redirectToReferrer: false
+    redirectToReferrer: false,
   };
   componentWillReceiveProps(nextProps) {
     if (
@@ -41,8 +40,14 @@ class SignIn extends Component {
   //   clearMenu();
   //   this.props.history.push("/dashboard");
   // };
+  componentDidMount() {
+    const { isLoggedIn } = this.props;
+    console.log("SignIn -> componentDidMount -> isLoggedIn", isLoggedIn);
+    // history.replace("/dashboard/profile/dev1");
+    this.props.history.push("/dashboard/profile/dev1");
+  }
 
-  handleLogin = e => {
+  handleLogin = (e) => {
     e.preventDefault();
     const { login, clearMenu } = this.props;
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -85,13 +90,13 @@ class SignIn extends Component {
                       rules: [
                         {
                           type: "email",
-                          message: "The input is not valid E-mail!"
+                          message: "The input is not valid E-mail!",
                         },
                         {
                           required: true,
-                          message: "Please input your E-mail!"
-                        }
-                      ]
+                          message: "Please input your E-mail!",
+                        },
+                      ],
                     })(
                       <Input
                         size="large"
@@ -110,9 +115,9 @@ class SignIn extends Component {
                       rules: [
                         {
                           required: true,
-                          message: "Please input your password!"
-                        }
-                      ]
+                          message: "Please input your password!",
+                        },
+                      ],
                     })(
                       <Input
                         size="large"
@@ -193,8 +198,8 @@ class SignIn extends Component {
 }
 
 export default connect(
-  state => ({
-    isLoggedIn: state.Auth.token !== null ? true : false
+  (state) => ({
+    isLoggedIn: state.Auth.token !== null ? true : false,
   }),
   { login, clearMenu }
 )(Form.create()(SignIn));
