@@ -12,6 +12,10 @@ const onLoginRequest = async (payload) => {
   });
 };
 
+const fetchNotificationsRequest = async () => {
+  return axios.get("/api/v1/notifications/unread-notifications");
+};
+
 export function* loginRequest() {
   yield takeEvery(actions.LOGIN_REQUEST, function*({ payload }) {
     try {
@@ -59,25 +63,32 @@ export function* logout() {
     yield put(push("/"));
   });
 }
-export function* checkAuthorization() {
-  yield takeEvery(actions.CHECK_AUTHORIZATION, function*() {
-    const token = getToken().token;
-    const user = getToken().user;
-    if (token) {
+export function* fetchNotifications() {
+  yield takeEvery(actions.FETCH_NOTIFICATIONS_START, function*() {
+    try {
+      const loginResult = yield call(fetchNotificationsRequest);
+      console.log("yieldtakeEvery -> loginResult", loginResult);
       yield put({
-        type: actions.LOGIN_SUCCESS,
-        token,
-        user,
+        type: actions.FETCH_NOTIFICATIONS_SUCCESS,
+        token: loginResult.data.token,
+        user: loginResult.data.user,
+      });
+    } catch (error) {
+      yield put({
+        type: actions.FETCH_NOTIFICATIONS_ERROR,
+        payload: {
+          message: error.response.data.message || error.message,
+        },
       });
     }
   });
 }
 export default function* rootSaga() {
   yield all([
-    fork(checkAuthorization),
-    fork(loginRequest),
-    fork(loginSuccess),
-    fork(loginError),
-    fork(logout),
+    fork(fetchNotifications),
+    // fork(loginRequest),
+    // fork(loginSuccess),
+    // fork(loginError),
+    // fork(logout),
   ]);
 }

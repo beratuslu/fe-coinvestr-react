@@ -69,6 +69,9 @@ export function* checkAuthorization() {
         token,
         user,
       });
+      yield put({
+        type: "FETCH_NOTIFICATIONS_START",
+      });
     }
   });
 }
