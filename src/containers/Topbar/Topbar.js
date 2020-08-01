@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { Layout } from "antd";
 import appActions from "../../redux/app/actions";
 import TopbarNotification from "./topbarNotification";
-import TopbarMessage from "./topbarMessage";
+// import TopbarMessage from "./topbarMessage";
 import TopbarSearch from "./topbarSearch";
 import TopbarUser from "./topbarUser";
-import TopbarAddtoCart from "./topbarAddtoCart";
+// import TopbarAddtoCart from "./topbarAddtoCart";
 import TopbarWrapper from "./topbar.style";
 
 const { Header } = Layout;

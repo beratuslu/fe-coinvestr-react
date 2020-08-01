@@ -1,13 +1,13 @@
 import actions from "./actions";
 
-const initState = { notifications: [] };
+const initState = { enumsAndConstants: {} };
 
 export default function authReducer(state = initState, action) {
   switch (action.type) {
-    case actions.FETCH_NOTIFICATIONS_SUCCESS:
+    case actions.FETCH_ENUMS_AND_CONSTANTS_SUCCESS:
       return {
         ...state,
-        notifications: action.payload,
+        enumsAndConstants: action.payload,
       };
     case actions.LOGOUT:
       return initState;

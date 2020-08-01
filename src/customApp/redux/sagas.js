@@ -5,6 +5,7 @@ import authSagas from "../containers/Auth/_redux/saga";
 import profileSaga from "../containers/Profile/_redux/saga";
 import firebaseSagas from "../containers/Firebase/_redux/saga";
 import notifSagas from "../containers/Notif/_redux/saga";
+import enumsAndConstants from "../containers/EnumsAndConstants/_redux/saga";
 
 export default function* devSaga() {
   yield all([
@@ -13,5 +14,6 @@ export default function* devSaga() {
     authSagas(),
     firebaseSagas(),
     notifSagas(),
+    enumsAndConstants(),
   ]);
 }

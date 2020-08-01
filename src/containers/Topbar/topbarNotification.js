@@ -1,33 +1,39 @@
-import React, { Component } from 'react';
-import { Popover } from 'antd';
-import { connect } from 'react-redux';
-import IntlMessages from '../../components/utility/intlMessages';
-import TopbarDropdownWrapper from './topbarDropdown.style';
+import React, { Component } from "react";
+import { Popover } from "antd";
+import { connect } from "react-redux";
+import IntlMessages from "../../components/utility/intlMessages";
+import TopbarDropdownWrapper from "./topbarDropdown.style";
 
 const demoNotifications = [
   {
     id: 1,
-    name: 'David Doe',
+    name: "David Doe",
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
+      "A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner",
   },
   {
     id: 2,
-    name: 'Navis Doe',
+    name: "Navis Doe",
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
+      "A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner",
   },
   {
     id: 3,
-    name: 'Emanual Doe',
+    name: "Emanual Doe",
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
+      "A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner",
   },
   {
     id: 4,
-    name: 'Dowain Doe',
+    name: "Dowain Doe",
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
+      "A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner",
+  },
+  {
+    id: 5,
+    name: "Dowain Doe",
+    notification:
+      "A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner",
   },
 ];
 
@@ -48,6 +54,7 @@ class TopbarNotification extends Component {
   }
   render() {
     const { customizedTheme } = this.props;
+    const { notifications } = this.props.notifications;
     const content = (
       <TopbarDropdownWrapper className="topbarNotification">
         <div className="isoDropdownHeader">
@@ -56,7 +63,7 @@ class TopbarNotification extends Component {
           </h3>
         </div>
         <div className="isoDropdownBody">
-          {demoNotifications.map(notification => (
+          {notifications.map((notification) => (
             <a className="isoDropdownListItem" key={notification.id} href="# ">
               <h5>{notification.name}</h5>
               <p>{notification.notification}</p>
@@ -88,7 +95,8 @@ class TopbarNotification extends Component {
   }
 }
 
-export default connect(state => ({
+export default connect((state) => ({
   ...state.App,
   customizedTheme: state.ThemeSwitcher.topbarTheme,
+  notifications: state.notifications,
 }))(TopbarNotification);
