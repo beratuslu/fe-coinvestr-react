@@ -51,6 +51,7 @@ const TopbarDropdownWrapper = styled.div`
     }
 
     .isoDropdownListItem {
+      position: relative;
       padding: 15px 30px;
       flex-shrink: 0;
       text-decoration: none;
@@ -94,6 +95,17 @@ const TopbarDropdownWrapper = styled.div`
         font-size: 11px;
         color: ${palette("grayscale", 1)};
         flex-shrink: 0;
+      }
+      .isRead {
+        width: 10px;
+        height: 10px;
+        display: block;
+        background-color: ${palette("primary", 6)};
+        position: absolute;
+        bottom: 27px;
+        right: 12px;
+        border: 1px solid #ffffff;
+        ${borderRadius("50%")};
       }
     }
   }

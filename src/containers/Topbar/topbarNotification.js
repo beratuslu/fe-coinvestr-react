@@ -3,6 +3,7 @@ import { Popover } from "antd";
 import { connect } from "react-redux";
 import IntlMessages from "../../components/utility/intlMessages";
 import TopbarDropdownWrapper from "./topbarDropdown.style";
+import _ from "lodash";
 
 const demoNotifications = [
   {
@@ -56,7 +57,9 @@ class TopbarNotification extends Component {
     const { customizedTheme, enums } = this.props;
     const { notifications } = this.props.notifications;
     const notifEnums = enums.enumsAndConstants.notifications;
-    console.log("TopbarNotification -> render -> notifEnums", notifEnums);
+
+    const unReadNotifs = _.filter(notifications, { isRead: false });
+
     if (!notifEnums) {
       return null;
     }
@@ -72,6 +75,7 @@ class TopbarNotification extends Component {
             <a className="isoDropdownListItem" key={notification.id} href="# ">
               <h5>{notifEnums[notification.notifType].title}</h5>
               <p>{notifEnums[notification.notifType].body}</p>
+              <span className="isRead"></span>
             </a>
           ))}
         </div>
@@ -93,7 +97,7 @@ class TopbarNotification extends Component {
             className="ion-android-notifications"
             style={{ color: customizedTheme.textColor }}
           />
-          <span>{demoNotifications.length}</span>
+          <span>{unReadNotifs.length}</span>
         </div>
       </Popover>
     );
