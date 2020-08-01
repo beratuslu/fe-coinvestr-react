@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import moment from "moment";
 import { eventChannel, delay } from "redux-saga";
 import { take, call, put, fork, race, cancel } from "redux-saga/effects";
 import { push } from "react-router-redux";
@@ -86,7 +87,15 @@ function* flow() {
         docSnapshot.docChanges().forEach(function(change) {
           console.log("function*flow -> change", change.type);
           if (change.type === "added") {
-            console.log("function*flow -> change", change.doc.data());
+            // console.log("function*flow -> change", change.doc.data());
+            console.log(
+              "function*flow -> change",
+
+              moment
+                .unix(change.doc.data().createTime.seconds)
+                .utc()
+                .format("YYYY-MM-DD HH:mm:ss.SSS")
+            );
             // change.doc here is new a new document
           }
         });

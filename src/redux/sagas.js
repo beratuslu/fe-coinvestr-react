@@ -1,7 +1,4 @@
 import { all } from "redux-saga/effects";
-import authSagas from "./auth/saga";
-// import socketSagas from "./socket/saga";
-import firebaseSagas from "../customApp/containers/firebase/saga";
 import contactSagas from "./contacts/saga";
 import invoicesSagas from "./invoice/saga";
 import mailSagas from "./mail/saga";
@@ -15,13 +12,9 @@ import devSagas from "../customApp/redux/sagas";
 import articles from "./articles/sagas";
 import investors from "./investors/sagas";
 import scrumBoardSaga from "./scrumBoard/saga";
-import profileSaga from "../containers/Profile/_redux/saga";
 
 export default function* rootSaga(getState) {
   yield all([
-    authSagas(),
-    // socketSagas(),
-    firebaseSagas(),
     contactSagas(),
     mailSagas(),
     notesSagas(),
@@ -34,7 +27,6 @@ export default function* rootSaga(getState) {
     devSagas(),
     articles(),
     investors(),
-    profileSaga(),
     scrumBoardSaga(),
   ]);
 }
