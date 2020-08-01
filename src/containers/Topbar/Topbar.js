@@ -20,7 +20,7 @@ class Topbar extends Component {
       background: customizedTheme.backgroundColor,
       position: "fixed",
       width: "100%",
-      height: 70
+      height: 70,
     };
     return (
       <TopbarWrapper>
@@ -52,7 +52,7 @@ class Topbar extends Component {
               <TopbarNotification locale={locale} />
             </li>
 
-            <li
+            {/* <li
               onClick={() => this.setState({ selectedItem: "message" })}
               className="isoMsg"
             >
@@ -63,7 +63,7 @@ class Topbar extends Component {
               className="isoCart"
             >
               <TopbarAddtoCart url={url} locale={locale} />
-            </li>
+            </li> */}
 
             <li
               onClick={() => this.setState({ selectedItem: "user" })}
@@ -79,10 +79,10 @@ class Topbar extends Component {
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     ...state.App,
     locale: state.LanguageSwitcher.language.locale,
-    customizedTheme: state.ThemeSwitcher.topbarTheme
+    customizedTheme: state.ThemeSwitcher.topbarTheme,
   }),
   { toggleCollapsed }
 )(Topbar);
