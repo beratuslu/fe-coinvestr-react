@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Popover } from "antd";
 import { connect } from "react-redux";
 import IntlMessages from "../../components/utility/intlMessages";
+import Tooltip from "../../components/uielements/tooltip";
 import TopbarDropdownWrapper from "./topbarDropdown.style";
 import _ from "lodash";
 
@@ -53,6 +54,9 @@ class TopbarNotification extends Component {
   handleVisibleChange() {
     this.setState({ visible: !this.state.visible });
   }
+  handleMarkAsRead() {
+    this.setState({ visible: !this.state.visible });
+  }
   render() {
     const { customizedTheme, enums } = this.props;
     const { notifications } = this.props.notifications;
@@ -75,7 +79,9 @@ class TopbarNotification extends Component {
             <a className="isoDropdownListItem" key={notification.id} href="# ">
               <h5>{notifEnums[notification.notifType].title}</h5>
               <p>{notifEnums[notification.notifType].body}</p>
-              <span className="isRead"></span>
+              <Tooltip placement="left" title="mark as read">
+                <span className="isRead"></span>
+              </Tooltip>
             </a>
           ))}
         </div>
