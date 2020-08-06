@@ -57,16 +57,42 @@ class TopbarNotification extends Component {
   handleMarkAsRead() {
     this.setState({ visible: !this.state.visible });
   }
-  render() {
+  renderItems() {
     const { customizedTheme, enums } = this.props;
     const { notifications } = this.props.notifications;
     const notifEnums = enums.enumsAndConstants.notifications;
-
+    let count = 0;
+    return notifications.map((notification, index) => {
+      let devider = null;
+      if (count === 5) {
+        count = 0;
+        devider = <a href="#">mark below 5 as read</a>;
+      }
+      count++;
+      return (
+        <div key={notification.id}>
+          {devider}
+          <a className="isoDropdownListItem" href="# ">
+            <h5>{notifEnums[notification.notifType].title}</h5>
+            <p>{notifEnums[notification.notifType].body}</p>
+            <Tooltip placement="left" title="mark as read">
+              <span className="isRead"></span>
+            </Tooltip>
+          </a>
+        </div>
+      );
+    });
+  }
+  render() {
+    const { customizedTheme, enums } = this.props;
+    const notifEnums = enums.enumsAndConstants.notifications;
+    const { notifications } = this.props.notifications;
     const unReadNotifs = _.filter(notifications, { isRead: false });
 
     if (!notifEnums) {
       return null;
     }
+
     const content = (
       <TopbarDropdownWrapper className="topbarNotification">
         <div className="isoDropdownHeader">
@@ -74,20 +100,10 @@ class TopbarNotification extends Component {
             <IntlMessages id="sidebar.notification" />
           </h3>
         </div>
-        <div className="isoDropdownBody">
-          {notifications.map((notification) => (
-            <a className="isoDropdownListItem" key={notification.id} href="# ">
-              <h5>{notifEnums[notification.notifType].title}</h5>
-              <p>{notifEnums[notification.notifType].body}</p>
-              <Tooltip placement="left" title="mark as read">
-                <span className="isRead"></span>
-              </Tooltip>
-            </a>
-          ))}
-        </div>
-        <a className="isoViewAllBtn" href="# ">
+        <div className="isoDropdownBody">{this.renderItems()}</div>
+        {/* <a className="isoViewAllBtn" href="# ">
           <IntlMessages id="topbar.viewAll" />
-        </a>
+        </a> */}
       </TopbarDropdownWrapper>
     );
     return (
@@ -96,7 +112,7 @@ class TopbarNotification extends Component {
         trigger="click"
         visible={this.state.visible}
         onVisibleChange={this.handleVisibleChange}
-        placement="bottomLeft"
+        placement="bottomRight"
       >
         <div className="isoIconWrapper">
           <i

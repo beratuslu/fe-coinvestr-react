@@ -8,7 +8,7 @@ const actions = {
   LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_ERROR: "LOGIN_ERROR",
   LOGOUT: "LOGOUT",
-  checkAuthorization: () => ({ type: actions.FETCH_NOTIFICATIONS_START }),
+  fetchNotifications: () => ({ type: actions.FETCH_NOTIFICATIONS_START }),
   login: (payload) => ({
     type: actions.LOGIN_REQUEST,
     payload,

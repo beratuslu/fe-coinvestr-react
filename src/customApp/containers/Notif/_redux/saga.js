@@ -12,8 +12,8 @@ const onLoginRequest = async (payload) => {
   });
 };
 
-const fetchNotificationsRequest = async () => {
-  return axios.get("/api/v1/notifications/latest");
+const fetchNotificationsRequest = async (payload) => {
+  return axios.post("/api/v1/notifications", payload);
 };
 
 export function* loginRequest() {
@@ -64,9 +64,9 @@ export function* logout() {
   });
 }
 export function* fetchNotifications() {
-  yield takeEvery(actions.FETCH_NOTIFICATIONS_START, function*() {
+  yield takeEvery(actions.FETCH_NOTIFICATIONS_START, function*(action) {
     try {
-      const response = yield call(fetchNotificationsRequest);
+      const response = yield call(fetchNotificationsRequest, action.payload);
       console.log("FETCH_NOTIFICATIONS_START -> loginResult", response);
       yield put({
         type: actions.FETCH_NOTIFICATIONS_SUCCESS,

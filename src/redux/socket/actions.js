@@ -1,18 +1,3 @@
-// const actions = {
-//   CHECK_AUTHORIZATION: "CHECK_AUTHORIZATION",
-//   LOGIN_REQUEST: "LOGIN_REQUEST",
-//   LOGOUT: "LOGOUT",
-//   LOGIN_SUCCESS: "LOGIN_SUCCESS",
-//   LOGIN_ERROR: "LOGIN_ERROR",
-//   checkAuthorization: () => ({ type: actions.CHECK_AUTHORIZATION }),
-//   login: credentials => ({
-//     type: actions.LOGIN_REQUEST,
-//     credentials
-//   }),
-//   logout: () => ({
-//     type: actions.LOGOUT
-//   })
-// };
 const actions = {
   CHECK_AUTHORIZATION: "CHECK_AUTHORIZATION",
   LOGIN_REQUEST: "LOGIN_REQUEST",
@@ -30,6 +15,6 @@ const actions = {
 
   // action creators for Stop and Start buttons. You can also put them into componentDidMount
   startChannel: () => ({ type: actions.START_CHANNEL }),
-  stopChannel: () => ({ type: actions.STOP_CHANNEL })
+  stopChannel: () => ({ type: actions.STOP_CHANNEL }),
 };
 export default actions;
