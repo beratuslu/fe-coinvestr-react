@@ -71,7 +71,7 @@ export function* checkAuthorization() {
       });
       yield put({
         type: "FETCH_NOTIFICATIONS_START",
-        payload: { pagination: { pageSize: 15, pageNumber: 1 } },
+        payload: { pagination: { pageSize: 45, pageNumber: 1 } },
       });
     }
   });

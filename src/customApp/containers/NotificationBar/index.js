@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Actions from "../../../redux/themeSwitcher/actions.js";
-import Switcher from "../../../components/themeSwitcher/themeSwitcher";
+// import Switcher from "../../../components/themeSwitcher/themeSwitcher";
 import LanguageSwitcher from "../../../containers/LanguageSwitcher";
 import Themes from "./config";
 import bucketSVG from "../../../image/bucket.svg";
 import IntlMessages from "../../../components/utility/intlMessages";
+import NotificationsWrapper from "./components/NotificationsWrapper";
 import ThemeSwitcherStyle from "./themeSwitcher.style";
 
 const { switchActivation, changeTheme } = Actions;
@@ -28,19 +29,13 @@ class ThemeSwitcher extends Component {
       <ThemeSwitcherStyle
         className={isActivated ? "isoThemeSwitcher active" : "isoThemeSwitcher"}
       >
-        <div className="componentTitleWrapper" style={styleButton}>
-          <h3 className="componentTitle">
-            <IntlMessages id="themeSwitcher.settings" />
-          </h3>
-        </div>
+        {/* <div className="componentTitleWrapper" style={styleButton}>
+          <h3 className="componentTitle">Notifications</h3>
+        </div> */}
 
         <div className="SwitcherBlockWrapper">
-          {/*<Switcher
-            config={Themes.changeThemes}
-            changeTheme={changeTheme}
-            selectedId={changeThemes.themeName}
-          />*/}
-          <Switcher
+          <NotificationsWrapper />
+          {/* <Switcher
             config={Themes.sidebarTheme}
             changeTheme={changeTheme}
             selectedId={sidebarTheme.themeName}
@@ -57,7 +52,7 @@ class ThemeSwitcher extends Component {
             changeTheme={changeTheme}
             selectedId={layoutTheme.themeName}
           />
-          <LanguageSwitcher />
+          <LanguageSwitcher /> */}
         </div>
 
         <div className="purchaseBtnWrapper">
