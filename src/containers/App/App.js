@@ -9,7 +9,8 @@ import authAction from "../../redux/auth/actions";
 import appActions from "../../redux/app/actions";
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
-import ThemeSwitcher from "../../containers/ThemeSwitcher";
+// import ThemeSwitcher from "../../containers/ThemeSwitcher";
+import NotificationBar from "../../customApp/containers/NotificationBar";
 import AppRouter from "./AppRouter";
 import { siteConfig } from "../../settings";
 import { AppLocale } from "../../dashApp";
@@ -37,7 +38,7 @@ export class App extends Component {
               <Layout style={{ height: appHeight }}>
                 <Debounce time="1000" handler="onResize">
                   <WindowResizeListener
-                    onResize={windowSize =>
+                    onResize={(windowSize) =>
                       this.props.toggleAll(
                         windowSize.windowWidth,
                         windowSize.windowHeight
@@ -51,7 +52,7 @@ export class App extends Component {
                   <Layout
                     className="isoContentMainLayout"
                     style={{
-                      height: height
+                      height: height,
                     }}
                   >
                     <Content
@@ -60,7 +61,7 @@ export class App extends Component {
                         padding: "70px 0 0",
                         flexShrink: "0",
                         background: "#f1f3f6",
-                        position: "relative"
+                        position: "relative",
                       }}
                     >
                       <AppRouter url={url} />
@@ -69,14 +70,15 @@ export class App extends Component {
                       style={{
                         background: "#ffffff",
                         textAlign: "center",
-                        borderTop: "1px solid #ededed"
+                        borderTop: "1px solid #ededed",
                       }}
                     >
                       {siteConfig.footerText}
                     </Footer>
                   </Layout>
                 </Layout>
-                <ThemeSwitcher />
+                {/* <ThemeSwitcher /> */}
+                <NotificationBar />
               </Layout>
             </AppHolder>
           </ThemeProvider>
@@ -87,11 +89,11 @@ export class App extends Component {
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     auth: state.Auth,
     locale: state.LanguageSwitcher.language.locale,
     selectedTheme: state.ThemeSwitcher.changeThemes.themeName,
-    height: state.App.height
+    height: state.App.height,
   }),
   { logout, toggleAll }
 )(App);
