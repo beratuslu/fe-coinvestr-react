@@ -121,6 +121,9 @@ const TopbarDropdownWrapper = styled.div`
         right: 22px;
         border: 1px solid #ffffff;
         ${borderRadius("50%")};
+        &.read{
+          background-color: ${palette("grayscale", 2)};
+        }
       }
     }
   }

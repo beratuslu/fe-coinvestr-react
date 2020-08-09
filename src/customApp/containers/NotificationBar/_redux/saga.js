@@ -1,4 +1,4 @@
-import { all, takeEvery, put, fork, call } from "redux-saga/effects";
+import { all, takeEvery, put, fork, call, select } from "redux-saga/effects";
 import { push } from "react-router-redux";
 import notifications from "../../../../components/feedback/notification";
 import { getToken, clearToken } from "../../../../helpers/utility";
@@ -35,6 +35,8 @@ export function* fetchNotifications() {
   });
 }
 
+const getNotifState = (state) => state.notifications;
+
 export function* markNotificationsAsRead() {
   yield takeEvery(actions.MARK_NOTIFICATIONS_AS_READ_REQUEST, function*(
     action
@@ -47,6 +49,17 @@ export function* markNotificationsAsRead() {
       yield put({
         type: actions.MARK_NOTIFICATIONS_AS_READ_SUCCESS,
         payload: response.data,
+      });
+
+      let notifState = yield select(getNotifState); // <-- get the notifications
+      yield put({
+        type: "FETCH_NOTIFICATIONS_START",
+        payload: {
+          pagination: {
+            pageSize: notifState.notifications.length,
+            pageNumber: 1,
+          },
+        },
       });
     } catch (error) {
       yield put({

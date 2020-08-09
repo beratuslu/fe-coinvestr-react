@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Popover } from "antd";
 import { connect } from "react-redux";
 import IntlMessages from "../../../../../components/utility/intlMessages";
+import classNames from "classnames";
 import Tooltip from "../../../../../components/uielements/tooltip";
 import TopbarDropdownWrapper from "./topbarDropdown.style";
 import actions from "../../_redux/actions";
@@ -60,6 +61,11 @@ class Notifications extends Component {
       //   notifIdArr = [];
       // }
       count++;
+      const isReadClasses = classNames({
+        isRead: true,
+        read: notification.isRead,
+      });
+
       return (
         <div className="notifWrapper" key={"asSs" + notification.id}>
           {/* {devider} */}
@@ -68,7 +74,7 @@ class Notifications extends Component {
             <p>{notifEnums[notification.notifType].body}</p>
             <Tooltip placement="left" title="mark as read">
               <span
-                className="isRead"
+                className={isReadClasses}
                 onClick={() => this.handleMarkAsRead([notification.id])}
               ></span>
             </Tooltip>
