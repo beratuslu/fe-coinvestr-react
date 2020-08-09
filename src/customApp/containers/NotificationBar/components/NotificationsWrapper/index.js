@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import IntlMessages from "../../../../../components/utility/intlMessages";
 import Tooltip from "../../../../../components/uielements/tooltip";
 import TopbarDropdownWrapper from "./topbarDropdown.style";
+import actions from "../../_redux/actions";
 import _ from "lodash";
 
 class Notifications extends Component {
@@ -27,6 +28,7 @@ class Notifications extends Component {
   // }
   handleMarkAsRead(notifIdArr) {
     console.log("Notifications ", notifIdArr);
+    this.props.markNotificationsAsRead(notifIdArr);
   }
   renderItems() {
     const { customizedTheme, enums } = this.props;
@@ -35,6 +37,7 @@ class Notifications extends Component {
     let count = 0;
     let notifIdArr = [];
     return notifications.map((notification, index) => {
+      // TODO: mark below 5 as read button for every 5 records
       notifIdArr.push(notification.id);
       // let devider = false;
       // if (count === 5) {
@@ -98,9 +101,12 @@ class Notifications extends Component {
   }
 }
 
-export default connect((state) => ({
-  ...state.App,
-  customizedTheme: state.ThemeSwitcher.topbarTheme,
-  notifications: state.notifications,
-  enums: state.enumsAndConstants,
-}))(Notifications);
+export default connect(
+  (state) => ({
+    ...state.App,
+    customizedTheme: state.ThemeSwitcher.topbarTheme,
+    notifications: state.notifications,
+    enums: state.enumsAndConstants,
+  }),
+  { ...actions }
+)(Notifications);

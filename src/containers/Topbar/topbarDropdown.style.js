@@ -103,7 +103,7 @@ const TopbarDropdownWrapper = styled.div`
         background-color: ${palette("primary", 6)};
         position: absolute;
         bottom: 27px;
-        right: 12px;
+        right: 22px;
         border: 1px solid #ffffff;
         ${borderRadius("50%")};
       }
