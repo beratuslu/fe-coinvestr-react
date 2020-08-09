@@ -24,6 +24,9 @@ class Notifications extends Component {
   handleMarkAsRead() {
     this.setState({ visible: !this.state.visible });
   }
+  handleMarkAsRead() {
+    console.log("ssss");
+  }
   renderItems() {
     const { customizedTheme, enums } = this.props;
     const { notifications } = this.props.notifications;
@@ -33,11 +36,15 @@ class Notifications extends Component {
       let devider = null;
       if (count === 5) {
         count = 0;
-        devider = <a href="#">mark below 5 as read</a>;
+        devider = (
+          <a className="devider" onClick={this.handleMarkAsRead} href="#">
+            mark below 5 as read
+          </a>
+        );
       }
       count++;
       return (
-        <div key={notification.id}>
+        <div className="notifWrapper" key={notification.id}>
           {devider}
           <a className="isoDropdownListItem" href="# ">
             <h5>{notifEnums[notification.notifType].title}</h5>
@@ -63,9 +70,7 @@ class Notifications extends Component {
     return (
       <TopbarDropdownWrapper className="Notifications">
         <div className="isoDropdownHeader">
-          <h3>
-            <IntlMessages id="sidebar.notification" />
-          </h3>
+          <h3>Notifications</h3>
         </div>
         <div className="isoDropdownBody">{this.renderItems()}</div>
         {/* <a className="isoViewAllBtn" href="# ">

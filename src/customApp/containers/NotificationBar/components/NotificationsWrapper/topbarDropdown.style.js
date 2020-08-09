@@ -16,7 +16,7 @@ const TopbarDropdownWrapper = styled.div`
   min-width: 160px;
   flex-shrink: 0;
   ${borderRadius("5px")};
-  ${boxShadow("0 2px 10px rgba(0,0,0,0.2)")};
+  /* ${boxShadow("0 2px 10px rgba(0,0,0,0.2)")}; */
   ${transition()};
 
   @media only screen and (max-width: 767px) {
@@ -27,6 +27,7 @@ const TopbarDropdownWrapper = styled.div`
     border-bottom: 1px solid #f1f1f1;
     margin-bottom: 0px;
     padding: 15px 30px;
+    padding-top:27px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -49,6 +50,16 @@ const TopbarDropdownWrapper = styled.div`
     flex-direction: column;
     margin-bottom: 10px;
     background-color: ${palette("grayscale", 6)};
+
+    .notifWrapper {
+      .devider {
+        padding-left: 30px;
+        display:block;
+        border-bottom: 1px solid #ebebeb;
+        padding-top:10px;
+        padding-bottom: 8px;
+      }
+    }
 
     a {
       text-decoration: none;
