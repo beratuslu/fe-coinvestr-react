@@ -24,6 +24,8 @@ export function* fetchNotifications() {
         type: actions.FETCH_NOTIFICATIONS_SUCCESS,
         payload: response.data,
       });
+      if (action.initial) {
+      }
     } catch (error) {
       yield put({
         type: actions.FETCH_NOTIFICATIONS_ERROR,

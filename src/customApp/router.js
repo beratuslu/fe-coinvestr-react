@@ -6,10 +6,6 @@ const routes = [
     component: asyncComponent(() => import("./containers/GithubSearch")),
   },
   {
-    path: "githubSearch",
-    component: asyncComponent(() => import("./containers/GithubSearch")),
-  },
-  {
     path: "blank_page",
     component: asyncComponent(() => import("./containers/blankPage")),
   },

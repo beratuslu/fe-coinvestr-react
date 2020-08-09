@@ -39,7 +39,6 @@ export function* loginSuccess() {
     yield (axios.defaults.headers.common = {
       Authorization: `Bearer ${payload.token}`,
     });
-    yield put(actions.startSocket(payload.token));
     // yield put(push("/dashboard"));
   });
 }

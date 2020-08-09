@@ -76,7 +76,10 @@ function* flow() {
     const doc = db
       .collection("users")
       .doc("a-uid")
-      .collection("notifications");
+      .collection("notifications")
+      .where("id", ">", 82);
+
+    // moment().utc().format("YYYY-MM-DD HH:mm:ss.SSS")
 
     let observer = doc.onSnapshot(
       (docSnapshot) => {
@@ -104,7 +107,9 @@ function* flow() {
         //   console.log("snapshot added ", doc());
         // });
       },
-      (err) => {}
+      (err) => {
+        console.log("function*flow -> err", err);
+      }
     );
 
     // const task = yield fork(handleIO);
