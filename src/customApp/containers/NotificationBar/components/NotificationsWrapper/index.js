@@ -61,23 +61,28 @@ class Notifications extends Component {
       //   notifIdArr = [];
       // }
       count++;
-      const isReadClasses = classNames({
-        isRead: true,
-        read: notification.isRead,
-      });
+      // const isReadClasses = classNames({
+      //   isRead: true,
+      //   read: notification.isRead,
+      // });
 
       return (
-        <div className="notifWrapper" key={"asSs" + notification.id}>
+        <div className="notifWrapper" key={notification.id}>
           {/* {devider} */}
-          <a className="isoDropdownListItem" href="# ">
+          <a className="isoDropdownListItem">
             <h5>{notifEnums[notification.notifType].title}</h5>
             <p>{notifEnums[notification.notifType].body}</p>
-            <Tooltip placement="left" title="mark as read">
-              <span
-                className={isReadClasses}
-                onClick={() => this.handleMarkAsRead([notification.id])}
-              ></span>
-            </Tooltip>
+
+            {notification.isRead ? (
+              <span className="isRead read"></span>
+            ) : (
+              <Tooltip placement="left" title="mark as read">
+                <span
+                  className="isRead "
+                  onClick={() => this.handleMarkAsRead([notification.id])}
+                ></span>
+              </Tooltip>
+            )}
           </a>
         </div>
       );
