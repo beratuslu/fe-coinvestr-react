@@ -24,7 +24,12 @@ export function* fetchNotifications() {
         type: actions.FETCH_NOTIFICATIONS_SUCCESS,
         payload: response.data,
       });
+      console.log("yieldtakeEvery -> response.data", response.data);
       if (action.initial) {
+        yield put({
+          type: "FIREBASE_NOTIFICATIONS_START",
+          payload: response.data[0].id,
+        });
       }
     } catch (error) {
       yield put({

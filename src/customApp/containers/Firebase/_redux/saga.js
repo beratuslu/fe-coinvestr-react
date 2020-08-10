@@ -60,9 +60,8 @@ function subscribe(socket) {
 
 function* flow() {
   while (true) {
-    let { payload } = yield take("START_CHANNEL");
-
-    console.log("============================ssss==============");
+    let { payload } = yield take("FIREBASE_NOTIFICATIONS_START");
+    console.log("funcsssssssssstion*flow -> payload", payload);
 
     firebase.initializeApp({
       apiKey,
@@ -77,7 +76,7 @@ function* flow() {
       .collection("users")
       .doc("a-uid")
       .collection("notifications")
-      .where("id", ">", 82);
+      .where("id", ">", payload);
 
     // moment().utc().format("YYYY-MM-DD HH:mm:ss.SSS")
 
@@ -100,6 +99,7 @@ function* flow() {
                 .format("YYYY-MM-DD HH:mm:ss.SSS")
             );
             // change.doc here is new a new document
+            console.log("function*flow -> change.doc", change.doc.data());
           }
         });
 
