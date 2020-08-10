@@ -2,7 +2,7 @@ import actions from "./actions";
 
 const initState = { notifications: [] };
 
-export default function authReducer(state = initState, action) {
+export default function notificationBar(state = initState, action) {
   switch (action.type) {
     case actions.FETCH_NOTIFICATIONS_SUCCESS:
       return {

@@ -10,7 +10,7 @@ import appActions from "../../redux/app/actions";
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
 // import ThemeSwitcher from "../../containers/ThemeSwitcher";
-import NotificationBar from "../../customApp/containers/NotificationBar";
+import NotificationBar from "../../customApp/containers/NotificationBar/NotificationBar";
 import AppRouter from "./AppRouter";
 import { siteConfig } from "../../settings";
 import { AppLocale } from "../../dashApp";

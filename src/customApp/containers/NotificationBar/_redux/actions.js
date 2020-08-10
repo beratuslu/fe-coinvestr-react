@@ -3,23 +3,14 @@ const actions = {
   FETCH_NOTIFICATIONS_SUCCESS: "FETCH_NOTIFICATIONS_SUCCESS",
   FETCH_NOTIFICATIONS_FAILURE: "FETCH_NOTIFICATIONS_FAILURE",
 
-  CHECK_AUTHORIZATION: "CHECK_AUTHORIZATION",
   MARK_NOTIFICATIONS_AS_READ_REQUEST: "MARK_NOTIFICATIONS_AS_READ_REQUEST",
   MARK_NOTIFICATIONS_AS_READ_SUCCESS: "MARK_NOTIFICATIONS_AS_READ_SUCCESS",
   MARK_NOTIFICATIONS_AS_READ_ERROR: "MARK_NOTIFICATIONS_AS_READ_ERROR",
-  LOGOUT: "LOGOUT",
-  fetchNotifications: () => ({ type: actions.FETCH_NOTIFICATIONS_START }),
-  markNotificationsAsRead: (payload) => ({
-    type: actions.MARK_NOTIFICATIONS_AS_READ_REQUEST,
-    payload,
-  }),
-  startSocket: (token) => ({
-    type: "START_CHANNEL",
-    token,
-  }),
 
-  logout: () => ({
-    type: actions.LOGOUT,
+  SWITCH_NOTIFICATION_BAR: "SWITCH_NOTIFICATION_BAR",
+
+  switchNotificationBar: () => ({
+    type: actions.SWITCH_NOTIFICATION_BAR,
   }),
 };
 export default actions;

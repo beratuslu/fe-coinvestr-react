@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import Actions from "../../../redux/themeSwitcher/actions.js";
 // import Switcher from "../../../components/themeSwitcher/themeSwitcher";
 import LanguageSwitcher from "../../../containers/LanguageSwitcher";
-import Themes from "./config";
 import bucketSVG from "../../../image/bucket.svg";
-import IntlMessages from "../../../components/utility/intlMessages";
 import NotificationsWrapper from "./components/NotificationsWrapper";
-import ThemeSwitcherStyle from "./themeSwitcher.style";
+import NotificationBarStyle from "./notificationBar.style";
 
 const { switchActivation, changeTheme } = Actions;
 
@@ -26,44 +24,12 @@ class ThemeSwitcher extends Component {
     const styleButton = { background: sidebarTheme.buttonColor };
 
     return (
-      <ThemeSwitcherStyle
+      <NotificationBarStyle
         className={isActivated ? "isoThemeSwitcher active" : "isoThemeSwitcher"}
       >
-        {/* <div className="componentTitleWrapper" style={styleButton}>
-          <h3 className="componentTitle">Notifications</h3>
-        </div> */}
-
         <div className="SwitcherBlockWrapper">
           <NotificationsWrapper />
-          {/* <Switcher
-            config={Themes.sidebarTheme}
-            changeTheme={changeTheme}
-            selectedId={sidebarTheme.themeName}
-          />
-
-          <Switcher
-            config={Themes.topbarTheme}
-            changeTheme={changeTheme}
-            selectedId={topbarTheme.themeName}
-          />
-
-          <Switcher
-            config={Themes.layoutTheme}
-            changeTheme={changeTheme}
-            selectedId={layoutTheme.themeName}
-          />
-          <LanguageSwitcher /> */}
         </div>
-
-        {/* <div className="purchaseBtnWrapper">
-          <a
-            href="https://themeforest.net/item/isomorphic-react-redux-admin-dashboard/20262330?ref=redqteam"
-            className="purchaseBtn"
-            style={styleButton}
-          >
-            <IntlMessages id="themeSwitcher.purchase" />
-          </a>
-        </div> */}
 
         <button
           type="primary"
@@ -75,7 +41,7 @@ class ThemeSwitcher extends Component {
         >
           <img src={process.env.PUBLIC_URL + bucketSVG} alt="bucket" />
         </button>
-      </ThemeSwitcherStyle>
+      </NotificationBarStyle>
     );
   }
 }
