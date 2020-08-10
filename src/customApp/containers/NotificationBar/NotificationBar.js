@@ -11,17 +11,9 @@ const { switchActivation, changeTheme } = Actions;
 
 class ThemeSwitcher extends Component {
   render() {
-    const {
-      isActivated,
-      // changeThemes,
-      topbarTheme,
-      sidebarTheme,
-      layoutTheme,
-      switchActivation,
-      changeTheme,
-    } = this.props;
+    const { isActivated } = this.props.notifications;
 
-    const styleButton = { background: sidebarTheme.buttonColor };
+    // const styleButton = { background: sidebarTheme.buttonColor };
 
     return (
       <NotificationBarStyle
@@ -31,7 +23,7 @@ class ThemeSwitcher extends Component {
           <NotificationsWrapper />
         </div>
 
-        <button
+        {/* <button
           type="primary"
           className="switcherToggleBtn"
           style={styleButton}
@@ -40,15 +32,14 @@ class ThemeSwitcher extends Component {
           }}
         >
           <img src={process.env.PUBLIC_URL + bucketSVG} alt="bucket" />
-        </button>
+        </button> */}
       </NotificationBarStyle>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    ...state.ThemeSwitcher,
-    LanguageSwitcher: state.LanguageSwitcher,
+    notifications: state.notifications,
   };
 }
 export default connect(mapStateToProps, {

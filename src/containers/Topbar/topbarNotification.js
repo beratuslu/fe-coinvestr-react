@@ -52,7 +52,9 @@ class TopbarNotification extends Component {
     this.setState({ visible: false });
   }
   handleVisibleChange() {
-    this.setState({ visible: !this.state.visible });
+    const { dispatch } = this.props;
+    dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
+    // this.setState({ visible: !this.state.visible });
   }
   handleMarkAsRead() {
     this.setState({ visible: !this.state.visible });

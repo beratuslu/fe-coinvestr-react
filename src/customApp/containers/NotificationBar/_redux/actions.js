@@ -9,8 +9,10 @@ const actions = {
 
   SWITCH_NOTIFICATION_BAR: "SWITCH_NOTIFICATION_BAR",
 
-  switchNotificationBar: () => ({
-    type: actions.SWITCH_NOTIFICATION_BAR,
+  fetchNotifications: () => ({ type: actions.FETCH_NOTIFICATIONS_START }),
+  markNotificationsAsRead: (payload) => ({
+    type: actions.MARK_NOTIFICATIONS_AS_READ_REQUEST,
+    payload,
   }),
 };
 export default actions;
