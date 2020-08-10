@@ -6,10 +6,28 @@ import LanguageSwitcher from "../../../containers/LanguageSwitcher";
 import bucketSVG from "../../../image/bucket.svg";
 import NotificationsWrapper from "./components/NotificationsWrapper";
 import NotificationBarStyle from "./notificationBar.style";
+import onClickOutside from "react-onclickoutside";
 
 const { switchActivation, changeTheme } = Actions;
 
-class ThemeSwitcher extends Component {
+class NotificationBar extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+
+    // this.state = {
+    //   visible: false,
+    // };
+  }
+
+  handleClickOutside = (evt) => {
+    const { isActivated } = this.props.notifications;
+    const { dispatch } = this.props;
+
+    if (isActivated) {
+      dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
+    }
+  };
   render() {
     const { isActivated } = this.props.notifications;
 
@@ -42,7 +60,6 @@ function mapStateToProps(state) {
     notifications: state.notifications,
   };
 }
-export default connect(mapStateToProps, {
-  switchActivation,
-  changeTheme,
-})(ThemeSwitcher);
+let MyComponent = onClickOutside(NotificationBar);
+
+export default connect(mapStateToProps)(MyComponent);

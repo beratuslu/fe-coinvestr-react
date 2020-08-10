@@ -53,7 +53,9 @@ class TopbarNotification extends Component {
   }
   handleVisibleChange() {
     const { dispatch } = this.props;
+    const { isActivated } = this.props.notifications;
     dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
+    // TODO: onClick should close bar if it is already opened
     // this.setState({ visible: !this.state.visible });
   }
   handleMarkAsRead() {
@@ -88,7 +90,7 @@ class TopbarNotification extends Component {
   render() {
     const { customizedTheme, enums } = this.props;
     const notifEnums = enums.enumsAndConstants.notifications;
-    const { notifications } = this.props.notifications;
+    const { notifications, isActivated } = this.props.notifications;
     const unReadNotifs = _.filter(notifications, { isRead: false });
 
     if (!notifEnums) {
@@ -109,21 +111,33 @@ class TopbarNotification extends Component {
       </TopbarDropdownWrapper>
     );
     return (
-      <Popover
-        content={content}
-        trigger="click"
-        visible={this.state.visible}
-        onVisibleChange={this.handleVisibleChange}
-        placement="bottomRight"
+      // <Popover
+      //   content={content}
+      //   trigger="click"
+      //   visible={this.state.visible}
+      //   onVisibleChange={this.handleVisibleChange}
+      //   placement="bottomRight"
+      // >
+      //   <div  className="isoIconWrapper">
+      //     <i
+      //       className="ion-android-notifications"
+      //       style={{ color: customizedTheme.textColor }}
+      //     />
+      //     <span>{unReadNotifs.length}</span>
+      //   </div>
+      // </Popover>
+      <div
+        onClick={() => {
+          this.handleVisibleChange();
+        }}
+        className="isoIconWrapper"
       >
-        <div className="isoIconWrapper">
-          <i
-            className="ion-android-notifications"
-            style={{ color: customizedTheme.textColor }}
-          />
-          <span>{unReadNotifs.length}</span>
-        </div>
-      </Popover>
+        <i
+          className="ion-android-notifications"
+          style={{ color: customizedTheme.textColor }}
+        />
+        <span>{unReadNotifs.length}</span>
+      </div>
     );
   }
 }

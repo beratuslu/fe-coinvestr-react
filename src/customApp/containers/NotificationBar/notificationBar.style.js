@@ -21,11 +21,11 @@ const ThemeSwitcherStyle = styled.div`
   ${transition()};
   ${boxShadow("-1px 0 5px rgba(0,0,0,0.25)")};
 
-  @media only screen and (max-width: 767px) {
+  /* @media only screen and (max-width: 767px) {
     width: 270px;
     right: ${(props) => (props["data-rtl"] === "rtl" ? "inherit" : "-270px")};
     left: ${(props) => (props["data-rtl"] === "rtl" ? "-270px" : "inherit")};
-  }
+  } */
 
   &.active {
     right: ${(props) => (props["data-rtl"] === "rtl" ? "inherit" : "0")};
