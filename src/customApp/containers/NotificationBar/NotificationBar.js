@@ -24,9 +24,9 @@ class NotificationBar extends Component {
     const { isActivated } = this.props.notifications;
     const { dispatch } = this.props;
 
-    // if (isActivated) {
-    //   dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
-    // }
+    if (isActivated) {
+      dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
+    }
   };
   render() {
     const { isActivated } = this.props.notifications;

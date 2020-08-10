@@ -54,7 +54,10 @@ class TopbarNotification extends Component {
   handleVisibleChange() {
     const { dispatch } = this.props;
     const { isActivated } = this.props.notifications;
+    console.log("click");
     dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
+    // if (!isActivated) {
+    // }
     // TODO: onClick should close bar if it is already opened
     // this.setState({ visible: !this.state.visible });
   }
@@ -93,6 +96,11 @@ class TopbarNotification extends Component {
     const { notifications, isActivated } = this.props.notifications;
     const unReadNotifs = _.filter(notifications, { isRead: false });
 
+    console.log(
+      "TopbarNotification -> render -> this.props.notifications",
+      this.props.notifications
+    );
+
     if (!notifEnums) {
       return null;
     }
@@ -126,10 +134,10 @@ class TopbarNotification extends Component {
       //     <span>{unReadNotifs.length}</span>
       //   </div>
       // </Popover>
-      <div
-        onClick={() => {
-          this.handleVisibleChange();
-        }}
+      <a
+        style={{ display: "block" }}
+        disabled={isActivated}
+        onClick={this.handleVisibleChange}
         className="isoIconWrapper"
       >
         <i
@@ -137,7 +145,7 @@ class TopbarNotification extends Component {
           style={{ color: customizedTheme.textColor }}
         />
         <span>{unReadNotifs.length}</span>
-      </div>
+      </a>
     );
   }
 }
