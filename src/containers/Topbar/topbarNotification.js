@@ -51,13 +51,11 @@ class TopbarNotification extends Component {
   hide() {
     this.setState({ visible: false });
   }
-  handleVisibleChange() {
+  handleVisibleChange(letds) {
     const { dispatch } = this.props;
     const { isActivated } = this.props.notifications;
     dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
-    // if (!isActivated) {
-    // }
-    // TODO: onClick should close bar if it is already opened
+
     // this.setState({ visible: !this.state.visible });
   }
   handleMarkAsRead() {
@@ -94,11 +92,6 @@ class TopbarNotification extends Component {
     const notifEnums = enums.enumsAndConstants.notifications;
     const { notifications, isActivated } = this.props.notifications;
     const unReadNotifs = _.filter(notifications, { isRead: false });
-
-    console.log(
-      "TopbarNotification -> render -> this.props.notifications",
-      this.props.notifications
-    );
 
     if (!notifEnums) {
       return null;

@@ -13,7 +13,6 @@ export function* fetchNotifications() {
   yield takeEvery(actions.FETCH_ENUMS_AND_CONSTANTS_START, function*() {
     try {
       const response = yield call(fetchDataRequest);
-      console.log("yieldtakeEvery -> response", response);
 
       yield put({
         type: actions.FETCH_ENUMS_AND_CONSTANTS_SUCCESS,

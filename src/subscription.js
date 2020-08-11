@@ -2,16 +2,8 @@
 const convertedVapidKey = urlBase64ToUint8Array(
   process.env.REACT_APP_PUBLIC_VAPID_KEY
 );
-console.log(
-  "process.env.REACT_APP_PUBLIC_VAPID_KEY",
-  process.env.REACT_APP_PUBLIC_VAPID_KEY
-);
 
 function urlBase64ToUint8Array(base64String) {
-  console.log(
-    "TCL: functionurlBase64ToUint8Array -> process.env.REACT_APP_PUBLIC_VAPID_KEY",
-    process.env.REACT_APP_PUBLIC_VAPID_KEY
-  );
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
   // eslint-disable-next-line
   const base64 = (base64String + padding)

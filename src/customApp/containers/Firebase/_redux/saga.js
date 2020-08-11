@@ -12,7 +12,6 @@ const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
 function subscribe(socket) {
   return eventChannel((emit) => {
     socket.on("newNotif", (data) => {
-      console.log("TCL: subscribe -> data", data);
       // emit(addUser({ username }));
     });
     // socket.on("users.login", ({ username }) => {
@@ -38,7 +37,6 @@ function subscribe(socket) {
 //   let observer = doc.onSnapshot(
 //     (docSnapshot) => {
 //       docSnapshot.data();
-//       console.log("read -> docSnapshot.data()", docSnapshot.data());
 //     },
 //     (err) => {}
 //   );
@@ -61,7 +59,6 @@ function subscribe(socket) {
 function* flow() {
   while (true) {
     let { payload } = yield take("FIREBASE_NOTIFICATIONS_START");
-    console.log("funcsssssssssstion*flow -> payload", payload);
 
     firebase.initializeApp({
       apiKey,
@@ -82,14 +79,10 @@ function* flow() {
 
     let observer = doc.onSnapshot(
       (docSnapshot) => {
-        // console.log("function*flow -> docSnapshot", docSnapshot);
         // const asd = docSnapshot.docs.map((doc) => doc.data());
-        // console.log("function*flow -> asd", asd);
 
         docSnapshot.docChanges().forEach(function(change) {
-          console.log("function*flow -> change", change.type);
           if (change.type === "added") {
-            // console.log("function*flow -> change", change.doc.data());
             console.log(
               "function*flow -> change",
 
@@ -99,17 +92,13 @@ function* flow() {
                 .format("YYYY-MM-DD HH:mm:ss.SSS")
             );
             // change.doc here is new a new document
-            console.log("function*flow -> change.doc", change.doc.data());
           }
         });
 
         // docSnapshot.forEach(function(doc) {
-        //   console.log("snapshot added ", doc());
         // });
       },
-      (err) => {
-        console.log("function*flow -> err", err);
-      }
+      (err) => {}
     );
 
     // const task = yield fork(handleIO);
