@@ -9,7 +9,6 @@ const fetchNotificationsRequest = async (payload) => {
   return axios.post("/api/v1/notifications", payload);
 };
 const markNotificationsAsReadRequest = async (payload) => {
-  console.log("markNotificationsAsReadRequest -> payload", payload);
   return axios.post("/api/v1/notifications/mark-notifications-as-read", {
     notifIdArr: payload,
   });
@@ -19,12 +18,10 @@ export function* fetchNotifications() {
   yield takeEvery(actions.FETCH_NOTIFICATIONS_START, function*(action) {
     try {
       const response = yield call(fetchNotificationsRequest, action.payload);
-      console.log("FETCH_NOTIFICATIONS_START -> loginResult", response);
       yield put({
         type: actions.FETCH_NOTIFICATIONS_SUCCESS,
         payload: response.data,
       });
-      console.log("yieldtakeEvery -> response.data", response.data);
       if (action.initial) {
         yield put({
           type: "FIREBASE_NOTIFICATIONS_START",
