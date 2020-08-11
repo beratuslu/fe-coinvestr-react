@@ -54,7 +54,6 @@ class TopbarNotification extends Component {
   handleVisibleChange() {
     const { dispatch } = this.props;
     const { isActivated } = this.props.notifications;
-    console.log("click");
     dispatch({ type: "SWITCH_NOTIFICATION_BAR" });
     // if (!isActivated) {
     // }
