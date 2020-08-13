@@ -8,6 +8,7 @@ const actions = {
   MARK_NOTIFICATIONS_AS_READ_ERROR: "MARK_NOTIFICATIONS_AS_READ_ERROR",
 
   SWITCH_NOTIFICATION_BAR: "SWITCH_NOTIFICATION_BAR",
+  NEW_NOTIF_FROM_FIREBASE: "NEW_NOTIF_FROM_FIREBASE",
 
   fetchNotifications: () => ({ type: actions.FETCH_NOTIFICATIONS_START }),
   markNotificationsAsRead: (payload) => ({

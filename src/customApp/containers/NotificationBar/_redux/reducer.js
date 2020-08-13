@@ -15,6 +15,13 @@ export default function notificationBar(state = initState, action) {
         ...state,
         isActivated: !state.isActivated,
       };
+    case actions.NEW_NOTIF_FROM_FIREBASE: {
+      const notifications = state.notifications.unshift(action.payload);
+      return {
+        ...state,
+        notifications,
+      };
+    }
 
     case actions.LOGOUT:
       return initState;

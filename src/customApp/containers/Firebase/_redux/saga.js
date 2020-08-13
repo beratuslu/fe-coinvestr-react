@@ -1,7 +1,9 @@
+import React from "react";
 import firebase from "firebase";
 import moment from "moment";
 import { eventChannel, delay } from "redux-saga";
 import notifications from "../../../../components/feedback/notification";
+import NotifDescription from "../components/NotifDescription/";
 import axios from "axios";
 import {
   take,
@@ -29,7 +31,34 @@ const firebaseCustomTokenRequest = async () => {
   return axios.get("/api/v1/auth/get-firebase-custom-token");
 };
 
+function subscribe(state) {
+  return eventChannel((emit) => {
+    socket.on("newNotif", (data) => {
+      console.log("TCL: subscribe -> data", data);
+      // emit(addUser({ username }));
+    });
+    // socket.on("users.login", ({ username }) => {
+    //   emit(addUser({ username }));
+    // });
+    // socket.on("users.logout", ({ username }) => {
+    //   emit(removeUser({ username }));
+    // });
+    // socket.on("messages.new", ({ message }) => {
+    //   emit(newMessage({ message }));
+    // });
+    // socket.on("disconnect", e => {
+    //   // TODO: handle
+    // });
+  });
+}
+
 function* startNotifications() {
+  const channel = yield call(subscribe, state);
+  // while (true) {
+  //   let action = yield take(channel);
+  //   yield put(action);
+  // }
+
   let state = yield select((state) => state); // <-- get the notifications
 
   const notifId = state.notifications.notifications[0].id;
@@ -52,10 +81,20 @@ function* startNotifications() {
             change.doc.data()
           );
 
+          put(actions.newNotifFromFirebase(change.doc.data()));
+
           notifications.success({
             // message: change.doc.data().notifType,
-            message: "Hello",
-            description: "this is my message",
+            message: (
+              <NotifDescription
+                notification={change.doc.data()}
+              ></NotifDescription>
+            ),
+            description: (
+              <NotifDescription
+                notification={change.doc.data()}
+              ></NotifDescription>
+            ),
             placement: "bottomLeft",
           });
 
@@ -82,9 +121,9 @@ function* authenticate() {
         .auth()
         .signInWithCustomToken(reponse.data);
 
-      yield put({
-        type: "FIREBASE_NOTIFICATIONS_START",
-      });
+      // yield put({
+      //   type: "FIREBASE_NOTIFICATIONS_START",
+      // });
 
       yield fork(startNotifications);
     } catch (error) {
