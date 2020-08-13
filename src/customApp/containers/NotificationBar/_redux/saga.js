@@ -22,10 +22,10 @@ export function* fetchNotifications() {
         type: actions.FETCH_NOTIFICATIONS_SUCCESS,
         payload: response.data,
       });
+
       if (action.initial) {
         yield put({
-          type: "FIREBASE_NOTIFICATIONS_START",
-          payload: response.data[0].id,
+          type: "FIREBASE_AUTH_START",
         });
       }
     } catch (error) {

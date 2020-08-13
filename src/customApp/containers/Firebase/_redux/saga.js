@@ -1,7 +1,17 @@
 import firebase from "firebase";
 import moment from "moment";
 import { eventChannel, delay } from "redux-saga";
-import { take, call, put, fork, race, cancel } from "redux-saga/effects";
+import notifications from "../../../../components/feedback/notification";
+import axios from "axios";
+import {
+  take,
+  call,
+  put,
+  fork,
+  race,
+  cancel,
+  select,
+} from "redux-saga/effects";
 import { push } from "react-router-redux";
 import actions from "./actions";
 
@@ -9,102 +19,89 @@ const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 const authDomain = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
 const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
 
-function subscribe(socket) {
-  return eventChannel((emit) => {
-    socket.on("newNotif", (data) => {
-      // emit(addUser({ username }));
-    });
-    // socket.on("users.login", ({ username }) => {
-    //   emit(addUser({ username }));
-    // });
-    // socket.on("users.logout", ({ username }) => {
-    //   emit(removeUser({ username }));
-    // });
-    // socket.on("messages.new", ({ message }) => {
-    //   emit(newMessage({ message }));
-    // });
-    // socket.on("disconnect", e => {
-    //   // TODO: handle
-    // });
-    return () => {};
-  });
+firebase.initializeApp({
+  apiKey,
+  authDomain,
+  projectId,
+});
+
+const firebaseCustomTokenRequest = async () => {
+  return axios.get("/api/v1/auth/get-firebase-custom-token");
+};
+
+function* startNotifications() {
+  let state = yield select((state) => state); // <-- get the notifications
+
+  const notifId = state.notifications.notifications[0].id;
+
+  const user = state.Auth.user;
+  const db = firebase.firestore();
+
+  const doc = db
+    .collection("users")
+    .doc(user.userName)
+    .collection("notifications")
+    .where("id", ">", notifId);
+
+  let observer = doc.onSnapshot(
+    (docSnapshot) => {
+      docSnapshot.docChanges().forEach(function(change) {
+        if (change.type === "added") {
+          console.log(
+            "function*startNotifications -> change.doc.data()",
+            change.doc.data()
+          );
+
+          notifications.success({
+            // message: change.doc.data().notifType,
+            message: "Hello",
+            description: "this is my message",
+            placement: "bottomLeft",
+          });
+
+          // console.log(
+          //   "function*flow -> change",
+
+          //   moment
+          //     .unix(change.doc.data().createTime.seconds)
+          //     .utc()
+          //     .format("YYYY-MM-DD HH:mm:ss.SSS")
+          // );
+        }
+      });
+    },
+    (err) => {}
+  );
 }
-
-// function* read() {
-//   const db = firebase.firestore();
-//   const doc = db.collection("users").doc("a-uid");
-
-//   let observer = doc.onSnapshot(
-//     (docSnapshot) => {
-//       docSnapshot.data();
-//     },
-//     (err) => {}
-//   );
-
-//   // let collectionRef = db.collection("users/a-uid/notifications");
-// }
-
-// function* write(socket) {
-//   while (true) {
-//     const { payload } = yield take(`sendMessage`);
-//     socket.emit("message", payload);
-//   }
-// }
-
-// function* handleIO() {
-//   yield fork(read);
-//   // yield fork(write, socket);
-// }
-
-function* flow() {
+function* authenticate() {
   while (true) {
-    let { payload } = yield take("FIREBASE_NOTIFICATIONS_START");
+    let action = yield take("FIREBASE_AUTH_START");
+    try {
+      const reponse = yield call(firebaseCustomTokenRequest);
+      const firebaseAuthResult = yield firebase
+        .auth()
+        .signInWithCustomToken(reponse.data);
 
-    firebase.initializeApp({
-      apiKey,
-      authDomain,
-      projectId,
-    });
-    const db = firebase.firestore();
+      yield put({
+        type: "FIREBASE_NOTIFICATIONS_START",
+      });
 
-    // const doc = db.collection("users");
+      yield fork(startNotifications);
+    } catch (error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    }
 
-    const doc = db
-      .collection("users")
-      .doc("a-uid")
-      .collection("notifications")
-      .where("id", ">", payload);
-
-    // moment().utc().format("YYYY-MM-DD HH:mm:ss.SSS")
-
-    let observer = doc.onSnapshot(
-      (docSnapshot) => {
-        // const asd = docSnapshot.docs.map((doc) => doc.data());
-
-        docSnapshot.docChanges().forEach(function(change) {
-          if (change.type === "added") {
-            console.log(
-              "function*flow -> change",
-
-              moment
-                .unix(change.doc.data().createTime.seconds)
-                .utc()
-                .format("YYYY-MM-DD HH:mm:ss.SSS")
-            );
-            // change.doc here is new a new document
-          }
-        });
-
-        // docSnapshot.forEach(function(doc) {
-        // });
-      },
-      (err) => {}
-    );
-
-    // const task = yield fork(handleIO);
+    // firebase.auth().signInWithCustomToken(token).catch(function(error) {
+    //   // Handle Errors here.
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    //   // ...
+    // });
   }
 }
 
 export default function* rootSaga() {
-  yield fork(flow);
+  yield fork(authenticate);
 }
