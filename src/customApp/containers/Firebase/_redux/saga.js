@@ -17,6 +17,9 @@ import {
 import { push } from "react-router-redux";
 import actions from "./actions";
 
+import { Provider } from "react-redux";
+import { store } from "../../../../redux/store";
+
 const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 const authDomain = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
 const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
@@ -33,84 +36,72 @@ const firebaseCustomTokenRequest = async () => {
 
 function subscribe(state) {
   return eventChannel((emit) => {
-    socket.on("newNotif", (data) => {
-      console.log("TCL: subscribe -> data", data);
-      // emit(addUser({ username }));
-    });
-    // socket.on("users.login", ({ username }) => {
-    //   emit(addUser({ username }));
-    // });
-    // socket.on("users.logout", ({ username }) => {
-    //   emit(removeUser({ username }));
-    // });
-    // socket.on("messages.new", ({ message }) => {
-    //   emit(newMessage({ message }));
-    // });
-    // socket.on("disconnect", e => {
-    //   // TODO: handle
-    // });
+    const notifId = state.notifications.notifications[0].id;
+
+    const user = state.Auth.user;
+    const db = firebase.firestore();
+
+    const doc = db
+      .collection("users")
+      .doc(user.userName)
+      .collection("notifications")
+      .where("id", ">", notifId);
+
+    let observer = doc.onSnapshot(
+      (docSnapshot) => {
+        docSnapshot.docChanges().forEach(function(change) {
+          if (change.type === "added") {
+            console.log(
+              "function*startNotifications -> change.doc.data()",
+              change.doc.data()
+            );
+
+            emit(actions.newNotifFromFirebase(change.doc.data()));
+
+            notifications.success({
+              // message: change.doc.data().notifType,
+              message: (
+                <Provider store={store}>
+                  <NotifDescription
+                    notification={change.doc.data()}
+                  ></NotifDescription>
+                </Provider>
+              ),
+              description: (
+                <Provider store={store}>
+                  <NotifDescription
+                    notification={change.doc.data()}
+                  ></NotifDescription>
+                </Provider>
+              ),
+              placement: "bottomLeft",
+              duration: 0,
+            });
+
+            // console.log(
+            //   "function*flow -> change",
+
+            //   moment
+            //     .unix(change.doc.data().createTime.seconds)
+            //     .utc()
+            //     .format("YYYY-MM-DD HH:mm:ss.SSS")
+            // );
+          }
+        });
+      },
+      (err) => {}
+    );
+    return () => {};
   });
 }
 
 function* startNotifications() {
-  const channel = yield call(subscribe, state);
-  // while (true) {
-  //   let action = yield take(channel);
-  //   yield put(action);
-  // }
-
   let state = yield select((state) => state); // <-- get the notifications
-
-  const notifId = state.notifications.notifications[0].id;
-
-  const user = state.Auth.user;
-  const db = firebase.firestore();
-
-  const doc = db
-    .collection("users")
-    .doc(user.userName)
-    .collection("notifications")
-    .where("id", ">", notifId);
-
-  let observer = doc.onSnapshot(
-    (docSnapshot) => {
-      docSnapshot.docChanges().forEach(function(change) {
-        if (change.type === "added") {
-          console.log(
-            "function*startNotifications -> change.doc.data()",
-            change.doc.data()
-          );
-
-          put(actions.newNotifFromFirebase(change.doc.data()));
-
-          notifications.success({
-            // message: change.doc.data().notifType,
-            message: (
-              <NotifDescription
-                notification={change.doc.data()}
-              ></NotifDescription>
-            ),
-            description: (
-              <NotifDescription
-                notification={change.doc.data()}
-              ></NotifDescription>
-            ),
-            placement: "bottomLeft",
-          });
-
-          // console.log(
-          //   "function*flow -> change",
-
-          //   moment
-          //     .unix(change.doc.data().createTime.seconds)
-          //     .utc()
-          //     .format("YYYY-MM-DD HH:mm:ss.SSS")
-          // );
-        }
-      });
-    },
-    (err) => {}
-  );
+  const channel = yield call(subscribe, state);
+  while (true) {
+    let action = yield take(channel);
+    yield put(action);
+  }
 }
 function* authenticate() {
   while (true) {

@@ -16,7 +16,7 @@ export default function notificationBar(state = initState, action) {
         isActivated: !state.isActivated,
       };
     case actions.NEW_NOTIF_FROM_FIREBASE: {
-      const notifications = state.notifications.unshift(action.payload);
+      const notifications = [action.payload, ...state.notifications];
       return {
         ...state,
         notifications,

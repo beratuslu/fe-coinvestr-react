@@ -7,7 +7,7 @@ import Pagination from "../../../components/uielements/pagination";
 import { Icon } from "antd";
 import moment from "moment";
 import Timeline, {
-  TimelineItem
+  TimelineItem,
 } from "../../../components/uielements/timeline";
 import { RadioButton, RadioGroup } from "../../../components/uielements/radio";
 
@@ -22,14 +22,14 @@ import {
   SwitchButtonsWrapper,
   CollapseWrapper,
   PaginationWrapper,
-  ActivityWrapper
+  ActivityWrapper,
 } from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
 
 // import IntlMessages from "../../../components/utility/intlMessages";
 
 const Panel = Collapses.Panel;
-const Collapse = props => (
+const Collapse = (props) => (
   <CollapseWrapper>
     <Collapses {...props}>{props.children}</Collapses>
   </CollapseWrapper>
@@ -44,7 +44,7 @@ class TradeList extends Component {
     this.state = {
       recordType: "myTrades",
       pageSize: 10,
-      pageNumber: 1
+      pageNumber: 1,
     };
   }
   componentDidMount() {
@@ -55,7 +55,7 @@ class TradeList extends Component {
     const { recordType, pageSize, pageNumber } = this.state;
     const obj = {
       recordType,
-      pagination: { pageSize, pageNumber }
+      pagination: { pageSize, pageNumber },
     };
     this.props.fetchUserTradesStart(obj);
   }
@@ -84,7 +84,7 @@ class TradeList extends Component {
     stopSellOrderFilled: "red",
 
     profitSellOrderCanceled: "gray",
-    stopSellOrderCanceled: "gray"
+    stopSellOrderCanceled: "gray",
   };
   renderTradeActivityText(activity) {
     return (
@@ -101,7 +101,7 @@ class TradeList extends Component {
     );
   }
   renderTradeActivities(activities) {
-    return activities.map(activity => {
+    return activities.map((activity) => {
       const text = this.renderTradeActivityText(activity);
       let dot = null;
       if (activity.type === "profitSellOrderPartiallyFilled") {
@@ -131,7 +131,7 @@ class TradeList extends Component {
   }
 
   renderTrades(trades) {
-    const tradesJsx = trades.map(trade => {
+    const tradesJsx = trades.map((trade) => {
       return (
         <Panel header={<TradeCollapseHeader trade={trade} />} key={trade.id}>
           <br />
@@ -197,9 +197,9 @@ class TradeList extends Component {
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     profile: state.Profile,
-    auth: state.Auth
+    auth: state.Auth,
   }),
   { ...actions }
 )(TradeList);
