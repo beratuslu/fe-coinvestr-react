@@ -78,7 +78,15 @@ class TopbarNotification extends Component {
           {devider}
           <a className="isoDropdownListItem" href="# ">
             <h5>{notifEnums[notification.notifType].title}</h5>
-            <p>{notifEnums[notification.notifType].body}</p>
+            {/* <p>{notifEnums[notification.notifType].body}</p> */}
+            <p>
+              asdasd <br />
+              asdasd <br />
+              asdasd <br />
+              asdasd <br />
+              asdasd <br />
+              asdasd <br />
+            </p>
             <Tooltip placement="left" title="mark as read">
               <span className="isRead"></span>
             </Tooltip>

@@ -8,7 +8,7 @@ import { IntlProvider } from "react-intl";
 import themes from "./settings/themes";
 import AppLocale from "./languageProvider";
 import config, {
-  getCurrentLanguage
+  getCurrentLanguage,
 } from "./containers/LanguageSwitcher/config";
 import { themeConfig } from "./settings";
 import DashAppHolder from "./dashAppStyle";
@@ -37,7 +37,7 @@ const DashApp = () => (
 );
 Boot()
   .then(() => DashApp())
-  .catch(error => console.error(error));
+  .catch((error) => console.error(error));
 
 export default DashApp;
 export { AppLocale };

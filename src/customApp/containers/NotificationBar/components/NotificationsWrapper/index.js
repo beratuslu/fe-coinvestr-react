@@ -71,7 +71,47 @@ class Notifications extends Component {
           {/* {devider} */}
           <a className="isoDropdownListItem">
             <h5>{notifEnums[notification.notifType].title}</h5>
-            <p>{notifEnums[notification.notifType].body}</p>
+            {/* <p>{notifEnums[notification.notifType].body}</p> */}
+
+            <br />
+            <br />
+            <table>
+              <tbody>
+                <tr>
+                  <td>Symbol:</td>
+                  <td>
+                    <strong>ETHBTC</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Btc Amount:</td>
+                  <td>
+                    <strong>0.01</strong>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Buy Price:</td>
+                  <td>
+                    <strong>buy_price</strong>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Profit Price:</td>
+                  <td>
+                    <strong>profit_price</strong>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Stop Loss Price:</td>
+                  <td>
+                    <strong>stop_price</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             {notification.isRead ? (
               <span className="isRead read"></span>

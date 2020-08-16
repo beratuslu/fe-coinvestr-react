@@ -4,6 +4,7 @@ import moment from "moment";
 import { eventChannel, delay } from "redux-saga";
 import notifications from "../../../../components/feedback/notification";
 import NotifDescription from "../components/NotifDescription/";
+import NotifMessages from "../components/NotifMessages/";
 import axios from "axios";
 import {
   take,
@@ -18,7 +19,10 @@ import { push } from "react-router-redux";
 import actions from "./actions";
 
 import { Provider } from "react-redux";
-import { store } from "../../../../redux/store";
+import { store, history } from "../../../../redux/store";
+import { ConnectedRouter } from "connected-react-router";
+
+console.log("NotifMessages", NotifMessages);
 
 const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 const authDomain = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
@@ -40,6 +44,8 @@ function subscribe(state) {
 
     const user = state.Auth.user;
     const db = firebase.firestore();
+    const notificationsConstants =
+      state.enumsAndConstants.enumsAndConstants.notifications;
 
     const doc = db
       .collection("users")
@@ -51,45 +57,37 @@ function subscribe(state) {
       (docSnapshot) => {
         docSnapshot.docChanges().forEach(function(change) {
           if (change.type === "added") {
+            const arrivedNotif = change.doc.data();
+            const { title, status } = notificationsConstants[
+              arrivedNotif.notifType
+            ];
             console.log(
-              "function*startNotifications -> change.doc.data()",
-              change.doc.data()
+              "function*startNotifications -> arrivedNotif",
+              arrivedNotif
             );
-
-            emit(actions.newNotifFromFirebase(change.doc.data()));
-
-            notifications.success({
-              // message: change.doc.data().notifType,
-              message: (
-                <Provider store={store}>
-                  <NotifDescription
-                    notification={change.doc.data()}
-                  ></NotifDescription>
-                </Provider>
-              ),
+            emit(actions.newNotifFromFirebase(arrivedNotif));
+            const MessageComponent = NotifMessages[arrivedNotif.notifType];
+            notifications[status]({
+              message: title,
               description: (
                 <Provider store={store}>
-                  <NotifDescription
-                    notification={change.doc.data()}
-                  ></NotifDescription>
+                  <ConnectedRouter history={history}>
+                    <MessageComponent
+                      notification={arrivedNotif}
+                    ></MessageComponent>
+                  </ConnectedRouter>
                 </Provider>
               ),
               placement: "bottomLeft",
+              // duration: 5000,
               duration: 0,
             });
-
-            // console.log(
-            //   "function*flow -> change",
-
-            //   moment
-            //     .unix(change.doc.data().createTime.seconds)
-            //     .utc()
-            //     .format("YYYY-MM-DD HH:mm:ss.SSS")
-            // );
           }
         });
       },
-      (err) => {}
+      (err) => {
+        console.log("subscribe -> err", err);
+      }
     );
     return () => {};
   });
