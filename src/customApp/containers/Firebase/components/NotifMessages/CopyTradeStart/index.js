@@ -43,8 +43,9 @@ class CopyTradeStart extends Component {
   //   return <div>{parts}</div>;
   // }
   render() {
-    const { notification, enumsAndConstants } = this.props;
+    const { notification, enumsAndConstants, app, bar } = this.props;
     const { params } = notification;
+    const { btcAmount, buyPrice, profitPrice, stopLossPrice, symbol } = params;
 
     return (
       <MessageWrapper onMouseEnter={this.onMouseEnter}>
@@ -54,45 +55,48 @@ class CopyTradeStart extends Component {
             {params.copiedUser.userName}
           </Link>{" "}
           started.
-          <br />
-          <br />
-          <table>
-            <tbody>
-              <tr>
-                <td>Symbol:</td>
-                <td>
-                  <strong>ETHBTC</strong>
-                </td>
-              </tr>
-              <tr>
-                <td>Btc Amount:</td>
-                <td>
-                  <strong>0.01</strong>
-                </td>
-              </tr>
+          {(app.view === "DesktopView" || bar) && (
+            <div>
+              <br />
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Symbol:</td>
+                    <td>
+                      <strong>{symbol}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Btc Amount:</td>
+                    <td>
+                      <strong>{btcAmount}</strong>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td>Buy Price:</td>
-                <td>
-                  <strong>buy_price</strong>
-                </td>
-              </tr>
+                  <tr>
+                    <td>Buy Price:</td>
+                    <td>
+                      <strong>{buyPrice}</strong>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td>Profit Price:</td>
-                <td>
-                  <strong>profit_price</strong>
-                </td>
-              </tr>
+                  <tr>
+                    <td>Profit Price:</td>
+                    <td>
+                      <strong>{profitPrice}</strong>
+                    </td>
+                  </tr>
 
-              <tr>
-                <td>Stop Loss Price:</td>
-                <td>
-                  <strong>stop_price</strong>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <tr>
+                    <td>Stop Loss Price:</td>
+                    <td>
+                      <strong>{stopLossPrice}</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
           {/* <br />
           <br /> Symbol: <strong> ETHBTC</strong>,
           <br /> Btc Amount: <strong>"0.01"</strong>,
@@ -111,6 +115,7 @@ function mapStateToProps(state) {
     profile: state.Profile,
     auth: state.Auth,
     enumsAndConstants: state.enumsAndConstants.enumsAndConstants,
+    app: state.App,
   };
 }
 export default connect(mapStateToProps, { ...actions })(CopyTradeStart);

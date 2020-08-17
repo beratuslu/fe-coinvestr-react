@@ -137,6 +137,18 @@ const TopbarWrapper = styled.div`
               background-color: ${palette("color", 2)};
             }
           }
+
+          a {
+            &.disabled {
+              pointer-events: none;
+              touch-action: none;
+            }
+            /* @media (max-width: 768px) {
+              &.disabled {
+                pointer-events: none;
+              }
+            } */
+          }
         }
 
         &.isoMsg {

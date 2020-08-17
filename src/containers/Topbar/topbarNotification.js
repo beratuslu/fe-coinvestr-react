@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import IntlMessages from "../../components/utility/intlMessages";
 import Tooltip from "../../components/uielements/tooltip";
 import TopbarDropdownWrapper from "./topbarDropdown.style";
+import classNames from "classnames";
 import _ from "lodash";
 
 const demoNotifications = [
@@ -118,6 +119,11 @@ class TopbarNotification extends Component {
         </a> */}
       </TopbarDropdownWrapper>
     );
+    const iconClasses = classNames({
+      isoIconWrapper: true,
+      disabled: isActivated,
+    });
+
     return (
       // <Popover
       //   content={content}
@@ -134,17 +140,19 @@ class TopbarNotification extends Component {
       //     <span>{unReadNotifs.length}</span>
       //   </div>
       // </Popover>
+
       <a
         style={{ display: "block" }}
-        disabled={isActivated}
+        // disabled={isActivated}
         onClick={this.handleVisibleChange}
-        className="isoIconWrapper"
+        // className="isoIconWrapper"
+        className={iconClasses}
       >
         <i
           className="ion-android-notifications"
           style={{ color: customizedTheme.textColor }}
         />
-        <span>{unReadNotifs.length}</span>
+        {unReadNotifs.length > 0 && <span>{unReadNotifs.length}</span>}
       </a>
     );
   }

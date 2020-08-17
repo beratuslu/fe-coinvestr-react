@@ -7,6 +7,7 @@ import Tooltip from "../../../../../components/uielements/tooltip";
 import TopbarDropdownWrapper from "./topbarDropdown.style";
 import actions from "../../_redux/actions";
 import _ from "lodash";
+import NotifMessages from "../../../Firebase/components/NotifMessages";
 
 class Notifications extends Component {
   constructor(props) {
@@ -66,52 +67,18 @@ class Notifications extends Component {
       //   read: notification.isRead,
       // });
 
+      const MessageComponent = NotifMessages[notification.notifType];
+
       return (
         <div className="notifWrapper" key={notification.id}>
           {/* {devider} */}
-          <a className="isoDropdownListItem">
+          <div className="isoDropdownListItem">
             <h5>{notifEnums[notification.notifType].title}</h5>
-            {/* <p>{notifEnums[notification.notifType].body}</p> */}
 
-            <br />
-            <br />
-            <table>
-              <tbody>
-                <tr>
-                  <td>Symbol:</td>
-                  <td>
-                    <strong>ETHBTC</strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Btc Amount:</td>
-                  <td>
-                    <strong>0.01</strong>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>Buy Price:</td>
-                  <td>
-                    <strong>buy_price</strong>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>Profit Price:</td>
-                  <td>
-                    <strong>profit_price</strong>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>Stop Loss Price:</td>
-                  <td>
-                    <strong>stop_price</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <MessageComponent
+              notification={notification}
+              bar
+            ></MessageComponent>
 
             {notification.isRead ? (
               <span className="isRead read"></span>
@@ -123,7 +90,7 @@ class Notifications extends Component {
                 ></span>
               </Tooltip>
             )}
-          </a>
+          </div>
         </div>
       );
     });
