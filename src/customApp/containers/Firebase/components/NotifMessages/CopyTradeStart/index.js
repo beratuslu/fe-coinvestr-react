@@ -24,24 +24,6 @@ class CopyTradeStart extends Component {
     const { notification, markNotificationsAsRead } = this.props;
     markNotificationsAsRead([notification.id]);
   }
-  // renderMessage(body, params) {
-  //   var parts = body.split(/{([^{}]*)\}/gm);
-  //   console.log("parts: ", parts);
-  //   for (var i = 1; i < parts.length; i += 2) {
-  //     let part = parts[i];
-  //     if (part.startsWith("{")) {
-  //       const paramKey = part.replace("{", "").replace("}", "");
-  //       part = part.replace;
-  //     }
-  //     parts[i] = (
-  //       <span className="match" key={i}>
-  //         {parts[i]}
-  //       </span>
-  //     );
-  //   }
-  //   console.log("parts: ", parts);
-  //   return <div>{parts}</div>;
-  // }
   render() {
     const { notification, enumsAndConstants, app, bar } = this.props;
     const { params } = notification;
@@ -97,13 +79,6 @@ class CopyTradeStart extends Component {
               </table>
             </div>
           )}
-          {/* <br />
-          <br /> Symbol: <strong> ETHBTC</strong>,
-          <br /> Btc Amount: <strong>"0.01"</strong>,
-          <br /> buyPrice: <strong>"buy_price"</strong>,
-          <br />
-          profitPrice: <strong>"profit_price"</strong>,
-          <br /> stopLossPrice: <strong>"stop_price"</strong>, */}
         </div>
       </MessageWrapper>
     );
