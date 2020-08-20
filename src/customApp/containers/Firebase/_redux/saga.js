@@ -38,7 +38,10 @@ const firebaseCustomTokenRequest = async () => {
 
 function subscribe(state) {
   return eventChannel((emit) => {
-    const notifId = state.notifications.notifications[0].id;
+    let notifId = 0;
+    if (state.notifications.notifications.length) {
+      notifId = state.notifications.notifications[0].id;
+    }
 
     const user = state.Auth.user;
     const db = firebase.firestore();
