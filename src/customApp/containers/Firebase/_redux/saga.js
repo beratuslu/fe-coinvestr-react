@@ -110,6 +110,10 @@ function* authenticate() {
       const firebaseAuthResult = yield firebase
         .auth()
         .signInWithCustomToken(reponse.data);
+      console.log(
+        "function*authenticate -> firebaseAuthResult",
+        firebaseAuthResult
+      );
 
       // yield put({
       //   type: "FIREBASE_NOTIFICATIONS_START",

@@ -69,11 +69,6 @@ export function* checkAuthorization() {
         token,
         user,
       });
-      yield put({
-        type: actions.LOGIN_SUCCESS,
-        token,
-        user,
-      });
     }
   });
 }
