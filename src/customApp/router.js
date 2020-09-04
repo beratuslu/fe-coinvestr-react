@@ -16,7 +16,7 @@ const routes = [
   },
   {
     path: "profile/:userName",
-    component: asyncComponent(() => import("../containers/Profile/Profile")),
+    component: asyncComponent(() => import("./containers/Profile/Profile")),
     exact: true,
   },
   {
