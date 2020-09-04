@@ -10,6 +10,11 @@ const routes = [
     component: asyncComponent(() => import("./containers/blankPage")),
   },
   {
+    path: "copy-trade/:id",
+    component: asyncComponent(() => import("./containers/CopyTrade/CopyTrade")),
+    exact: true,
+  },
+  {
     path: "profile/:userName",
     component: asyncComponent(() => import("../containers/Profile/Profile")),
     exact: true,
