@@ -27,6 +27,7 @@ import {
 } from "./Profile.styles";
 import actions from "../../../redux/profile/actions";
 import profileActions from "./_redux/actions";
+import axios from "axios";
 
 class Profile extends Component {
   constructor(props) {
@@ -37,9 +38,17 @@ class Profile extends Component {
     this.follow = this.follow.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
 
+    this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
+    this.onPageChange = this.onPageChange.bind(this);
+
     this.state = {
       active: "post",
       visible: false,
+
+      recordType: "myTrades",
+      pageSize: 10,
+      pageNumber: 1,
+      trades: {},
     };
   }
 
@@ -56,6 +65,8 @@ class Profile extends Component {
 
     const visitingOwnProfile = userName === userNameFromRoute;
     this.props.setProfileOwner(visitingOwnProfile);
+
+    this.makeDataRequest();
   }
 
   handleMenuClick(e) {
@@ -94,8 +105,33 @@ class Profile extends Component {
       this.setState({ active: type, visible: true });
     }
   }
+
+  async makeDataRequest() {
+    const { recordType, pageSize, pageNumber } = this.state;
+    const obj = {
+      recordType,
+      pagination: { pageSize, pageNumber },
+    };
+    // this.props.fetchUserTradesStart(obj);
+
+    const trades = await axios.post(`/api/v1/profile/user-trades`, obj);
+    console.log("Profile -> makeDataRequest -> response", trades);
+    this.setState({ trades });
+  }
+  onRecordTypeChange(event) {
+    this.setState({ recordType: event.target.value }, () => {
+      this.makeDataRequest();
+    });
+  }
+  onPageChange(pageNumber) {
+    this.setState({ pageNumber }, () => {
+      this.makeDataRequest();
+    });
+  }
+
   render() {
-    const { trades, isSelfProfile, isFollowed } = this.props.profile;
+    const { isSelfProfile, isFollowed } = this.props.profile;
+    const { trades } = this.state;
 
     return (
       <Wrapper>

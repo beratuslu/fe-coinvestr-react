@@ -41,36 +41,11 @@ const Collapse = (props) => (
 class TradeList extends Component {
   constructor(props) {
     super(props);
-    this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
-    this.onPageChange = this.onPageChange.bind(this);
 
-    this.state = {
-      recordType: "myTrades",
-      pageSize: 10,
-      pageNumber: 1,
-    };
+    this.state = {};
   }
   componentDidMount() {
-    this.makeDataRequest();
-  }
-
-  makeDataRequest() {
-    const { recordType, pageSize, pageNumber } = this.state;
-    const obj = {
-      recordType,
-      pagination: { pageSize, pageNumber },
-    };
-    this.props.fetchUserTradesStart(obj);
-  }
-  onRecordTypeChange(event) {
-    this.setState({ recordType: event.target.value }, () => {
-      this.makeDataRequest();
-    });
-  }
-  onPageChange(pageNumber) {
-    this.setState({ pageNumber }, () => {
-      this.makeDataRequest();
-    });
+    // this.makeDataRequest();
   }
 
   colors = {
@@ -151,7 +126,9 @@ class TradeList extends Component {
     return <Collapse defaultActiveKey={trades[0].id}>{tradesJsx}</Collapse>;
   }
   render() {
-    const { trades } = this.props.profile;
+    const { trades } = this.props;
+    const { singleItem } = this.props;
+    console.log("TradeList -> render -> trades", trades);
 
     return (
       <LayoutWrapper>
@@ -167,7 +144,7 @@ class TradeList extends Component {
         </SwitchButtonsWrapper>
         <Box className="container">
           <TradeListWrapper>
-            {!isEmpty(trades) ? (
+            {!isEmpty(trades.data) ? (
               <>
                 <div className="collapseWrapper">
                   <Table>
@@ -185,20 +162,22 @@ class TradeList extends Component {
                       </tr>
                     </tbody>
                   </Table>
-                  {this.renderTrades(trades)}
+                  {this.renderTrades(trades.data)}
                 </div>
               </>
             ) : (
               <div>No trades.</div>
             )}
           </TradeListWrapper>
-          <PaginationWrapper>
-            <Pagination
-              defaultCurrent={4}
-              total={60}
-              onChange={this.onPageChange}
-            />
-          </PaginationWrapper>
+          {!singleItem && trades.data && (
+            <PaginationWrapper>
+              <Pagination
+                defaultCurrent={1}
+                total={trades.pagination.totalRecord}
+                onChange={this.onPageChange}
+              />
+            </PaginationWrapper>
+          )}
         </Box>
       </LayoutWrapper>
     );
