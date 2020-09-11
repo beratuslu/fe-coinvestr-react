@@ -42,7 +42,9 @@ class TradeList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      recordType: "myTrades",
+    };
   }
   componentDidMount() {
     // this.makeDataRequest();
@@ -135,7 +137,10 @@ class TradeList extends Component {
         <SwitchButtonsWrapper>
           <RadioGroup
             value={this.state.recordType}
-            onChange={this.onRecordTypeChange}
+            onChange={(event) => {
+              this.setState({ recordType: event.target.value });
+              this.props.onRecordTypeChange(event);
+            }}
             className="isoTradeType"
           >
             <RadioButton value="myTrades">My Trades</RadioButton>
@@ -173,8 +178,9 @@ class TradeList extends Component {
             <PaginationWrapper>
               <Pagination
                 defaultCurrent={1}
+                current={trades.pagination.pageNumber}
                 total={trades.pagination.totalRecord}
-                onChange={this.onPageChange}
+                onChange={this.props.onPageChange}
               />
             </PaginationWrapper>
           )}

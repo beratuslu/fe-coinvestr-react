@@ -39,7 +39,7 @@ class Profile extends Component {
     this.handleMenuClick = this.handleMenuClick.bind(this);
 
     this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
-    this.onPageChange = this.onPageChange.bind(this);
+    this.onTradesPageChange = this.onTradesPageChange.bind(this);
 
     this.state = {
       active: "post",
@@ -47,7 +47,7 @@ class Profile extends Component {
 
       recordType: "myTrades",
       pageSize: 10,
-      pageNumber: 1,
+      tradesPageNumber: 1,
       trades: {},
     };
   }
@@ -66,7 +66,7 @@ class Profile extends Component {
     const visitingOwnProfile = userName === userNameFromRoute;
     this.props.setProfileOwner(visitingOwnProfile);
 
-    this.makeDataRequest();
+    this.makeTradesRequest();
   }
 
   handleMenuClick(e) {
@@ -106,26 +106,29 @@ class Profile extends Component {
     }
   }
 
-  async makeDataRequest() {
-    const { recordType, pageSize, pageNumber } = this.state;
+  async makeTradesRequest() {
+    const { recordType, pageSize, tradesPageNumber } = this.state;
     const obj = {
       recordType,
-      pagination: { pageSize, pageNumber },
+      pagination: { pageSize, pageNumber: tradesPageNumber },
     };
     // this.props.fetchUserTradesStart(obj);
 
     const trades = await axios.post(`/api/v1/profile/user-trades`, obj);
-    console.log("Profile -> makeDataRequest -> response", trades);
+    console.log("Profile -> makeTradesRequest -> response", trades);
     this.setState({ trades });
   }
   onRecordTypeChange(event) {
-    this.setState({ recordType: event.target.value }, () => {
-      this.makeDataRequest();
-    });
+    this.setState(
+      { recordType: event.target.value, tradesPageNumber: 1 },
+      () => {
+        this.makeTradesRequest();
+      }
+    );
   }
-  onPageChange(pageNumber) {
-    this.setState({ pageNumber }, () => {
-      this.makeDataRequest();
+  onTradesPageChange(tradesPageNumber) {
+    this.setState({ tradesPageNumber }, () => {
+      this.makeTradesRequest();
     });
   }
 
@@ -205,7 +208,11 @@ class Profile extends Component {
               </Container>
             </Navigation>
 
-            <TradeList trades={trades} />
+            <TradeList
+              onRecordTypeChange={this.onRecordTypeChange}
+              onPageChange={this.onTradesPageChange}
+              trades={trades}
+            />
 
             <Modal
               wrapClassName="follow-modal"
