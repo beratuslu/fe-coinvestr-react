@@ -43,8 +43,8 @@ class SignIn extends Component {
   componentDidMount() {
     const { isLoggedIn } = this.props;
     console.log("SignIn -> componentDidMount -> isLoggedIn", isLoggedIn);
-    // history.replace("/dashboard/profile/dev1");
-    this.props.history.push("/dashboard/profile/dev1");
+
+    // this.props.history.push("/dashboard/profile/dev1");
   }
 
   handleLogin = (e) => {
@@ -52,7 +52,6 @@ class SignIn extends Component {
     const { login, clearMenu } = this.props;
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("geldi mi?");
         // Notification(
         //   "success",
         //   "Received values of form",

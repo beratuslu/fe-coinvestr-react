@@ -34,12 +34,13 @@ export function* loginRequest() {
 
 export function* loginSuccess() {
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
+    // console.log("asdsssss");
     yield localStorage.setItem("token", payload.token);
     yield localStorage.setItem("user", JSON.stringify(payload.user));
     yield (axios.defaults.headers.common = {
       Authorization: `Bearer ${payload.token}`,
     });
-    // yield put(push("/dashboard"));
+    yield put(push("/dashboard/profile/asdsss"));
   });
 }
 

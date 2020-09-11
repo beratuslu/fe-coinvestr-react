@@ -10,6 +10,18 @@ export default () =>
     axios.interceptors.response.use(function(response) {
       return response.data;
     });
+    const UNAUTHORIZED = 401;
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        const { status } = error.response;
+        if (status === UNAUTHORIZED) {
+          store.dispatch(authActions.logout());
+        }
+        return Promise.reject(error);
+      }
+    );
+
     store.dispatch(authActions.checkAuthorization());
     store.dispatch(enumActions.fetchEnums());
   });

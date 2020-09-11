@@ -134,15 +134,21 @@ class TradeList extends Component {
   }
 
   renderTrades(trades) {
+    const { singleItem } = this.props;
     const tradesJsx = trades.map((trade) => {
       return (
-        <Panel header={<TradeCollapseHeader trade={trade} />} key={trade.id}>
+        <Panel
+          showArrow={!singleItem}
+          disabled={singleItem}
+          header={<TradeCollapseHeader trade={trade} />}
+          key={trade.id}
+        >
           <br />
           <Timeline>{this.renderTradeActivities(trade.activities)}</Timeline>
         </Panel>
       );
     });
-    return <Collapse>{tradesJsx}</Collapse>;
+    return <Collapse defaultActiveKey={trades[0].id}>{tradesJsx}</Collapse>;
   }
   render() {
     const { trades } = this.props.profile;

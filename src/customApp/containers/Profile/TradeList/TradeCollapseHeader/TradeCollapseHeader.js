@@ -33,7 +33,7 @@ export default function TradeCollapseHeader({ trade }) {
               <ProjectInfo>
                 <Avatar src={AvatarIcon} alt={trade.name} />
                 <InfoWrapper>
-                  <Title>{trade.user.name}</Title>
+                  <Title>{trade.user.userName}</Title>
                 </InfoWrapper>
               </ProjectInfo>
             </Link>

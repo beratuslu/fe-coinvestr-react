@@ -15,7 +15,9 @@ const onLoginRequest = async (payload) => {
 export function* loginRequest() {
   yield takeEvery(actions.LOGIN_REQUEST, function*({ payload }) {
     try {
+      yield put({ type: "HELLO_ASD" });
       const loginResult = yield call(onLoginRequest, payload);
+      console.log("yieldtakeEvery -> loginResult", loginResult);
       yield put({
         type: actions.LOGIN_SUCCESS,
         token: loginResult.data.token,
@@ -33,6 +35,7 @@ export function* loginRequest() {
 }
 
 export function* loginSuccess() {
+  // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaappppppppp1");
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
     yield localStorage.setItem("token", payload.token);
     yield localStorage.setItem("user", JSON.stringify(payload.user));
@@ -40,7 +43,8 @@ export function* loginSuccess() {
       Authorization: `Bearer ${payload.token}`,
     });
     yield put(actions.startSocket(payload.token));
-    // yield put(push("/dashboard"));
+
+    // yield put(push(`/dashboard/profile/${payload.user.userName}`));
   });
 }
 
