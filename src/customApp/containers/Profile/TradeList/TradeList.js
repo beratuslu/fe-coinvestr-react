@@ -26,6 +26,7 @@ import {
   CollapseWrapper,
   PaginationWrapper,
   ActivityWrapper,
+  SingleTradeWrapper,
 } from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
 
@@ -128,25 +129,31 @@ class TradeList extends Component {
     return <Collapse defaultActiveKey={trades[0].id}>{tradesJsx}</Collapse>;
   }
   render() {
-    const { trades } = this.props;
-    const { singleItem } = this.props;
+    const { trades, singleItem } = this.props;
     console.log("TradeList -> render -> trades", trades);
 
+    let WrapperElement = LayoutWrapper;
+    if (singleItem) {
+      WrapperElement = SingleTradeWrapper;
+    }
+
     return (
-      <LayoutWrapper>
-        <SwitchButtonsWrapper>
-          <RadioGroup
-            value={this.state.recordType}
-            onChange={(event) => {
-              this.setState({ recordType: event.target.value });
-              this.props.onRecordTypeChange(event);
-            }}
-            className="isoTradeType"
-          >
-            <RadioButton value="myTrades">My Trades</RadioButton>
-            <RadioButton value="copiedTrades">Copied Trades</RadioButton>
-          </RadioGroup>
-        </SwitchButtonsWrapper>
+      <WrapperElement>
+        {!singleItem && (
+          <SwitchButtonsWrapper>
+            <RadioGroup
+              value={this.state.recordType}
+              onChange={(event) => {
+                this.setState({ recordType: event.target.value });
+                this.props.onRecordTypeChange(event);
+              }}
+              className="isoTradeType"
+            >
+              <RadioButton value="myTrades">My Trades</RadioButton>
+              <RadioButton value="copiedTrades">Copied Trades</RadioButton>
+            </RadioGroup>
+          </SwitchButtonsWrapper>
+        )}
         <Box className="container">
           <TradeListWrapper>
             {!isEmpty(trades.data) ? (
@@ -185,7 +192,7 @@ class TradeList extends Component {
             </PaginationWrapper>
           )}
         </Box>
-      </LayoutWrapper>
+      </WrapperElement>
     );
   }
 }

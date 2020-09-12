@@ -74,6 +74,11 @@ const SwitchButtonsWrapper = styled.div`
   }
 `;
 
+const SingleTradeWrapper = styled.div`
+  overflow: scroll;
+  width: 100%;
+`;
+
 const WDTradeListWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -488,4 +493,5 @@ export {
   CollapseWrapper,
   PaginationWrapper,
   ActivityWrapper,
+  SingleTradeWrapper,
 };
