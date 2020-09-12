@@ -1,6 +1,7 @@
 import { all, takeEvery, put, fork, call } from "redux-saga/effects";
 import { push } from "react-router-redux";
 import notifications from "../../../../components/feedback/notification";
+import enumActions from "../../EnumsAndConstants/_redux/actions";
 import { getToken, clearToken } from "../../../../helpers/utility";
 import actions from "./actions";
 import axios from "axios";
@@ -37,15 +38,17 @@ export function* loginSuccess() {
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
     // console.log("asdsssss");
 
-    yield put({
-      type: "FETCH_NOTIFICATIONS_START",
-      payload: { pagination: { pageSize: 45, pageNumber: 1 } },
-      initial: true,
-    });
     yield localStorage.setItem("token", payload.token);
     yield localStorage.setItem("user", JSON.stringify(payload.user));
     yield (axios.defaults.headers.common = {
       Authorization: `Bearer ${payload.token}`,
+    });
+
+    yield put(enumActions.fetchEnums());
+    yield put({
+      type: "FETCH_NOTIFICATIONS_START",
+      payload: { pagination: { pageSize: 45, pageNumber: 1 } },
+      initial: true,
     });
     if (payload.loginRequest) {
       yield put(push(`/dashboard/profile/${payload.user.userName}`));
