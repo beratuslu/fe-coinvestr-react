@@ -20,6 +20,7 @@ export function* loginRequest() {
         type: actions.LOGIN_SUCCESS,
         token: loginResult.data.token,
         user: loginResult.data.user,
+        loginRequest: true,
       });
     } catch (error) {
       yield put({
@@ -35,11 +36,20 @@ export function* loginRequest() {
 export function* loginSuccess() {
   yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
     // console.log("asdsssss");
+
+    yield put({
+      type: "FETCH_NOTIFICATIONS_START",
+      payload: { pagination: { pageSize: 45, pageNumber: 1 } },
+      initial: true,
+    });
     yield localStorage.setItem("token", payload.token);
     yield localStorage.setItem("user", JSON.stringify(payload.user));
     yield (axios.defaults.headers.common = {
       Authorization: `Bearer ${payload.token}`,
     });
+    if (payload.loginRequest) {
+      yield put(push(`/dashboard/profile/${payload.user.userName}`));
+    }
     // yield put(
     //   push(
     //     "/dashboard/profile/asdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsssasdsss"
@@ -72,11 +82,6 @@ export function* checkAuthorization() {
         type: actions.LOGIN_SUCCESS,
         token,
         user,
-      });
-      yield put({
-        type: "FETCH_NOTIFICATIONS_START",
-        payload: { pagination: { pageSize: 45, pageNumber: 1 } },
-        initial: true,
       });
     }
   });

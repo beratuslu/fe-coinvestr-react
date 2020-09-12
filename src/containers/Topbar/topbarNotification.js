@@ -102,6 +102,7 @@ class TopbarNotification extends Component {
     const { notifications, isActivated } = this.props.notifications;
     const unReadNotifs = _.filter(notifications, { isRead: false });
 
+    console.log("TopbarNotification -> render -> notifEnums", notifEnums);
     if (!notifEnums) {
       return null;
     }
