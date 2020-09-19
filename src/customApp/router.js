@@ -19,12 +19,12 @@ const routes = [
     component: asyncComponent(() => import("./containers/Profile/Profile")),
     exact: true,
   },
-  {
-    path: "profile/:userName/edit-copy",
-    component: asyncComponent(() =>
-      import("../containers/Profile/CopyCreateOrUpdate/CopyCreateOrUpdate")
-    ),
-    exact: false,
-  },
+  // {
+  //   path: "profile/:userName/edit-copy",
+  //   component: asyncComponent(() =>
+  //     import("./containers/Profile/CopyCreateOrUpdate/CopyCreateOrUpdate")
+  //   ),
+  //   exact: false,
+  // },
 ];
 export default routes;

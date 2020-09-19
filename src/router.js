@@ -85,5 +85,5 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
 };
 
 export default connect((state) => ({
-  isLoggedIn: state.Auth.idToken !== null,
+  isLoggedIn: state.auth.token !== null,
 }))(PublicRoutes);

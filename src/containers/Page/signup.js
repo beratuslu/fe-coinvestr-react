@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Input from '../../components/uielements/input';
-import Checkbox from '../../components/uielements/checkbox';
-import Button from '../../components/uielements/button';
-import authAction from '../../redux/auth/actions';
-import appActions from '../../redux/app/actions';
-import Auth0 from '../../helpers/auth0/index';
-import Firebase from '../../helpers/firebase';
-import FirebaseLogin from '../../components/firebase';
-import IntlMessages from '../../components/utility/intlMessages';
-import SignUpStyleWrapper from './signup.style';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Input from "../../components/uielements/input";
+import Checkbox from "../../components/uielements/checkbox";
+import Button from "../../components/uielements/button";
+import authActions from "../../customApp/containers/Auth/_redux/actions";
+import appActions from "../../redux/app/actions";
+import Auth0 from "../../helpers/auth0/index";
+import Firebase from "../../helpers/firebase";
+import FirebaseLogin from "../../components/firebase";
+import IntlMessages from "../../components/utility/intlMessages";
+import SignUpStyleWrapper from "./signup.style";
 
-const { login } = authAction;
+const { login } = authActions;
 const { clearMenu } = appActions;
 
 class SignUp extends Component {
@@ -29,14 +29,14 @@ class SignUp extends Component {
   }
   handleLogin = (token = false) => {
     const { login, clearMenu } = this.props;
-    console.log(token, 'handlelogin');
+    console.log(token, "handlelogin");
     if (token) {
       login(token);
     } else {
       login();
     }
     clearMenu();
-    this.props.history.push('/dashboard');
+    this.props.history.push("/dashboard");
   };
   render() {
     const { history } = this.props;
@@ -76,7 +76,7 @@ class SignUp extends Component {
                 />
               </div>
 
-              <div className="isoInputWrapper" style={{ marginBottom: '50px' }}>
+              <div className="isoInputWrapper" style={{ marginBottom: "50px" }}>
                 <Checkbox>
                   <IntlMessages id="page.signUpTermsConditions" />
                 </Checkbox>
@@ -136,8 +136,8 @@ class SignUp extends Component {
 }
 
 export default connect(
-  state => ({
-    isLoggedIn: state.Auth.idToken !== null ? true : false,
+  (state) => ({
+    isLoggedIn: state.auth.token !== null ? true : false,
   }),
   { login, clearMenu }
 )(SignUp);

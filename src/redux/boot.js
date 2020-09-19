@@ -1,5 +1,6 @@
 import { store } from "./store";
-import authActions from "./auth/actions";
+// import authActions from "./auth/actions";
+import authActions from "../customApp/containers/Auth/_redux/actions";
 import conf from "../customApp/config";
 import axios from "axios";
 
@@ -19,6 +20,10 @@ export default () =>
         }
         return Promise.reject(error);
       }
+    );
+    console.log(
+      "process.env.REACT_APP_ENV_TEST",
+      process.env.REACT_APP_ENV_TEST
     );
 
     store.dispatch(authActions.checkAuthorization());

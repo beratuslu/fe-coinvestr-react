@@ -1,4 +1,4 @@
-import Auth from "./auth/reducer";
+// import Auth from "./auth/reducer";
 import Socket from "./socket/reducer";
 import App from "./app/reducer";
 import Mails from "./mail/reducer";
@@ -18,13 +18,13 @@ import YoutubeSearch from "./youtubeSearch/reducers";
 import DevReducers from "../customApp/redux/reducers";
 import Articles from "./articles/reducers";
 import Investors from "./investors/reducers";
-import Profile from "../containers/Profile/_redux/reducer";
+// import Profile from "../containers/Profile/_redux/reducer";
 import scrumBoard from "./scrumBoard/reducer";
 import drawer from "./drawer/reducer";
 import modal from "./modal/reducer";
 
 export default {
-  Auth,
+  // Auth,
   Socket,
   App,
   ThemeSwitcher,
@@ -43,9 +43,9 @@ export default {
   YoutubeSearch,
   Articles,
   Investors,
-  Profile,
+  // Profile,
   scrumBoard,
   modal,
   drawer,
-  ...DevReducers
+  ...DevReducers,
 };

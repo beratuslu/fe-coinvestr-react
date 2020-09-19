@@ -43,7 +43,7 @@ function subscribe(state) {
       notifId = state.notifications.notifications[0].id;
     }
 
-    const user = state.Auth.user;
+    const user = state.auth.user;
     const db = firebase.firestore();
     const notificationsConstants =
       state.enumsAndConstants.enumsAndConstants.notifications;

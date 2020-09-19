@@ -5,7 +5,7 @@ import { IntlProvider } from "react-intl";
 import { Debounce } from "react-throttle";
 import WindowResizeListener from "react-window-size-listener";
 import { ThemeProvider } from "styled-components";
-import authAction from "../../redux/auth/actions";
+// import authAction from "../../redux/auth/actions";
 import appActions from "../../redux/app/actions";
 import Sidebar from "../Sidebar/Sidebar";
 import Topbar from "../Topbar/Topbar";
@@ -19,7 +19,7 @@ import AppHolder from "./commonStyle";
 import "./global.css";
 
 const { Content, Footer } = Layout;
-const { logout } = authAction;
+// const { logout } = authAction;
 const { toggleAll } = appActions;
 export class App extends Component {
   render() {
@@ -95,5 +95,5 @@ export default connect(
     selectedTheme: state.ThemeSwitcher.changeThemes.themeName,
     height: state.App.height,
   }),
-  { logout, toggleAll }
+  { toggleAll }
 )(App);

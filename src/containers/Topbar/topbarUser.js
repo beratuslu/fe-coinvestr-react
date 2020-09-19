@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import Popover from "../../components/uielements/popover";
 import IntlMessages from "../../components/utility/intlMessages";
 import userpic from "../../image/user1.png";
-import authAction from "../../redux/auth/actions";
+import authActions from "../../customApp/containers/Auth/_redux/actions";
+import appActions from "../../redux/app/actions";
+
 import TopbarDropdownWrapper from "./topbarDropdown.style";
 
-const { logout } = authAction;
+const { logout } = authActions;
 
 class TopbarUser extends Component {
   constructor(props) {

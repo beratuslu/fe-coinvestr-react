@@ -247,8 +247,8 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
   return {
-    profile: state.Profile,
-    auth: state.Auth,
+    profile: state.profile,
+    auth: state.auth,
   };
 }
 export default connect(mapStateToProps, { ...profileActions })(Profile);

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Input from "../../components/uielements/input";
 import Checkbox from "../../components/uielements/checkbox";
 import Button from "../../components/uielements/button";
-import authActions from "../../redux/auth/actions";
+import authActions from "../../customApp/containers/Auth/_redux/actions";
 import appAction from "../../redux/app/actions";
 import Firebase from "../../helpers/firebase";
 import FirebaseLogin from "../../components/firebase";
@@ -198,7 +198,7 @@ class SignIn extends Component {
 
 export default connect(
   (state) => ({
-    isLoggedIn: state.Auth.token !== null ? true : false,
+    isLoggedIn: state.auth.token !== null ? true : false,
   }),
   { login, clearMenu }
 )(Form.create()(SignIn));
