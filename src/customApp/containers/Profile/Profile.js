@@ -40,6 +40,7 @@ class Profile extends Component {
 
     this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
     this.onTradesPageChange = this.onTradesPageChange.bind(this);
+    this.avatarClick = this.avatarClick.bind(this);
 
     this.state = {
       active: "post",
@@ -131,6 +132,9 @@ class Profile extends Component {
       this.makeTradesRequest();
     });
   }
+  avatarClick() {
+    console.log("avatarClick");
+  }
 
   render() {
     const { isSelfProfile, isFollowed } = this.props.profile;
@@ -143,7 +147,8 @@ class Profile extends Component {
             <Banner
               className="profile-banner"
               style={{
-                backgroundImage: `url(${this.props.profile.data.profile_bg})`,
+                // backgroundImage: `url(${this.props.profile.data.profile_bg})`,
+                backgroundImage: `url(https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/b6ws30scxsdhvgcoltv9.jpg)`,
               }}
             >
               <Container className="container">
@@ -151,6 +156,7 @@ class Profile extends Component {
                   avatar={this.props.profile.data.avatar}
                   name={this.props.profile.data.name}
                   username={this.props.profile.data.username}
+                  handleClick={this.avatarClick}
                 />
               </Container>
             </Banner>

@@ -105,9 +105,10 @@ export const Banner = styled.div`
     z-index: 1;
     .avatar-card {
       position: absolute;
-      bottom: -42px;
+      bottom: -7px;
+      height: 100px;
       left: 30px;
-      pointer-events: none;
+      /* pointer-events: none; */
       width: calc(100% - 60px);
       @media only screen and (max-width: 820px) {
         bottom: -35px;
