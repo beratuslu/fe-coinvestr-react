@@ -41,7 +41,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -49,9 +49,9 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/men/64.jpg",
           username: "@jon_doe",
           comment: "Hey. This is so dope",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 2,
@@ -60,7 +60,7 @@ const profileData = {
       gallery: [
         "https://isomorphic.redq.io/static/media/1.f812b733.png",
         "https://isomorphic.redq.io/static/media/1.f812b733.png",
-        "https://isomorphic.redq.io/static/media/1.f812b733.png"
+        "https://isomorphic.redq.io/static/media/1.f812b733.png",
       ],
       numberOflike: "34",
       numberOfcomment: "2",
@@ -72,7 +72,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -80,7 +80,7 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/men/64.jpg",
           username: "@jon_doe",
           comment: "💪 😊 👍 🏆",
-          time: "133w"
+          time: "133w",
         },
         {
           id: 3,
@@ -88,9 +88,9 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/women/68.jpg",
           username: "@jenny_doe",
           comment: "wow!! 👌👌😍😍",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 3,
@@ -108,7 +108,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -117,9 +117,9 @@ const profileData = {
           username: "@jon_doe",
           comment:
             "How delightful, total eye candy🌸😻😻 Are you interested in being featured next in our gallery? Write to me for more info!!",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 4,
@@ -135,7 +135,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -143,9 +143,9 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/men/64.jpg",
           username: "@jon_doe",
           comment: "Hey. This is so dope",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 5,
@@ -161,7 +161,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -169,7 +169,7 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/men/64.jpg",
           username: "@jon_doe",
           comment: "💪 😊 👍 🏆",
-          time: "133w"
+          time: "133w",
         },
         {
           id: 3,
@@ -177,9 +177,9 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/women/68.jpg",
           username: "@jenny_doe",
           comment: "wow!! 👌👌😍😍",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 6,
@@ -195,7 +195,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -204,9 +204,9 @@ const profileData = {
           username: "@jon_doe",
           comment:
             "How delightful, total eye candy🌸😻😻 Are you interested in being featured next in our gallery? Write to me for more info!!",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 7,
@@ -215,7 +215,7 @@ const profileData = {
       gallery: [
         "https://isomorphic.redq.io/static/media/1.f812b733.png",
         "https://isomorphic.redq.io/static/media/1.f812b733.png",
-        "https://isomorphic.redq.io/static/media/1.f812b733.png"
+        "https://isomorphic.redq.io/static/media/1.f812b733.png",
       ],
       numberOflike: "34",
       numberOfcomment: "2",
@@ -227,7 +227,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -235,7 +235,7 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/men/64.jpg",
           username: "@jon_doe",
           comment: "💪 😊 👍 🏆",
-          time: "133w"
+          time: "133w",
         },
         {
           id: 3,
@@ -243,9 +243,9 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/women/68.jpg",
           username: "@jenny_doe",
           comment: "wow!! 👌👌😍😍",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 8,
@@ -263,7 +263,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -272,9 +272,9 @@ const profileData = {
           username: "@jon_doe",
           comment:
             "How delightful, total eye candy🌸😻😻 Are you interested in being featured next in our gallery? Write to me for more info!!",
-          time: "133w"
-        }
-      ]
+          time: "133w",
+        },
+      ],
     },
     {
       id: 9,
@@ -290,7 +290,7 @@ const profileData = {
           username: "@samwell_martina",
           comment:
             'Hi 👋🏻😊<br /> These are my personal favorites of my last year\'s render challenge. And maybe that\'s also a reason to try this new instagram feature... 😜<br /> <a class="" href="#">#lekoarts</a> <a class="" href="#">#arsaurea</a> <a class="" href="#">#photoshop</a> <a class="" href="#">#cinema4d</a> <a class="" href="#">#c4d</a> <a class="" href="#">#graphicdesign</a> <a class="" href="#">#artwork</a> <a class="" href="#">#digitalart</a> <a class="" href="#">#artoftheday</a> <a class="" href="#">#abstract</a>',
-          time: "133w"
+          time: "133w",
         },
         {
           id: 2,
@@ -298,136 +298,136 @@ const profileData = {
           avatar: "https://randomuser.me/api/portraits/men/64.jpg",
           username: "@jon_doe",
           comment: "Hey. This is so dope",
-          time: "133w"
-        }
-      ]
-    }
+          time: "133w",
+        },
+      ],
+    },
   ],
   followers: [
     {
       id: 1,
       avatar:
         "https://pbs.twimg.com/profile_images/974603248119222272/N5PLzyan.jpg",
-      name: "Nykyta Korotkevych"
+      name: "Nykyta Korotkevych",
     },
     {
       id: 2,
       avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-      name: "Christine Maldonado"
+      name: "Christine Maldonado",
     },
     {
       id: 3,
       avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-      name: "Konsta Peura"
+      name: "Konsta Peura",
     },
     {
       id: 4,
       avatar: "https://randomuser.me/api/portraits/women/63.jpg",
-      name: "Britney Cooper"
+      name: "Britney Cooper",
     },
     {
       id: 5,
       avatar: "https://randomuser.me/api/portraits/men/81.jpg",
-      name: "Eduardo Hernandez"
+      name: "Eduardo Hernandez",
     },
     {
       id: 6,
       avatar:
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjEzMjA0ODk1OF5BMl5BanBnXkFtZTcwMTA4ODM3OQ@@._V1_UY256_CR5,0,172,256_AL_.jpg",
-      name: " Elizabeth Olsen"
+      name: " Elizabeth Olsen",
     },
     {
       id: 7,
       avatar: "https://randomuser.me/api/portraits/men/81.jpg",
-      name: "Hrvoje Šimić"
+      name: "Hrvoje Šimić",
     },
     {
       id: 8,
       avatar:
         "https://images.pexels.com/photos/247885/pexels-photo-247885.jpeg?h=350&auto=compress&cs=tinysrgb",
-      name: "Monroe Bond"
-    }
+      name: "Monroe Bond",
+    },
   ],
   following: [
     {
       id: 1,
       avatar: "https://randomuser.me/api/portraits/men/81.jpg",
-      name: "Eduardo Hernandez"
+      name: "Eduardo Hernandez",
     },
     {
       id: 2,
       avatar:
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjEzMjA0ODk1OF5BMl5BanBnXkFtZTcwMTA4ODM3OQ@@._V1_UY256_CR5,0,172,256_AL_.jpg",
-      name: " Elizabeth Olsen"
+      name: " Elizabeth Olsen",
     },
     {
       id: 3,
       avatar:
         "https://pbs.twimg.com/profile_images/1079706442763067392/wuaeGZnN.jpg",
-      name: "Hrvoje Šimić"
+      name: "Hrvoje Šimić",
     },
     {
       id: 4,
       avatar:
         "https://images.pexels.com/photos/247885/pexels-photo-247885.jpeg?h=350&auto=compress&cs=tinysrgb",
-      name: "Monroe Bond"
+      name: "Monroe Bond",
     },
     {
       id: 5,
       avatar:
         "https://pbs.twimg.com/profile_images/974603248119222272/N5PLzyan.jpg",
-      name: "Nykyta Korotkevych"
+      name: "Nykyta Korotkevych",
     },
     {
       id: 6,
       avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-      name: "Christine Maldonado"
+      name: "Christine Maldonado",
     },
     {
       id: 7,
       avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-      name: "Konsta Peura"
+      name: "Konsta Peura",
     },
     {
       id: 8,
       avatar: "https://randomuser.me/api/portraits/women/63.jpg",
-      name: "Britney Cooper"
+      name: "Britney Cooper",
     },
     {
       id: 9,
       avatar:
         "https://images-na.ssl-images-amazon.com/images/M/MV5BMjEzMjA0ODk1OF5BMl5BanBnXkFtZTcwMTA4ODM3OQ@@._V1_UY256_CR5,0,172,256_AL_.jpg",
-      name: " Elizabeth Olsen"
+      name: " Elizabeth Olsen",
     },
     {
       id: 10,
       avatar:
         "https://pbs.twimg.com/profile_images/1079706442763067392/wuaeGZnN.jpg",
-      name: "Hrvoje Šimić"
+      name: "Hrvoje Šimić",
     },
     {
       id: 11,
       avatar:
         "https://images.pexels.com/photos/247885/pexels-photo-247885.jpeg?h=350&auto=compress&cs=tinysrgb",
-      name: "Monroe Bond"
+      name: "Monroe Bond",
     },
     {
       id: 12,
       avatar:
         "https://pbs.twimg.com/profile_images/974603248119222272/N5PLzyan.jpg",
-      name: "Nykyta Korotkevych"
+      name: "Nykyta Korotkevych",
     },
     {
       id: 13,
       avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-      name: "Christine Maldonado"
+      name: "Christine Maldonado",
     },
     {
       id: 14,
       avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-      name: "Konsta Peura"
-    }
-  ]
+      name: "Konsta Peura",
+    },
+  ],
 };
 
 export default profileData;

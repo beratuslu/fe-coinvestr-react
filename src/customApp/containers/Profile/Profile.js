@@ -25,9 +25,18 @@ import {
   Navigation,
   FollowDropDownMenuStyles,
 } from "./Profile.styles";
-import actions from "../../../redux/profile/actions";
 import profileActions from "./_redux/actions";
 import axios from "axios";
+const BASE_URL = process.env.REACT_APP_API_URL;
+
+const cloudinaryOptions = {
+  cloudName: process.env.REACT_APP_CLOUDINARY_NAME,
+  uploadPreset: "photoUpload",
+  cropping: true,
+  showCompletedButton: true,
+  croppingAspectRatio: 4,
+  showPoweredBy: false,
+};
 
 class Profile extends Component {
   constructor(props) {
@@ -53,26 +62,47 @@ class Profile extends Component {
     };
   }
 
-  addTrade() {
-    console.log("add trade");
-  }
-  follow() {
-    console.log("follow");
-  }
+  addTrade() {}
+  follow() {}
 
   componentDidMount() {
     const { userName } = this.props.auth.user;
+    const { fetchProfileDataStart } = this.props;
+
     const userNameFromRoute = this.props.match.params.userName;
 
     const visitingOwnProfile = userName === userNameFromRoute;
     this.props.setProfileOwner(visitingOwnProfile);
 
     this.makeTradesRequest();
+
+    fetchProfileDataStart(userNameFromRoute);
+  }
+  openUploadWidget(type) {
+    cloudinaryOptions.uploadPreset = type;
+
+    if (type === "profilePhoto") {
+      cloudinaryOptions.croppingAspectRatio = 1;
+    }
+    if (type === "coverPhoto") {
+      cloudinaryOptions.croppingAspectRatio = 4;
+    }
+    window.cloudinary.openUploadWidget(cloudinaryOptions, (error, photos) => {
+      console.log("Profile -> openUploadWidget -> photos", photos);
+      const { event, info } = photos;
+      if (event === "success") {
+        try {
+          axios.post(`${BASE_URL}/api/v1/profile/update-profile-photo`, {
+            publicId: info.public_id,
+          });
+        } catch (error) {
+          console.log("Profile -> openUploadWidget -> error", error);
+        }
+      }
+    });
   }
 
-  handleMenuClick(e) {
-    console.log("Profile -> handleMenuClick -> e", e);
-  }
+  handleMenuClick(e) {}
   renderMenu() {
     return (
       <DropdownMenu
@@ -116,7 +146,6 @@ class Profile extends Component {
     // this.props.fetchUserTradesStart(obj);
 
     const trades = await axios.post(`/api/v1/profile/user-trades`, obj);
-    console.log("Profile -> makeTradesRequest -> response", trades);
     this.setState({ trades });
   }
   onRecordTypeChange(event) {
@@ -132,13 +161,16 @@ class Profile extends Component {
       this.makeTradesRequest();
     });
   }
-  avatarClick() {
-    console.log("avatarClick");
-  }
+  avatarClick() {}
 
   render() {
-    const { isSelfProfile, isFollowed } = this.props.profile;
+    const { isSelfProfile, isFollowed, data } = this.props.profile;
+    console.log("render -> data", data);
     const { trades } = this.state;
+    const profilePhotoUri = data
+      ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_150,h_150,c_crop,g_custom/${data.profilePhoto ||
+          ""}.jpg`
+      : "";
 
     return (
       <Wrapper>
@@ -148,15 +180,18 @@ class Profile extends Component {
               className="profile-banner"
               style={{
                 // backgroundImage: `url(${this.props.profile.data.profile_bg})`,
-                backgroundImage: `url(https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/b6ws30scxsdhvgcoltv9.jpg)`,
+                // 7bd73e3e0916e472617fcec31b11786e
+                // b6ws30scxsdhvgcoltv9
+                backgroundImage: `url(https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/pma6uiuevdf5fisyspln.jpg)`,
               }}
             >
               <Container className="container">
                 <AvatarCard
-                  avatar={this.props.profile.data.avatar}
+                  avatar={profilePhotoUri}
                   name={this.props.profile.data.name}
                   username={this.props.profile.data.username}
-                  handleClick={this.avatarClick}
+                  openUploadWidget={this.openUploadWidget}
+                  isSelfProfile={isSelfProfile}
                 />
               </Container>
             </Banner>
@@ -186,12 +221,33 @@ class Profile extends Component {
                       onClick={() => this.handleMenu("following")}
                     >
                       <strong>
-                        {this.props.profile.data.following.length}
+                        {this.props.profile.data.followings.length}
                       </strong>{" "}
                       Following
                     </li>
                   </ul>
-                  <ul className="buttons">
+                  <ul
+                    className="buttons"
+                    style={{ position: "relative", overflow: "visible" }}
+                  >
+                    {isSelfProfile && (
+                      <li>
+                        <i
+                          onClick={() => {}}
+                          className="ion-camera"
+                          style={{
+                            fontSize: "24px",
+                            color: "#323332",
+                            lineHeight: 1,
+                            position: "absolute",
+                            top: "-30px",
+                            right: "0px",
+                            cursor: "pointer",
+                            zIndex: 3,
+                          }}
+                        />
+                      </li>
+                    )}
                     <li>
                       {isSelfProfile ? (
                         <Button type="primary" onClick={this.addTrade}>

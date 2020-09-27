@@ -27,8 +27,9 @@ const profileActions = {
   FETCH_PROFILE_DATA_FAILURE: "FETCH_PROFILE_DATA_FAILURE",
   SET_PROFILE_DATA: "SET_PROFILE_DATA",
 
-  fetchProfileDataStart: () => ({
+  fetchProfileDataStart: (userName) => ({
     type: profileActions.FETCH_PROFILE_DATA_START,
+    userName,
   }),
   fetchProfileDataSuccess: (profile) => ({
     type: profileActions.FETCH_PROFILE_DATA_SUCCESS,

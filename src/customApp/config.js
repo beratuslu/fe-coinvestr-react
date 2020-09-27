@@ -1,4 +1,5 @@
 export default {
-  baseURL: "http://localhost:5001",
+  baseURL: process.env.REACT_APP_API_URL,
+
   // baseURL: "http://staging.api.coinvestr.com",
 };
