@@ -22,8 +22,8 @@ export default () =>
       }
     );
     console.log(
-      "process.env.REACT_APP_ENV_TEST",
-      process.env.REACT_APP_ENV_TEST
+      "process.env.REACT_APP_FIREBASE_PROJECT_ID",
+      process.env.REACT_APP_FIREBASE_PROJECT_ID
     );
 
     store.dispatch(authActions.checkAuthorization());
