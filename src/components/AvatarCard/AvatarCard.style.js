@@ -3,6 +3,25 @@ import styled from "styled-components";
 const CardWrapper = styled.div`
   display: flex;
   align-items: center;
+
+  .ion-camera {
+    font-size: 24px;
+    color: #323332;
+    line-height: 1;
+    position: absolute;
+    bottom: -20px;
+    left: 136px;
+    cursor: pointer;
+    z-index: 1;
+    @media only screen and (max-width: 820px) {
+      bottom: -0px;
+      left: 118px;
+    }
+    @media only screen and (max-width: 480px) {
+      bottom: 10px;
+      left: 80px;
+    }
+  }
 `;
 
 export const Avatar = styled.div`

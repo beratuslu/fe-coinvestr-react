@@ -17,16 +17,6 @@ const AvatarCard = ({
             openUploadWidget("profilePhoto");
           }}
           className="ion-camera"
-          style={{
-            fontSize: "24px",
-            color: "#323332",
-            lineHeight: 1,
-            position: "absolute",
-            bottom: "-20px",
-            left: "136px",
-            cursor: "pointer",
-            zIndex: 1,
-          }}
         />
       )}
       {avatar && (

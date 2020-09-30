@@ -81,19 +81,18 @@ class Profile extends Component {
     fetchProfileDataStart(userNameFromRoute);
   }
   openUploadWidget(type) {
-    const { updateProfilePhotoSuccess } = this.props;
+    const { updateProfilePhotoSuccess, updateCoverPhotoSuccess } = this.props;
     cloudinaryOptions.uploadPreset = type;
 
     if (type === "profilePhoto") {
       cloudinaryOptions.croppingAspectRatio = 1;
     }
     if (type === "coverPhoto") {
-      cloudinaryOptions.croppingAspectRatio = 4;
+      cloudinaryOptions.croppingAspectRatio = 5;
     }
     window.cloudinary.openUploadWidget(
       cloudinaryOptions,
       async (error, photos) => {
-        console.log("Profile -> openUploadWidget -> photos", photos);
         const { event, info } = photos;
         if (event === "success") {
           try {
@@ -101,10 +100,15 @@ class Profile extends Component {
               `${BASE_URL}/api/v1/profile/update-profile-photo`,
               {
                 publicId: info.public_id,
+                type,
               }
             );
-            console.log("Profile -> openUploadWidget -> response", response);
-            updateProfilePhotoSuccess(response.user);
+            if (type === "coverPhoto") {
+              updateCoverPhotoSuccess(response.user);
+            }
+            if (type === "profilePhoto") {
+              updateProfilePhotoSuccess(response.user);
+            }
           } catch (error) {
             console.log("Profile -> openUploadWidget -> error", error);
           }
@@ -190,10 +194,7 @@ class Profile extends Component {
             <Banner
               className="profile-banner"
               style={{
-                // backgroundImage: `url(${this.props.profile.data.profile_bg})`,
-                // 7bd73e3e0916e472617fcec31b11786e
-                // b6ws30scxsdhvgcoltv9
-                backgroundImage: `url(https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/pma6uiuevdf5fisyspln.jpg)`,
+                backgroundImage: `url(https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/${data.coverPhoto}.jpg)`,
               }}
             >
               <Container className="container">
@@ -201,7 +202,9 @@ class Profile extends Component {
                   avatar={profilePhotoUri}
                   name={this.props.profile.data.name}
                   username={this.props.profile.data.username}
-                  openUploadWidget={this.openUploadWidget}
+                  openUploadWidget={() => {
+                    this.openUploadWidget("profilePhoto");
+                  }}
                   isSelfProfile={isSelfProfile}
                 />
               </Container>
@@ -244,7 +247,9 @@ class Profile extends Component {
                     {isSelfProfile && (
                       <li>
                         <i
-                          onClick={() => {}}
+                          onClick={() => {
+                            this.openUploadWidget("coverPhoto");
+                          }}
                           className="ion-camera"
                           style={{
                             fontSize: "24px",

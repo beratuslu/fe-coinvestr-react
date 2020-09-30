@@ -8,6 +8,11 @@ const INITIAL_DATA = {
 };
 export default function profileReducer(state = INITIAL_DATA, action) {
   switch (action.type) {
+    case actions.UPDATE_COVER_PHOTO_SUCCESS:
+      return {
+        ...state,
+        data: { ...state.data, coverPhoto: action.payload.coverPhoto },
+      };
     case actions.UPDATE_PROFILE_PHOTO_SUCCESS:
       return {
         ...state,

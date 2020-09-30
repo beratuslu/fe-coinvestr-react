@@ -1,4 +1,9 @@
 const actions = {
+  UPDATE_COVER_PHOTO_SUCCESS: "UPDATE_COVER_PHOTO_SUCCESS",
+  updateCoverPhotoSuccess: (payload) => ({
+    type: actions.UPDATE_COVER_PHOTO_SUCCESS,
+    payload,
+  }),
   UPDATE_PROFILE_PHOTO_SUCCESS: "UPDATE_PROFILE_PHOTO_SUCCESS",
   updateProfilePhotoSuccess: (payload) => ({
     type: actions.UPDATE_PROFILE_PHOTO_SUCCESS,
