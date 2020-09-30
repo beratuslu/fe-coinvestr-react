@@ -168,7 +168,7 @@ class Profile extends Component {
     console.log("render -> data", data);
     const { trades } = this.state;
     const profilePhotoUri = data
-      ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_150,h_150,c_crop,g_custom/${data.profilePhoto ||
+      ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${data.profilePhoto ||
           ""}.jpg`
       : "";
 

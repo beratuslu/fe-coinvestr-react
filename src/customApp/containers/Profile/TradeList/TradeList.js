@@ -18,7 +18,7 @@ import Box from "../../../../components/utility/box";
 import LayoutWrapper from "../../../../components/utility/layoutWrapper";
 import { filterProjects } from "../../../../helpers/filterProjects";
 // import CollapseWrapper from "./collapse.style";
-import actions from "../../../../redux/profile/actions";
+// import actions from "../../../../redux/profile/actions";
 import {
   TradeListWrapper,
   Table,
@@ -201,8 +201,8 @@ export default connect(
   (state) => ({
     profile: state.Profile,
     auth: state.Auth,
-  }),
-  { ...actions }
+  })
+  // { ...actions }
 )(TradeList);
 
 // state => ({

@@ -11,27 +11,27 @@ const AvatarCard = ({
 }) => {
   return (
     <CardWrapper className={`avatar-card ${className ? className : ""}`}>
+      {isSelfProfile && (
+        <i
+          onClick={() => {
+            openUploadWidget("profilePhoto");
+          }}
+          className="ion-camera"
+          style={{
+            fontSize: "24px",
+            color: "#323332",
+            lineHeight: 1,
+            position: "absolute",
+            bottom: "-20px",
+            left: "136px",
+            cursor: "pointer",
+            zIndex: 1,
+          }}
+        />
+      )}
       {avatar && (
         <Avatar className="avatar isoIconWrapper">
           <img src={avatar} alt={name} />
-
-          {isSelfProfile && (
-            <i
-              onClick={() => {
-                openUploadWidget("profilePhoto");
-              }}
-              className="ion-camera"
-              style={{
-                fontSize: "24px",
-                color: "#323332",
-                lineHeight: 1,
-                position: "absolute",
-                bottom: "15px",
-                right: "8px",
-                cursor: "pointer",
-              }}
-            />
-          )}
         </Avatar>
       )}
       {name || username ? (

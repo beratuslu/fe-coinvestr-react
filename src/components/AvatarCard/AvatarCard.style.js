@@ -9,7 +9,7 @@ export const Avatar = styled.div`
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  /* overflow: hidden; */
+  overflow: hidden;
   flex-shrink: 0;
   border: 4px solid #ffffff;
   position: relative;
