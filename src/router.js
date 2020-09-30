@@ -9,8 +9,9 @@ import Auth0 from "./helpers/auth0";
 const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
     {...rest}
-    render={(props) =>
-      isLoggedIn ? (
+    render={(props) => {
+      console.log("isLoggedIn", isLoggedIn);
+      return isLoggedIn ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -20,11 +21,12 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
           }}
         />
         // (window.location.href = "/pages/authentication/login-basic")
-      )
-    }
+      );
+    }}
   />
 );
-const PublicRoutes = ({ history, isLoggedIn }) => {
+const PublicRoutes = ({ history, isLoggedIn, authState }) => {
+  console.log("PublicRoutes -> authState", authState);
   return (
     <ConnectedRouter history={history}>
       <div>

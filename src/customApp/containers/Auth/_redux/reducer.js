@@ -1,6 +1,6 @@
 import actions from "./actions";
 
-const initState = { idToken: null };
+const initState = { token: null };
 
 export default function authReducer(state = initState, action) {
   switch (action.type) {
