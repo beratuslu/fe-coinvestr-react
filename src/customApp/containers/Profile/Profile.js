@@ -26,6 +26,7 @@ import {
   FollowDropDownMenuStyles,
 } from "./Profile.styles";
 import profileActions from "./_redux/actions";
+import authActions from "../Auth/_redux/actions";
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -50,6 +51,7 @@ class Profile extends Component {
     this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
     this.onTradesPageChange = this.onTradesPageChange.bind(this);
     this.avatarClick = this.avatarClick.bind(this);
+    this.openUploadWidget = this.openUploadWidget.bind(this);
 
     this.state = {
       active: "post",
@@ -79,6 +81,7 @@ class Profile extends Component {
     fetchProfileDataStart(userNameFromRoute);
   }
   openUploadWidget(type) {
+    const { updateProfilePhotoSuccess } = this.props;
     cloudinaryOptions.uploadPreset = type;
 
     if (type === "profilePhoto") {
@@ -87,19 +90,27 @@ class Profile extends Component {
     if (type === "coverPhoto") {
       cloudinaryOptions.croppingAspectRatio = 4;
     }
-    window.cloudinary.openUploadWidget(cloudinaryOptions, (error, photos) => {
-      console.log("Profile -> openUploadWidget -> photos", photos);
-      const { event, info } = photos;
-      if (event === "success") {
-        try {
-          axios.post(`${BASE_URL}/api/v1/profile/update-profile-photo`, {
-            publicId: info.public_id,
-          });
-        } catch (error) {
-          console.log("Profile -> openUploadWidget -> error", error);
+    window.cloudinary.openUploadWidget(
+      cloudinaryOptions,
+      async (error, photos) => {
+        console.log("Profile -> openUploadWidget -> photos", photos);
+        const { event, info } = photos;
+        if (event === "success") {
+          try {
+            const response = await axios.post(
+              `${BASE_URL}/api/v1/profile/update-profile-photo`,
+              {
+                publicId: info.public_id,
+              }
+            );
+            console.log("Profile -> openUploadWidget -> response", response);
+            updateProfilePhotoSuccess(response.user);
+          } catch (error) {
+            console.log("Profile -> openUploadWidget -> error", error);
+          }
         }
       }
-    });
+    );
   }
 
   handleMenuClick(e) {}
@@ -313,4 +324,6 @@ function mapStateToProps(state) {
     auth: state.auth,
   };
 }
-export default connect(mapStateToProps, { ...profileActions })(Profile);
+export default connect(mapStateToProps, { ...profileActions, ...authActions })(
+  Profile
+);

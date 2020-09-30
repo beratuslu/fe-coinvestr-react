@@ -5,17 +5,17 @@ const actions = {
   LOGIN_ERROR: "LOGIN_ERROR",
   LOGOUT: "LOGOUT",
   checkAuthorization: () => ({ type: actions.CHECK_AUTHORIZATION }),
-  login: payload => ({
+  login: (payload) => ({
     type: actions.LOGIN_REQUEST,
-    payload
+    payload,
   }),
-  startSocket: token => ({
+  startSocket: (token) => ({
     type: "START_CHANNEL",
-    token
+    token,
   }),
 
   logout: () => ({
-    type: actions.LOGOUT
-  })
+    type: actions.LOGOUT,
+  }),
 };
 export default actions;
