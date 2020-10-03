@@ -27,6 +27,11 @@ class TopbarUser extends Component {
   }
 
   render() {
+    const { profilePhoto } = this.props.auth.user;
+    const profilePhotoUri = profilePhoto
+      ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom,r_max/${profilePhoto ||
+          ""}.jpg`
+      : "";
     const content = (
       <TopbarDropdownWrapper className="isoUserDropdown">
         <a className="isoDropdownLink" href="# ">
@@ -54,11 +59,18 @@ class TopbarUser extends Component {
         placement="bottomLeft"
       >
         <div className="isoImgWrapper">
-          <img alt="user" src={userpic} />
+          <img alt="user" src={profilePhotoUri} />
           <span className="userActivity online" />
         </div>
       </Popover>
     );
   }
 }
-export default connect(null, { logout })(TopbarUser);
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+
+export default connect(mapStateToProps, { logout })(TopbarUser);
