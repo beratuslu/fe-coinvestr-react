@@ -5,7 +5,8 @@ const AvatarCard = ({
   className,
   avatar,
   name,
-  username,
+  lastName,
+  userName,
   openUploadWidget,
   isSelfProfile,
 }) => {
@@ -24,10 +25,10 @@ const AvatarCard = ({
           <img src={avatar} alt={name} />
         </Avatar>
       )}
-      {name || username ? (
+      {name || userName ? (
         <Info className="info">
-          {name && <h3 className="name">{name}</h3>}
-          {username && <p className="username">{username}</p>}
+          {name && <h3 className="name">{`${name} ${lastName}`}</h3>}
+          {userName && <p className="username">{userName}</p>}
         </Info>
       ) : (
         ""

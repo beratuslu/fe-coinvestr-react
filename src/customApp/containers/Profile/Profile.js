@@ -28,6 +28,8 @@ import {
 import profileActions from "./_redux/actions";
 import authActions from "../Auth/_redux/actions";
 import axios from "axios";
+import profilePlaceHolder from "../../assets/profile-placeholder.jpg";
+
 const BASE_URL = process.env.REACT_APP_API_URL;
 
 const cloudinaryOptions = {
@@ -180,12 +182,16 @@ class Profile extends Component {
 
   render() {
     const { isSelfProfile, isFollowed, data } = this.props.profile;
-    console.log("render -> data", data);
+
     const { trades } = this.state;
-    const profilePhotoUri = data
-      ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${data.profilePhoto ||
-          ""}.jpg`
-      : "";
+    const profilePhotoUri =
+      data && data.profilePhoto
+        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${data.profilePhoto}.jpg`
+        : profilePlaceHolder;
+    const coverPhotoUri =
+      data && data.coverPhoto
+        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/${data.coverPhoto}.jpg`
+        : "";
 
     return (
       <Wrapper>
@@ -194,14 +200,15 @@ class Profile extends Component {
             <Banner
               className="profile-banner"
               style={{
-                backgroundImage: `url(https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/${data.coverPhoto}.jpg)`,
+                backgroundImage: `url(${coverPhotoUri})`,
               }}
             >
               <Container className="container">
                 <AvatarCard
                   avatar={profilePhotoUri}
                   name={this.props.profile.data.name}
-                  username={this.props.profile.data.username}
+                  lastName={this.props.profile.data.lastName}
+                  userName={this.props.profile.data.userName}
                   openUploadWidget={() => {
                     this.openUploadWidget("profilePhoto");
                   }}
