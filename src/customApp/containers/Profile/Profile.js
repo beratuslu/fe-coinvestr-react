@@ -30,6 +30,7 @@ import profileActions from "./_redux/actions";
 import authActions from "../Auth/_redux/actions";
 import axios from "axios";
 import profilePlaceHolder from "../../assets/profile-placeholder.jpg";
+import { symbol } from "d3-shape";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -66,13 +67,9 @@ class Profile extends Component {
       tradesPageNumber: 1,
       trades: {},
       modalVisible: false,
+      symbols: [],
     };
   }
-
-  addTrade() {
-    this.setState({ modalVisible: true });
-  }
-  follow() {}
 
   componentDidMount() {
     const { userName } = this.props.auth.user;
@@ -189,10 +186,35 @@ class Profile extends Component {
     console.log("setModalData -> val2", val2);
   }
 
+  async addTrade() {
+    this.setState({ modalVisible: true });
+
+    const response = await axios.get(`${BASE_URL}/api/v1/market/symbols`);
+    console.log("addTrade -> response", response);
+
+    const symbols = Object.keys(response.data)
+      .map(function(key, index) {
+        // key: the name of the object key
+        // index: the ordinal position of the key within the object
+        return key;
+      })
+      .filter(function(symbol) {
+        var last3 = symbol.substr(symbol.length - 3);
+        if (last3 !== "BTC") {
+          return false;
+        }
+        return true;
+      });
+
+    this.setState({ symbols });
+  }
+  follow() {}
+
   render() {
     const { isSelfProfile, isFollowed, data } = this.props.profile;
 
-    const { trades } = this.state;
+    const { trades, symbols } = this.state;
+    console.log("render -> symbols", symbols);
     const profilePhotoUri =
       data && data.profilePhoto
         ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${data.profilePhoto}.jpg`
@@ -208,6 +230,7 @@ class Profile extends Component {
           modalVisible={this.state.modalVisible}
           selectedData={this.state.selectedData}
           setModalData={this.setModalData}
+          symbols={symbols}
         />
         {this.props.profile.loading !== true ? (
           <>

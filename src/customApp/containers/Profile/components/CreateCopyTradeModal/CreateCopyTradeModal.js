@@ -12,6 +12,7 @@ import { CalendarModalBody } from "./calendar.style";
 // import AvatarCard from "../../../../../components/AvatarCard/AvatarCard";
 
 import DeleteButton from "./deleteButton";
+import { symbol, symbols } from "d3-shape";
 const RangePicker = DateRangepicker;
 
 const localeDatePicker = {
@@ -60,8 +61,19 @@ export default class extends Component {
   handleDelete = () => {
     this.props.setModalData("delete", this.props.selectedData);
   };
+  renderOptions = () => {
+    const { symbols } = this.props;
+    return symbols.map((symbol) => {
+      return (
+        <SelectOption key={symbol} value={symbol}>
+          {symbol}
+        </SelectOption>
+      );
+    });
+  };
   render() {
-    const { modalVisible, selectedData, setModalData } = this.props;
+    const { modalVisible, selectedData, setModalData, symbols } = this.props;
+    console.log("extends -> render -> symbols", symbols);
     if (!modalVisible) {
       return <div />;
     }
@@ -89,6 +101,7 @@ export default class extends Component {
     const handleChange = (value) => {
       console.log("extends -> handleChange -> value", value);
     };
+
     return (
       <div>
         <Modal
@@ -102,47 +115,36 @@ export default class extends Component {
           <CalendarModalBody>
             <div className="isoCalendarInputWrapper">
               <Select
-                defaultValue="lucy"
+                showSearch
+                defaultValue="ETHBTC"
                 style={{ width: "100%" }}
                 onChange={handleChange}
+                loading={!symbols.length}
+                disabled={!symbols.length}
               >
-                <SelectOption value="jack">Jack</SelectOption>
-                <SelectOption value="lucy">Lucy</SelectOption>
-                <SelectOption value="disabled" disabled>
-                  Disabled
-                </SelectOption>
-                <SelectOption value="Yiminghe">yiminghe</SelectOption>
+                {this.renderOptions()}
               </Select>
             </div>
             <div className="isoCalendarInputWrapper">
               <Input
                 value={title}
-                placeholder="Set Title"
+                placeholder="Buy Price"
                 onChange={onChangeTitle}
               />
             </div>
-
             <div className="isoCalendarInputWrapper">
               <Input
-                value={desc}
-                placeholder="Set DEscription"
-                onChange={onChangeDesc}
+                value={title}
+                placeholder="Profit Price"
+                onChange={onChangeTitle}
               />
             </div>
-
-            <div className="isoCalendarDatePicker">
-              <RangePicker
-                locale={localeDatePicker}
-                ranges={{
-                  Today: [moment(), moment()],
-                  "This Month": [moment(), moment().endOf("month")],
-                }}
-                value={[start, end]}
-                showTime
-                format="YYYY/MM/DD HH:mm:ss"
-                onChange={onChangeFromTimePicker}
+            <div className="isoCalendarInputWrapper">
+              <Input
+                value={title}
+                placeholder="Stop Loss Price"
+                onChange={onChangeTitle}
               />
-              <DeleteButton handleDelete={this.handleDelete} />
             </div>
           </CalendarModalBody>
         </Modal>
