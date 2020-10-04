@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../../../ui/Antd/Button/Button";
-import AvatarCard from "../../../../components/AvatarCard/AvatarCard";
+import Button from "../../../../../ui/Antd/Button/Button";
+import AvatarCard from "../../../../../components/AvatarCard/AvatarCard";
 import Wrapper, { FollowerList, ListItem } from "./Followers.styles";
 
 const Followers = ({ data }) => {

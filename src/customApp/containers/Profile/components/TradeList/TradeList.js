@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import isEmpty from "lodash/isEmpty";
-import scrumBoardActions from "../../../../redux/scrumBoard/actions";
-import Collapses from "../../../../components/uielements/collapse";
-import Pagination from "../../../../components/uielements/pagination";
+import scrumBoardActions from "../../../../../redux/scrumBoard/actions";
+import Collapses from "../../../../../components/uielements/collapse";
+import Pagination from "../../../../../components/uielements/pagination";
 import { Icon } from "antd";
 import moment from "moment";
 import Timeline, {
   TimelineItem,
-} from "../../../../components/uielements/timeline";
+} from "../../../../../components/uielements/timeline";
 import {
   RadioButton,
   RadioGroup,
-} from "../../../../components/uielements/radio";
+} from "../../../../../components/uielements/radio";
 
-import Box from "../../../../components/utility/box";
-import LayoutWrapper from "../../../../components/utility/layoutWrapper";
-import { filterProjects } from "../../../../helpers/filterProjects";
+import Box from "../../../../../components/utility/box";
+import LayoutWrapper from "../../../../../components/utility/layoutWrapper";
+import { filterProjects } from "../../../../../helpers/filterProjects";
 // import CollapseWrapper from "./collapse.style";
-// import actions from "../../../../redux/profile/actions";
+// import actions from "../../../../../redux/profile/actions";
 import {
   TradeListWrapper,
   Table,
@@ -30,7 +30,7 @@ import {
 } from "./TradeList.style";
 import TradeCollapseHeader from "./TradeCollapseHeader/TradeCollapseHeader";
 
-// import IntlMessages from "../../../../components/utility/intlMessages";
+// import IntlMessages from "../../../../../components/utility/intlMessages";
 
 const Panel = Collapses.Panel;
 const Collapse = (props) => (

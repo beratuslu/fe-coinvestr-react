@@ -15,10 +15,11 @@ import { Icon } from "antd";
 import Button from "../../../components/uielements/button";
 import { RadioButton, RadioGroup } from "../../../components/uielements/radio";
 
-import Followers from "./Followers/Followers";
-import Following from "./Following/Following";
+import Followers from "./components/Followers/Followers";
+import Following from "./components/Following/Following";
 import basicStyle from "../../../settings/basicStyle";
-import TradeList from "./TradeList/TradeList";
+import TradeList from "./components/TradeList/TradeList";
+import CreateCopyTradeModal from "./components/CreateCopyTradeModal/CreateCopyTradeModal";
 import {
   Wrapper,
   Banner,
@@ -54,6 +55,7 @@ class Profile extends Component {
     this.onTradesPageChange = this.onTradesPageChange.bind(this);
     this.avatarClick = this.avatarClick.bind(this);
     this.openUploadWidget = this.openUploadWidget.bind(this);
+    this.setModalData = this.setModalData.bind(this);
 
     this.state = {
       active: "post",
@@ -63,10 +65,13 @@ class Profile extends Component {
       pageSize: 10,
       tradesPageNumber: 1,
       trades: {},
+      modalVisible: false,
     };
   }
 
-  addTrade() {}
+  addTrade() {
+    this.setState({ modalVisible: true });
+  }
   follow() {}
 
   componentDidMount() {
@@ -179,6 +184,10 @@ class Profile extends Component {
     });
   }
   avatarClick() {}
+  setModalData(val1, val2) {
+    console.log("setModalData -> val1", val1);
+    console.log("setModalData -> val2", val2);
+  }
 
   render() {
     const { isSelfProfile, isFollowed, data } = this.props.profile;
@@ -195,6 +204,11 @@ class Profile extends Component {
 
     return (
       <Wrapper>
+        <CreateCopyTradeModal
+          modalVisible={this.state.modalVisible}
+          selectedData={this.state.selectedData}
+          setModalData={this.setModalData}
+        />
         {this.props.profile.loading !== true ? (
           <>
             <Banner
