@@ -6,6 +6,7 @@ import { Row, Col } from "antd";
 import Modal from "../../../ui/Antd/Modal/Modal";
 import Container from "../../../ui/UI/Container/Container";
 import AvatarCard from "../../../components/AvatarCard/AvatarCard";
+import notifications from "../../../components/feedback/notification";
 import Dropdown, {
   DropdownMenu,
   MenuItem,
@@ -68,6 +69,7 @@ class Profile extends Component {
       trades: {},
       modalVisible: false,
       symbols: [],
+      createTradeLoading: false,
     };
   }
 
@@ -186,6 +188,7 @@ class Profile extends Component {
     console.log("setModalData -> val2", val2);
   }
 
+  follow() {}
   async addTrade() {
     this.setState({ modalVisible: true });
 
@@ -208,12 +211,47 @@ class Profile extends Component {
 
     this.setState({ symbols });
   }
-  follow() {}
+  showModal = () => {
+    this.setState({ modalVisible: true });
+  };
+
+  handleCancel = () => {
+    this.setState({ modalVisible: false });
+  };
+
+  handleCreate = () => {
+    const { form } = this.formRef.props;
+    form.validateFields(async (err, values) => {
+      console.log("handleCreate -> err", err);
+      if (err) {
+        return;
+      }
+      this.setState({ createTradeLoading: true });
+
+      try {
+        const response = await axios.post(`${BASE_URL}/api/v1/trades`, values);
+
+        notifications.success({
+          message: "Trade Created",
+          description: "ssss",
+        });
+        this.setState({ modalVisible: false, createTradeLoading: false });
+      } catch (error) {
+        console.log("Profile -> openUploadWidget -> error", error);
+      }
+
+      console.log("Received values of form: ", values);
+      // form.resetFields();
+    });
+  };
+  saveFormRef = (formRef) => {
+    this.formRef = formRef;
+  };
 
   render() {
     const { isSelfProfile, isFollowed, data } = this.props.profile;
 
-    const { trades, symbols } = this.state;
+    const { trades, symbols, createTradeLoading } = this.state;
     console.log("render -> symbols", symbols);
     const profilePhotoUri =
       data && data.profilePhoto
@@ -228,9 +266,11 @@ class Profile extends Component {
       <Wrapper>
         <CreateCopyTradeModal
           modalVisible={this.state.modalVisible}
-          selectedData={this.state.selectedData}
-          setModalData={this.setModalData}
+          wrappedComponentRef={this.saveFormRef}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
           symbols={symbols}
+          loading={createTradeLoading}
         />
         {this.props.profile.loading !== true ? (
           <>

@@ -11,7 +11,7 @@ import notification from "../../../components/notification";
 import GitResult from "../../components/githubResult";
 import basicStyle from "../../../settings/basicStyle";
 import actions from "../../redux/githubSearch/actions";
-import TradeList from "../Profile/TradeList/TradeList";
+import TradeList from "../Profile/components/TradeList/TradeList";
 import axios from "axios";
 
 const { gitSearch, onPageChange } = actions;

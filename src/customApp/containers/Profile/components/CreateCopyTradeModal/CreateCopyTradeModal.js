@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import moment from "moment";
-import Input from "../../../../../components/uielements/input";
+import InputNumber from "../../../../../components/uielements/InputNumber";
+import Radio from "../../../../../components/uielements/radio";
+import Form from "../../../../../components/uielements/form";
 import Select, {
   SelectOption,
 } from "../../../../../components/uielements/select";
@@ -50,69 +52,162 @@ const localeDatePicker = {
     placeholder: "Select time",
   },
 };
-export default class extends Component {
-  handleOk = () => {
-    this.props.setModalData("ok", this.props.selectedData);
-  };
-  handleCancel = () => {
-    this.props.setModalData("cancel");
-  };
+export default Form.create({ name: "form_in_modal" })(
+  class CreateCopyModalForm extends Component {
+    handleOk = () => {
+      this.props.setModalData("ok", this.props.selectedData);
+    };
+    handleCancel = () => {
+      this.props.setModalData("cancel");
+    };
 
-  handleDelete = () => {
-    this.props.setModalData("delete", this.props.selectedData);
-  };
-  renderOptions = () => {
-    const { symbols } = this.props;
-    return symbols.map((symbol) => {
+    handleDelete = () => {
+      this.props.setModalData("delete", this.props.selectedData);
+    };
+    renderOptions = () => {
+      const { symbols } = this.props;
+      return symbols.map((symbol) => {
+        return (
+          <SelectOption key={symbol} value={symbol}>
+            {symbol}
+          </SelectOption>
+        );
+      });
+    };
+    render() {
+      const {
+        modalVisible,
+        selectedData,
+        setModalData,
+        symbols,
+        loading,
+      } = this.props;
+
+      const { visible, onCancel, onCreate, form } = this.props;
+      const { getFieldDecorator } = form;
+
+      if (!modalVisible) {
+        return <div />;
+      }
+      const title =
+        selectedData && selectedData.title ? selectedData.title : "";
+      const desc = selectedData && selectedData.desc ? selectedData.desc : "";
+      const start =
+        selectedData && selectedData.start ? moment(selectedData.start) : "";
+      const end =
+        selectedData && selectedData.end ? moment(selectedData.end) : "";
+      const onChangeTitle = (event) => {
+        selectedData.title = event.target.value;
+        setModalData("updateValue", selectedData);
+      };
+      const onChangeDesc = (event) => {
+        selectedData.desc = event.target.value;
+        setModalData("updateValue", selectedData);
+      };
+      const onChangeFromTimePicker = (value) => {
+        try {
+          selectedData.start = value[0].toDate();
+          selectedData.end = value[1].toDate();
+        } catch (e) {}
+        setModalData("updateValue", selectedData);
+      };
+      const handleChange = (value) => {
+        console.log("extends -> handleChange -> value", value);
+      };
+
       return (
-        <SelectOption key={symbol} value={symbol}>
-          {symbol}
-        </SelectOption>
-      );
-    });
-  };
-  render() {
-    const { modalVisible, selectedData, setModalData, symbols } = this.props;
-    console.log("extends -> render -> symbols", symbols);
-    if (!modalVisible) {
-      return <div />;
-    }
-    const title = selectedData && selectedData.title ? selectedData.title : "";
-    const desc = selectedData && selectedData.desc ? selectedData.desc : "";
-    const start =
-      selectedData && selectedData.start ? moment(selectedData.start) : "";
-    const end =
-      selectedData && selectedData.end ? moment(selectedData.end) : "";
-    const onChangeTitle = (event) => {
-      selectedData.title = event.target.value;
-      setModalData("updateValue", selectedData);
-    };
-    const onChangeDesc = (event) => {
-      selectedData.desc = event.target.value;
-      setModalData("updateValue", selectedData);
-    };
-    const onChangeFromTimePicker = (value) => {
-      try {
-        selectedData.start = value[0].toDate();
-        selectedData.end = value[1].toDate();
-      } catch (e) {}
-      setModalData("updateValue", selectedData);
-    };
-    const handleChange = (value) => {
-      console.log("extends -> handleChange -> value", value);
-    };
-
-    return (
-      <div>
-        <Modal
-          title="Create Trade"
-          visible={modalVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          okText="ok"
-          cancelText="Cancel"
-        >
-          <CalendarModalBody>
+        <div>
+          <Modal
+            title="Create Trade"
+            visible={modalVisible}
+            okText="Create"
+            onCancel={onCancel}
+            onOk={onCreate}
+            confirmLoading={loading}
+          >
+            <Form layout="vertical">
+              <Form.Item label="Symbol">
+                {getFieldDecorator("symbol", {
+                  initialValue: "ETHBTC",
+                })(
+                  <Select
+                    showSearch
+                    style={{ width: "100%" }}
+                    onChange={handleChange}
+                    loading={!symbols.length}
+                    disabled={!symbols.length}
+                  >
+                    {this.renderOptions()}
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator("buyPrice", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Required.",
+                    },
+                    {
+                      type: "number",
+                      message: "Should be a number.",
+                    },
+                  ],
+                })(
+                  <InputNumber
+                    className="ant-input-number"
+                    placeholder="Buy Price"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator("profitPrice", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Required.",
+                    },
+                    {
+                      type: "number",
+                      message: "Should be a number.",
+                    },
+                  ],
+                })(<InputNumber placeholder="Profit Price" />)}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator("stopLossPrice", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Required.",
+                    },
+                    {
+                      type: "number",
+                      message: "Should be a number.",
+                    },
+                  ],
+                })(
+                  <InputNumber
+                    style={{ width: "100%" }}
+                    placeholder="Stop Loss Price"
+                  />
+                )}
+              </Form.Item>
+              {/* <Form.Item label="Description">
+                {getFieldDecorator("description")(<Input type="textarea" />)}
+              </Form.Item> */}
+              {/* <Form.Item className="collection-create-form_last-form-item">
+                {getFieldDecorator("modifier", {
+                  initialValue: "public",
+                })(
+                  <Radio.Group>
+                    <Radio value="public">Public</Radio>
+                    <Radio value="private">Private</Radio>
+                  </Radio.Group>
+                )}
+              </Form.Item> */}
+            </Form>
+            {/* <CalendarModalBody>
             <div className="isoCalendarInputWrapper">
               <Select
                 showSearch
@@ -146,9 +241,10 @@ export default class extends Component {
                 onChange={onChangeTitle}
               />
             </div>
-          </CalendarModalBody>
-        </Modal>
-      </div>
-    );
+          </CalendarModalBody> */}
+          </Modal>
+        </div>
+      );
+    }
   }
-}
+);
