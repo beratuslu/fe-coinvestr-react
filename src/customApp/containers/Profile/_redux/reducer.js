@@ -4,19 +4,39 @@ const INITIAL_DATA = {
   isSelfProfile: null,
   loading: true,
   error: null,
-  data: null,
+  profile: null,
+
+  trades: [],
+  tradesPageNumber: 1,
+  tradesPageSize: 10,
+  tradesTotalRecord: null,
+  tradesRecordType: "myTrades", //copiedTrades
 };
 export default function profileReducer(state = INITIAL_DATA, action) {
   switch (action.type) {
+    case actions.CHANGE_TRADES_PAGE_NUMBER:
+      return {
+        ...state,
+        tradesPageNumber: action.payload,
+      };
+    case actions.CHANGE_TRADES_RECORD_TYPE:
+      return {
+        ...state,
+        tradesRecordType: action.payload,
+        tradesPageNumber: 1,
+      };
     case actions.UPDATE_COVER_PHOTO_SUCCESS:
       return {
         ...state,
-        data: { ...state.data, coverPhoto: action.payload.coverPhoto },
+        profile: { ...state.profile, coverPhoto: action.payload.coverPhoto },
       };
     case actions.UPDATE_PROFILE_PHOTO_SUCCESS:
       return {
         ...state,
-        data: { ...state.data, profilePhoto: action.payload.profilePhoto },
+        profile: {
+          ...state.profile,
+          profilePhoto: action.payload.profilePhoto,
+        },
       };
     case actions.SET_PROFILE_OWNER:
       return {
@@ -26,7 +46,7 @@ export default function profileReducer(state = INITIAL_DATA, action) {
     case actions.FETCH_PROFILE_DATA_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        profile: action.payload,
         loading: false,
         error: null,
       };
@@ -41,7 +61,8 @@ export default function profileReducer(state = INITIAL_DATA, action) {
         ...state,
         loading: false,
         error: null,
-        trades: action.payload,
+        trades: action.payload.data,
+        tradesTotalRecord: action.payload.pagination.totalRecord,
       };
     default:
       return state;

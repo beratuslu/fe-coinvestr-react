@@ -1,4 +1,14 @@
 const actions = {
+  CHANGE_TRADES_PAGE_NUMBER: "CHANGE_TRADES_PAGE_NUMBER",
+  changeTradesPageNumber: (payload) => ({
+    type: actions.CHANGE_TRADES_PAGE_NUMBER,
+    payload,
+  }),
+  CHANGE_TRADES_RECORD_TYPE: "CHANGE_TRADES_RECORD_TYPE",
+  changeTradesRecordType: (payload) => ({
+    type: actions.CHANGE_TRADES_RECORD_TYPE,
+    payload,
+  }),
   UPDATE_COVER_PHOTO_SUCCESS: "UPDATE_COVER_PHOTO_SUCCESS",
   updateCoverPhotoSuccess: (payload) => ({
     type: actions.UPDATE_COVER_PHOTO_SUCCESS,

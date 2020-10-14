@@ -129,8 +129,8 @@ class TradeList extends Component {
     return <Collapse defaultActiveKey={trades[0].id}>{tradesJsx}</Collapse>;
   }
   render() {
-    const { trades, singleItem } = this.props;
-    console.log("TradeList -> render -> trades", trades);
+    const { trades, singleItem, pageNumber, totalRecord } = this.props;
+    console.log("TradeList -> render -> trades---------------------", trades);
 
     let WrapperElement = LayoutWrapper;
     if (singleItem) {
@@ -156,7 +156,7 @@ class TradeList extends Component {
         )}
         <Box className="container">
           <TradeListWrapper>
-            {!isEmpty(trades.data) ? (
+            {!isEmpty(trades) ? (
               <>
                 <div className="collapseWrapper">
                   <Table>
@@ -174,19 +174,19 @@ class TradeList extends Component {
                       </tr>
                     </tbody>
                   </Table>
-                  {this.renderTrades(trades.data)}
+                  {this.renderTrades(trades)}
                 </div>
               </>
             ) : (
               <div>No trades.</div>
             )}
           </TradeListWrapper>
-          {!singleItem && trades.data && (
+          {!singleItem && totalRecord > 10 && (
             <PaginationWrapper>
               <Pagination
                 defaultCurrent={1}
-                current={trades.pagination.pageNumber}
-                total={trades.pagination.totalRecord}
+                current={pageNumber}
+                total={totalRecord}
                 onChange={this.props.onPageChange}
               />
             </PaginationWrapper>

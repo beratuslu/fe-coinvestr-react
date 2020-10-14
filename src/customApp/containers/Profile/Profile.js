@@ -70,21 +70,25 @@ class Profile extends Component {
       modalVisible: false,
       symbols: [],
       createTradeLoading: false,
+      profile: {},
     };
   }
 
   componentDidMount() {
     const { userName } = this.props.auth.user;
-    const { fetchProfileDataStart } = this.props;
+    const { fetchProfileDataStart, setProfileOwner, match } = this.props;
 
-    const userNameFromRoute = this.props.match.params.userName;
+    const userNameFromRoute = match.params.userName;
 
     const visitingOwnProfile = userName === userNameFromRoute;
-    this.props.setProfileOwner(visitingOwnProfile);
 
-    this.makeTradesRequest();
-
+    setProfileOwner(visitingOwnProfile);
     fetchProfileDataStart(userNameFromRoute);
+  }
+  async makeProfileRequest() {
+    // const BASE_URL = `/api/v1/profile`;
+    // const trades = await axios.post(`/api/v1/profile/`, requestObj);
+    // this.setState({ trades });
   }
   openUploadWidget(type) {
     const { updateProfilePhotoSuccess, updateCoverPhotoSuccess } = this.props;
@@ -115,9 +119,7 @@ class Profile extends Component {
             if (type === "profilePhoto") {
               updateProfilePhotoSuccess(response.user);
             }
-          } catch (error) {
-            console.log("Profile -> openUploadWidget -> error", error);
-          }
+          } catch (error) {}
         }
       }
     );
@@ -158,42 +160,31 @@ class Profile extends Component {
     }
   }
 
-  async makeTradesRequest() {
-    const { recordType, pageSize, tradesPageNumber } = this.state;
-    const obj = {
-      recordType,
-      pagination: { pageSize, pageNumber: tradesPageNumber },
-    };
-    // this.props.fetchUserTradesStart(obj);
-
-    const trades = await axios.post(`/api/v1/profile/user-trades`, obj);
-    this.setState({ trades });
-  }
   onRecordTypeChange(event) {
-    this.setState(
-      { recordType: event.target.value, tradesPageNumber: 1 },
-      () => {
-        this.makeTradesRequest();
-      }
-    );
+    const { changeTradesRecordType } = this.props;
+    changeTradesRecordType(event.target.value);
+    // this.setState(
+    //   { recordType: event.target.value, tradesPageNumber: 1 },
+    //   () => {
+    //     this.makeTradesRequest();
+    //   }
+    // );
   }
   onTradesPageChange(tradesPageNumber) {
-    this.setState({ tradesPageNumber }, () => {
-      this.makeTradesRequest();
-    });
+    const { changeTradesPageNumber } = this.props;
+    changeTradesPageNumber(tradesPageNumber);
+    // this.setState({ tradesPageNumber }, () => {
+    //   this.makeTradesRequest();
+    // });
   }
   avatarClick() {}
-  setModalData(val1, val2) {
-    console.log("setModalData -> val1", val1);
-    console.log("setModalData -> val2", val2);
-  }
+  setModalData(val1, val2) {}
 
   follow() {}
   async addTrade() {
     this.setState({ modalVisible: true });
 
     const response = await axios.get(`${BASE_URL}/api/v1/market/symbols`);
-    console.log("addTrade -> response", response);
 
     const symbols = Object.keys(response.data)
       .map(function(key, index) {
@@ -222,7 +213,6 @@ class Profile extends Component {
   handleCreate = () => {
     const { form } = this.formRef.props;
     form.validateFields(async (err, values) => {
-      console.log("handleCreate -> err", err);
       if (err) {
         return;
       }
@@ -236,11 +226,8 @@ class Profile extends Component {
           description: "ssss",
         });
         this.setState({ modalVisible: false, createTradeLoading: false });
-      } catch (error) {
-        console.log("Profile -> openUploadWidget -> error", error);
-      }
+      } catch (error) {}
 
-      console.log("Received values of form: ", values);
       // form.resetFields();
     });
   };
@@ -249,17 +236,25 @@ class Profile extends Component {
   };
 
   render() {
-    const { isSelfProfile, isFollowed, data } = this.props.profile;
+    const {
+      isSelfProfile,
+      isFollowed,
+      profile,
+      trades,
+      tradesPageNumber,
+      tradesPageSize,
+      tradesTotalRecord,
+    } = this.props.profile;
+    console.log("Profile -> render -> trades", trades);
 
-    const { trades, symbols, createTradeLoading } = this.state;
-    console.log("render -> symbols", symbols);
+    const { symbols, createTradeLoading } = this.state;
     const profilePhotoUri =
-      data && data.profilePhoto
-        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${data.profilePhoto}.jpg`
+      profile && profile.profilePhoto
+        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${profile.profilePhoto}.jpg`
         : profilePlaceHolder;
     const coverPhotoUri =
-      data && data.coverPhoto
-        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/${data.coverPhoto}.jpg`
+      profile && profile.coverPhoto
+        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/${profile.coverPhoto}.jpg`
         : "";
 
     return (
@@ -283,9 +278,9 @@ class Profile extends Component {
               <Container className="container">
                 <AvatarCard
                   avatar={profilePhotoUri}
-                  name={this.props.profile.data.name}
-                  lastName={this.props.profile.data.lastName}
-                  userName={this.props.profile.data.userName}
+                  name={this.props.profile.profile.name}
+                  lastName={this.props.profile.profile.lastName}
+                  userName={this.props.profile.profile.userName}
                   openUploadWidget={() => {
                     this.openUploadWidget("profilePhoto");
                   }}
@@ -302,7 +297,7 @@ class Profile extends Component {
                       className={"active"}
                       onClick={() => this.handleMenu("post")}
                     >
-                      {/* <strong>{this.props.profile.data.post.length}</strong>{" "} */}
+                      {/* <strong>{this.props.profile.profile.post.length}</strong>{" "} */}
                       Trades
                     </li>
                     <li
@@ -310,7 +305,7 @@ class Profile extends Component {
                       onClick={() => this.handleMenu("followers")}
                     >
                       <strong>
-                        {this.props.profile.data.followers.length}
+                        {this.props.profile.profile.followers.length}
                       </strong>{" "}
                       Followers
                     </li>
@@ -319,7 +314,7 @@ class Profile extends Component {
                       onClick={() => this.handleMenu("following")}
                     >
                       <strong>
-                        {this.props.profile.data.followings.length}
+                        {this.props.profile.profile.followings.length}
                       </strong>{" "}
                       Following
                     </li>
@@ -374,6 +369,9 @@ class Profile extends Component {
               onRecordTypeChange={this.onRecordTypeChange}
               onPageChange={this.onTradesPageChange}
               trades={trades}
+              pageNumber={tradesPageNumber}
+              pageSize={tradesPageSize}
+              totalRecord={tradesTotalRecord}
             />
 
             <Modal
@@ -383,10 +381,10 @@ class Profile extends Component {
               footer={null}
             >
               {this.state.active === "followers" && (
-                <Followers data={this.props.profile.data.followers} />
+                <Followers data={this.props.profile.profile.followers} />
               )}
               {this.state.active === "following" && (
-                <Following data={this.props.profile.data.following} />
+                <Following data={this.props.profile.profile.following} />
               )}
             </Modal>
           </>
