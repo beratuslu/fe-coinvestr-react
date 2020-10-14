@@ -7,6 +7,8 @@ import axios from "axios";
 import actions from "./actions";
 const BASE_URL = `/api/v1/profile`;
 
+const getProfileState = (state) => state.profile;
+
 const profileTradesRequest = async (payload) => {
   return axios.post(`${BASE_URL}/user-trades`, payload);
 };
@@ -17,7 +19,6 @@ const profileRequest = async (userName) => {
 
 export function* getProfileTrades() {
   try {
-    const getProfileState = (state) => state.profile;
     let profileState = yield select(getProfileState); // <-- get the notifications
 
     const {
@@ -38,7 +39,6 @@ export function* getProfileTrades() {
     }
 
     const result = yield call(profileTradesRequest, requestObj);
-    console.log("function*getProfileTrades -> result", result);
 
     yield put({
       type: actions.FETCH_USER_TRADES_SUCCESS,
@@ -73,6 +73,25 @@ export function* changeTradesPageNumber() {
     yield fork(getProfileTrades);
   });
 }
+export function* listenForProfileLocationChange() {
+  yield takeEvery("@@router/LOCATION_CHANGE", function*(action) {
+    const { pathname } = action.payload.location;
+
+    let profileState = yield select(getProfileState); // <-- get the notifications
+
+    const { profile } = profileState;
+
+    const userName = pathname.split("/").pop();
+
+    if (
+      pathname.includes("/dashboard/profile/") &&
+      userName !== profile.userName
+    ) {
+      yield put(actions.resetProfile());
+      yield put(actions.fetchProfileDataStart(userName));
+    }
+  });
+}
 
 // function* fetchProfileDataEffect() {
 //   try {
@@ -86,10 +105,9 @@ export function* changeTradesPageNumber() {
 export default function* profileSaga() {
   yield all([
     fork(getProfile),
-    fork(getProfileTrades),
     fork(changeTradesRecordType),
     fork(changeTradesPageNumber),
-    // fork(loginError),
+    fork(listenForProfileLocationChange),
     // fork(logout)
   ]);
 }

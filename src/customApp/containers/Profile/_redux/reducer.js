@@ -4,7 +4,7 @@ const INITIAL_DATA = {
   isSelfProfile: null,
   loading: true,
   error: null,
-  profile: null,
+  profile: {},
 
   trades: [],
   tradesPageNumber: 1,
@@ -19,6 +19,8 @@ export default function profileReducer(state = INITIAL_DATA, action) {
         ...state,
         tradesPageNumber: action.payload,
       };
+    case actions.RESET_PROFILE:
+      return { ...INITIAL_DATA };
     case actions.CHANGE_TRADES_RECORD_TYPE:
       return {
         ...state,

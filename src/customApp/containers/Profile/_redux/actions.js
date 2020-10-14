@@ -1,4 +1,8 @@
 const actions = {
+  RESET_PROFILE: "RESET_PROFILE",
+  resetProfile: () => ({
+    type: actions.RESET_PROFILE,
+  }),
   CHANGE_TRADES_PAGE_NUMBER: "CHANGE_TRADES_PAGE_NUMBER",
   changeTradesPageNumber: (payload) => ({
     type: actions.CHANGE_TRADES_PAGE_NUMBER,
