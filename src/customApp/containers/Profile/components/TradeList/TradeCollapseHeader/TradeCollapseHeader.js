@@ -35,7 +35,7 @@ export default function TradeCollapseHeader({ trade }) {
       <tbody>
         <tr>
           <td width="300">
-            <Link to={`/dashboard/scrum-board/project/${trade.id}`}>
+            <Link replace to={`/dashboard/profile/${trade.user.userName}`}>
               <ProjectInfo>
                 <Avatar src={profilePhotoUri} alt={trade.name} />
                 <InfoWrapper>
