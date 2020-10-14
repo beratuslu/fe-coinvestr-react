@@ -245,7 +245,6 @@ class Profile extends Component {
       tradesPageSize,
       tradesTotalRecord,
     } = this.props.profile;
-    console.log("Profile -> render -> trades", trades);
 
     const { symbols, createTradeLoading } = this.state;
     const profilePhotoUri =

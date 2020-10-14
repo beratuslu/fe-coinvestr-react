@@ -130,7 +130,6 @@ class TradeList extends Component {
   }
   render() {
     const { trades, singleItem, pageNumber, totalRecord } = this.props;
-    console.log("TradeList -> render -> trades---------------------", trades);
 
     let WrapperElement = LayoutWrapper;
     if (singleItem) {

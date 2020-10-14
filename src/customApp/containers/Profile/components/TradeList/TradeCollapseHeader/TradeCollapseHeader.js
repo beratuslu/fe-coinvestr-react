@@ -20,10 +20,16 @@ import PublicIcon from "../../../../../../static/Images/19.svg";
 import PlusIcon from "../../../../../../static/Images/24.svg";
 import SoftwareIcon from "../../../../../../static/Images/20.svg";
 import AvatarIcon from "../../../../../../static/Images/08-icon.svg";
+import profilePlaceHolder from "../../../../../assets/profile-placeholder.jpg";
 
 // export default function BoardListCard({ trade, onDelete, onEdit }) {
 export default function TradeCollapseHeader({ trade }) {
-  console.log("TradeCollapseHeader -> trade", trade);
+  const { user } = trade;
+
+  const profilePhotoUri =
+    user && user.profilePhoto
+      ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${user.profilePhoto}.jpg`
+      : profilePlaceHolder;
   return (
     <Table>
       <tbody>
@@ -31,7 +37,7 @@ export default function TradeCollapseHeader({ trade }) {
           <td width="300">
             <Link to={`/dashboard/scrum-board/project/${trade.id}`}>
               <ProjectInfo>
-                <Avatar src={AvatarIcon} alt={trade.name} />
+                <Avatar src={profilePhotoUri} alt={trade.name} />
                 <InfoWrapper>
                   <Title>{trade.user.userName}</Title>
                 </InfoWrapper>
