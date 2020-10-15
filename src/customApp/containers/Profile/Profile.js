@@ -48,6 +48,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleFollowModalCancel = this.handleFollowModalCancel.bind(this);
+
     this.handleMenu = this.handleMenu.bind(this);
     this.addTrade = this.addTrade.bind(this);
     this.follow = this.follow.bind(this);
@@ -140,7 +142,7 @@ class Profile extends Component {
       </DropdownMenu>
     );
   }
-  handleCancel() {
+  handleFollowModalCancel() {
     this.setState({ visible: false, active: "post" });
   }
   handleMenu(type) {
@@ -245,6 +247,7 @@ class Profile extends Component {
       tradesPageSize,
       tradesTotalRecord,
     } = this.props.profile;
+    const { followers, followings } = profile;
 
     const { symbols, createTradeLoading } = this.state;
     const profilePhotoUri =
@@ -376,14 +379,14 @@ class Profile extends Component {
             <Modal
               wrapClassName="follow-modal"
               visible={this.state.visible}
-              onCancel={this.handleCancel}
+              onCancel={this.handleFollowModalCancel}
               footer={null}
             >
               {this.state.active === "followers" && (
-                <Followers data={this.props.profile.profile.followers} />
+                <Followers list={followers} />
               )}
               {this.state.active === "following" && (
-                <Following data={this.props.profile.profile.following} />
+                <Followers list={followings} />
               )}
             </Modal>
           </>

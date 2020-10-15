@@ -1,17 +1,18 @@
 import React from "react";
 import Button from "../../../../../ui/Antd/Button/Button";
-import AvatarCard from "../../../../../components/AvatarCard/AvatarCard";
+import AvatarCard from "../AvatarCard/AvatarCard";
 import Wrapper, { FollowingList, ListItem } from "./Following.styles";
 
-const Following = ({ data }) => {
+const Following = (list) => {
+  console.log("Following -> list", list);
   return (
     <Wrapper>
       <h3>
-        <strong>{data.length}</strong> Following
+        <strong>{list.length}</strong> Following
       </h3>
       <FollowingList>
-        {data.length > 0 &&
-          data.map((follower) => (
+        {list.length > 0 &&
+          list.map((follower) => (
             <ListItem key={`follower-key${follower.id}`}>
               <AvatarCard avatar={follower.avatar} name={follower.name} />
               <Button>Following</Button>
