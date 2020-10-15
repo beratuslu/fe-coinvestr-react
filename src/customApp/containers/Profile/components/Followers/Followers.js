@@ -3,12 +3,12 @@ import Button from "../../../../../ui/Antd/Button/Button";
 import AvatarCard from "../AvatarCard/AvatarCard";
 import Wrapper, { FollowerList, ListItem } from "./Followers.styles";
 
-const Followers = ({ list, push }) => {
+const Followers = ({ list, push, title }) => {
   console.log("Followers -> list", list);
   return (
     <Wrapper>
       <h3>
-        <strong>{list.length}</strong> Followers
+        <strong>{list.length}</strong> {title}
       </h3>
       <FollowerList>
         {list.length > 0 &&

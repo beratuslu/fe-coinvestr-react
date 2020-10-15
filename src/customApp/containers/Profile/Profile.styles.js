@@ -204,6 +204,9 @@ export const Navigation = styled.div`
         &.active {
           border-bottom: 2px solid ${palette("secondary", 5)};
         }
+        &.disabled {
+          cursor: initial;
+        }
 
         @media only screen and (max-width: 570px) {
           margin: 0 0px;

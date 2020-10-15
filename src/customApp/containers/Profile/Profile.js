@@ -32,6 +32,7 @@ import authActions from "../Auth/_redux/actions";
 import axios from "axios";
 import profilePlaceHolder from "../../assets/profile-placeholder.jpg";
 import { symbol } from "d3-shape";
+import classNames from "classnames";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -269,9 +270,9 @@ class Profile extends Component {
               <Container className="container">
                 <AvatarCard
                   avatar={profilePhotoUri}
-                  name={this.props.profile.profile.name}
-                  lastName={this.props.profile.profile.lastName}
-                  userName={this.props.profile.profile.userName}
+                  name={profile.name}
+                  lastName={profile.lastName}
+                  userName={profile.userName}
                   openUploadWidget={() => {
                     this.openUploadWidget("profilePhoto");
                   }}
@@ -286,21 +287,33 @@ class Profile extends Component {
                   <ul className="menu">
                     <li
                       className={"active"}
-                      onClick={() => this.handleMenu("trades")}
+                      // onClick={() => this.handleMenu("trades")}
                     >
                       Trades
                     </li>
-                    <li onClick={() => this.handleMenu("followers")}>
-                      <strong>
-                        {this.props.profile.profile.followers.length}
-                      </strong>{" "}
-                      Followers
+                    <li
+                      className={classNames({
+                        disabled: followers.length == 0,
+                      })}
+                      onClick={() => {
+                        if (followers.length) {
+                          this.handleMenu("followers");
+                        }
+                      }}
+                    >
+                      <strong>{followers.length}</strong> Followers
                     </li>
-                    <li onClick={() => this.handleMenu("following")}>
-                      <strong>
-                        {this.props.profile.profile.followings.length}
-                      </strong>{" "}
-                      Following
+                    <li
+                      className={classNames({
+                        disabled: followings.length == 0,
+                      })}
+                      onClick={() => {
+                        if (followings.length) {
+                          this.handleMenu("following");
+                        }
+                      }}
+                    >
+                      <strong>{followings.length}</strong> Following
                     </li>
                   </ul>
                   <ul
@@ -365,10 +378,10 @@ class Profile extends Component {
               footer={null}
             >
               {followModal === "followers" && (
-                <Followers list={followers} push={push} />
+                <Followers list={followers} push={push} title="Followers" />
               )}
               {followModal === "following" && (
-                <Followers list={followings} push={push} />
+                <Followers list={followings} push={push} title="Following" />
               )}
             </Modal>
           </>
