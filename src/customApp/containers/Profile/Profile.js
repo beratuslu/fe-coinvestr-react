@@ -85,7 +85,7 @@ class Profile extends Component {
     const visitingOwnProfile = userName === userNameFromRoute;
 
     setProfileOwner(visitingOwnProfile);
-    fetchProfileDataStart(userNameFromRoute);
+    // fetchProfileDataStart(userNameFromRoute);
   }
   async makeProfileRequest() {
     // const BASE_URL = `/api/v1/profile`;
