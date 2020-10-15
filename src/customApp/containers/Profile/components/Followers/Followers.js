@@ -3,7 +3,7 @@ import Button from "../../../../../ui/Antd/Button/Button";
 import AvatarCard from "../AvatarCard/AvatarCard";
 import Wrapper, { FollowerList, ListItem } from "./Followers.styles";
 
-const Followers = ({ list }) => {
+const Followers = ({ list, push }) => {
   console.log("Followers -> list", list);
   return (
     <Wrapper>
@@ -18,6 +18,7 @@ const Followers = ({ list }) => {
                 profilePhoto={user.profilePhoto}
                 fullName={`${user.name} ${user.lastName}`}
                 userName={user.userName}
+                push={push}
               />
               {/* <Button>Following</Button> */}
             </ListItem>

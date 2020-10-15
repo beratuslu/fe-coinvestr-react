@@ -11,9 +11,16 @@ const INITIAL_DATA = {
   tradesPageSize: 10,
   tradesTotalRecord: null,
   tradesRecordType: "myTrades", //copiedTrades
+
+  followModal: false,
 };
 export default function profileReducer(state = INITIAL_DATA, action) {
   switch (action.type) {
+    case actions.CHANGE_FOLLOW_MODAL:
+      return {
+        ...state,
+        followModal: action.payload,
+      };
     case actions.CHANGE_TRADES_PAGE_NUMBER:
       return {
         ...state,

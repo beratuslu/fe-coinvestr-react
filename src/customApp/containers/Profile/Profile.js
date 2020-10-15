@@ -53,7 +53,6 @@ class Profile extends Component {
     this.handleMenu = this.handleMenu.bind(this);
     this.addTrade = this.addTrade.bind(this);
     this.follow = this.follow.bind(this);
-    this.handleMenuClick = this.handleMenuClick.bind(this);
 
     this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
     this.onTradesPageChange = this.onTradesPageChange.bind(this);
@@ -62,7 +61,7 @@ class Profile extends Component {
     this.setModalData = this.setModalData.bind(this);
 
     this.state = {
-      active: "post",
+      active: "trades",
       visible: false,
 
       recordType: "myTrades",
@@ -127,7 +126,6 @@ class Profile extends Component {
     );
   }
 
-  handleMenuClick(e) {}
   renderMenu() {
     return (
       <DropdownMenu
@@ -143,23 +141,12 @@ class Profile extends Component {
     );
   }
   handleFollowModalCancel() {
-    this.setState({ visible: false, active: "post" });
+    const { changeFollowModal } = this.props;
+    changeFollowModal(false);
   }
   handleMenu(type) {
-    if (type === "post") {
-      // setActive(type);
-      this.setState({ active: type });
-    }
-    if (type === "followers") {
-      // setActive(type);
-      // setVisible(true);
-      this.setState({ active: type, visible: true });
-    }
-    if (type === "following") {
-      // setActive(type);
-      // setVisible(true);
-      this.setState({ active: type, visible: true });
-    }
+    const { changeFollowModal } = this.props;
+    changeFollowModal(type);
   }
 
   onRecordTypeChange(event) {
@@ -246,8 +233,10 @@ class Profile extends Component {
       tradesPageNumber,
       tradesPageSize,
       tradesTotalRecord,
+      followModal,
     } = this.props.profile;
     const { followers, followings } = profile;
+    const { push } = this.props.history;
 
     const { symbols, createTradeLoading } = this.state;
     const profilePhotoUri =
@@ -297,24 +286,17 @@ class Profile extends Component {
                   <ul className="menu">
                     <li
                       className={"active"}
-                      onClick={() => this.handleMenu("post")}
+                      onClick={() => this.handleMenu("trades")}
                     >
-                      {/* <strong>{this.props.profile.profile.post.length}</strong>{" "} */}
                       Trades
                     </li>
-                    <li
-                      // className={this.state.active === "followers" ? "active" : ""}
-                      onClick={() => this.handleMenu("followers")}
-                    >
+                    <li onClick={() => this.handleMenu("followers")}>
                       <strong>
                         {this.props.profile.profile.followers.length}
                       </strong>{" "}
                       Followers
                     </li>
-                    <li
-                      // className={this.state.active === "following" ? "active" : ""}
-                      onClick={() => this.handleMenu("following")}
-                    >
+                    <li onClick={() => this.handleMenu("following")}>
                       <strong>
                         {this.props.profile.profile.followings.length}
                       </strong>{" "}
@@ -378,15 +360,15 @@ class Profile extends Component {
 
             <Modal
               wrapClassName="follow-modal"
-              visible={this.state.visible}
+              visible={!!followModal}
               onCancel={this.handleFollowModalCancel}
               footer={null}
             >
-              {this.state.active === "followers" && (
-                <Followers list={followers} />
+              {followModal === "followers" && (
+                <Followers list={followers} push={push} />
               )}
-              {this.state.active === "following" && (
-                <Followers list={followings} />
+              {followModal === "following" && (
+                <Followers list={followings} push={push} />
               )}
             </Modal>
           </>

@@ -1,4 +1,9 @@
 const actions = {
+  CHANGE_FOLLOW_MODAL: "CHANGE_FOLLOW_MODAL",
+  changeFollowModal: (payload) => ({
+    type: actions.CHANGE_FOLLOW_MODAL,
+    payload,
+  }),
   RESET_PROFILE: "RESET_PROFILE",
   resetProfile: () => ({
     type: actions.RESET_PROFILE,
