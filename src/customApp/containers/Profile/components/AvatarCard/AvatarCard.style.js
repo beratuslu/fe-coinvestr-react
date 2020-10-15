@@ -3,6 +3,7 @@ import styled from "styled-components";
 const CardWrapper = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   .ion-camera {
     font-size: 24px;

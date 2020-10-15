@@ -20,7 +20,7 @@ const Followers = ({ list, push }) => {
                 userName={user.userName}
                 push={push}
               />
-              {/* <Button>Following</Button> */}
+              {/* <Button>Profile</Button> */}
             </ListItem>
           ))}
       </FollowerList>

@@ -11,7 +11,7 @@ const AvatarCard = ({ className, fullName, profilePhoto, userName, push }) => {
   return (
     <CardWrapper
       onClick={() => {
-        push("/dashboard/profile/dev2");
+        push(`/dashboard/profile/${userName}`);
       }}
       className={`avatar-card ${className ? className : ""}`}
     >
