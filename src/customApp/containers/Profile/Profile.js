@@ -238,18 +238,28 @@ class Profile extends Component {
   };
 
   render() {
+    const { auth } = this.props;
     const {
       isSelfProfile,
-      isFollowed,
       profile,
       trades,
       tradesPageNumber,
       tradesPageSize,
       tradesTotalRecord,
       followModal,
+      loading,
     } = this.props.profile;
     const { followers, followings } = profile;
     const { push } = this.props.history;
+
+    let isFollowed = false;
+
+    if (!loading) {
+      let arr = followers.filter((user) => user.id === auth.user.id);
+      if (arr.length) {
+        isFollowed = true;
+      }
+    }
 
     const { symbols, createTradeLoading } = this.state;
     const profilePhotoUri =
@@ -271,7 +281,7 @@ class Profile extends Component {
           symbols={symbols}
           loading={createTradeLoading}
         />
-        {this.props.profile.loading !== true ? (
+        {loading !== true ? (
           <>
             <Banner
               className="profile-banner"

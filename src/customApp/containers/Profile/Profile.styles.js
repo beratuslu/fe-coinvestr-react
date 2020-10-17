@@ -11,10 +11,11 @@ export const FollowDropDownMenuStyles = createGlobalStyle`
   body{
     .followDropDownMenu{
       .unfollow{
-        background-color:#F75D81;
-        color:white;
+        ${"" /* background-color:#dd4a68; */}
+        color:#EC3D3A;
+        font-weight:bold;
         &:hover{
-          background-color:#fb436e
+          ${"" /* background-color:#EC3D3A */}
         }
       }
       
