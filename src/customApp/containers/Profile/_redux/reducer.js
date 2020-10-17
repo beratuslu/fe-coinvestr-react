@@ -16,11 +16,20 @@ const INITIAL_DATA = {
 };
 export default function profileReducer(state = INITIAL_DATA, action) {
   switch (action.type) {
-    case actions.ADD_FOLLOWER_TO_PROFILE: {
-      const followers = state.profile.followers.push(action.payload);
+    case actions.REMOVE_FOLLOWER_FROM_PROFILE: {
+      const followers = state.profile.followers.filter(
+        (follower) => follower.id !== action.payload
+      );
       return {
         ...state,
-        profile: { ...state.profile, ...followers },
+        profile: { ...state.profile, followers },
+      };
+    }
+    case actions.ADD_FOLLOWER_TO_PROFILE: {
+      const followers = [...state.profile.followers, action.payload];
+      return {
+        ...state,
+        profile: { ...state.profile, followers },
       };
     }
     case actions.CHANGE_FOLLOW_LIST_MODAL:

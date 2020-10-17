@@ -20,9 +20,18 @@ export default Form.create({ name: "form_in_modal_follow" })(
       });
     };
     render() {
-      const { modalVisible, symbols, loading } = this.props;
-
-      const { visible, onCancel, onCreate, form } = this.props;
+      const {
+        visible,
+        onCancel,
+        onCreate,
+        form,
+        modalVisible,
+        symbols,
+        loading,
+        title,
+        isFollowed,
+        followAmount,
+      } = this.props;
       const { getFieldDecorator } = form;
 
       if (!modalVisible) {
@@ -32,7 +41,7 @@ export default Form.create({ name: "form_in_modal_follow" })(
       return (
         <div>
           <Modal
-            title="Follow"
+            title={isFollowed ? "Enter Copy Amount" : "Edit Copy Amount"}
             visible={modalVisible}
             okText="Create"
             onCancel={onCancel}
@@ -42,6 +51,7 @@ export default Form.create({ name: "form_in_modal_follow" })(
             <Form layout="vertical">
               <Form.Item>
                 {getFieldDecorator("amount", {
+                  initialValue: isFollowed ? followAmount : null,
                   rules: [
                     {
                       required: true,

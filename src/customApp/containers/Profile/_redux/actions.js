@@ -1,4 +1,9 @@
 const actions = {
+  REMOVE_FOLLOWER_FROM_PROFILE: "REMOVE_FOLLOWER_FROM_PROFILE",
+  removeFollowerFromProfile: (payload) => ({
+    type: actions.REMOVE_FOLLOWER_FROM_PROFILE,
+    payload,
+  }),
   ADD_FOLLOWER_TO_PROFILE: "ADD_FOLLOWER_TO_PROFILE",
   addFollowerToProfile: (payload) => ({
     type: actions.ADD_FOLLOWER_TO_PROFILE,

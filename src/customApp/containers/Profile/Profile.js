@@ -54,6 +54,8 @@ class Profile extends Component {
       this
     );
     this.addTrade = this.addTrade.bind(this);
+    this.unfollow = this.unfollow.bind(this);
+
     this.handleFollowUserModalCreate = this.handleFollowUserModalCreate.bind(
       this
     );
@@ -81,6 +83,8 @@ class Profile extends Component {
       newTradeModalVisible: false,
       createTradeLoading: false,
       profile: {},
+      followAmount: null,
+      isFollowedFromState: null,
     };
   }
 
@@ -142,13 +146,12 @@ class Profile extends Component {
 
   renderMenu() {
     return (
-      <DropdownMenu
-        className="followDropDownMenu"
-        onClick={this.changeFollowListModalClickVisibility}
-      >
+      <DropdownMenu className="followDropDownMenu">
         <FollowDropDownMenuStyles />
-        <MenuItem key="1">Edit Copy</MenuItem>
-        <MenuItem className="unfollow" key="2">
+        <MenuItem onClick={this.showFollowUserModal} key="1">
+          Edit Copy
+        </MenuItem>
+        <MenuItem onClick={this.unfollow} className="unfollow" key="2">
           Unfollow
         </MenuItem>
       </DropdownMenu>
@@ -272,6 +275,10 @@ class Profile extends Component {
         });
 
         if (!isFollowed) {
+          console.log(
+            "Profile -> handleFollowUserModalCreate -> auth.user",
+            auth.user
+          );
           addFollowerToProfile(auth.user);
         }
       } catch (error) {
@@ -282,8 +289,47 @@ class Profile extends Component {
     });
   }
 
-  showFollowUserModal() {
-    this.setState({ followUserModalVisible: true });
+  async showFollowUserModal() {
+    const { auth } = this.props;
+    const { id, followers } = this.props.profile.profile;
+
+    this.setState({
+      followUserModalVisible: true,
+      followUserModalTitle: "Enter Copy Amount",
+    });
+
+    const requestObj = { userId: auth.user.id, traderId: id };
+
+    let isFollowed = false;
+
+    let arr = followers.filter((user) => user.id === auth.user.id);
+    if (arr.length) {
+      isFollowed = true;
+    }
+
+    if (isFollowed) {
+      this.setState({ isFollowedFromState: isFollowed });
+      const result = await axios.post(
+        `${BASE_URL}/api/v1/profile/get-follow-amount`,
+        requestObj
+      );
+      this.setState({ followAmount: result.amount });
+    }
+  }
+  async unfollow() {
+    const { auth, removeFollowerFromProfile } = this.props;
+    const { id, followers } = this.props.profile.profile;
+
+    const requestObj = { traderId: id };
+    try {
+      const result = await axios.post(
+        `${BASE_URL}/api/v1/profile/unfollow`,
+        requestObj
+      );
+      removeFollowerFromProfile(auth.user.id);
+    } catch (error) {
+      console.log("Profile -> unfollow -> error", error);
+    }
   }
 
   handleFollowUserModalCancel() {
@@ -291,6 +337,7 @@ class Profile extends Component {
   }
   render() {
     const { auth } = this.props;
+    const { isFollowedFromState, followAmount } = this.state;
     const {
       isSelfProfile,
       profile,
@@ -340,6 +387,8 @@ class Profile extends Component {
           onCreate={this.handleFollowUserModalCreate}
           symbols={symbols}
           loading={createTradeLoading}
+          isFollowed={isFollowedFromState}
+          followAmount={followAmount}
         />
 
         <Modal
