@@ -21,6 +21,7 @@ import Following from "./components/Following/Following";
 import basicStyle from "../../../settings/basicStyle";
 import TradeList from "./components/TradeList/TradeList";
 import CreateCopyTradeModal from "./components/CreateCopyTradeModal/CreateCopyTradeModal";
+import FollowUserModal from "./components/FollowUserModal/FollowUserModal";
 import {
   Wrapper,
   Banner,
@@ -48,18 +49,24 @@ const cloudinaryOptions = {
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleFollowModalCancel = this.handleFollowModalCancel.bind(this);
-
-    this.handleMenu = this.handleMenu.bind(this);
+    this.handleNewTradeModalCancel = this.handleNewTradeModalCancel.bind(this);
+    this.handleFollowListModalCancel = this.handleFollowListModalCancel.bind(
+      this
+    );
     this.addTrade = this.addTrade.bind(this);
-    this.follow = this.follow.bind(this);
+    this.handleFollowUserModalCreate = this.handleFollowUserModalCreate.bind(
+      this
+    );
+    this.handleFollowUserModalCancel = this.handleFollowUserModalCancel.bind(
+      this
+    );
+
+    this.showFollowUserModal = this.showFollowUserModal.bind(this);
 
     this.onRecordTypeChange = this.onRecordTypeChange.bind(this);
     this.onTradesPageChange = this.onTradesPageChange.bind(this);
-    this.avatarClick = this.avatarClick.bind(this);
+
     this.openUploadWidget = this.openUploadWidget.bind(this);
-    this.setModalData = this.setModalData.bind(this);
 
     this.state = {
       active: "trades",
@@ -69,21 +76,15 @@ class Profile extends Component {
       pageSize: 10,
       tradesPageNumber: 1,
       trades: {},
-      modalVisible: false,
       symbols: [],
+      followUserModalVisible: false,
+      newTradeModalVisible: false,
       createTradeLoading: false,
       profile: {},
     };
   }
 
-  componentDidMount() {
-    // const { userName } = this.props.auth.user;
-    // const { fetchProfileDataStart, setProfileOwner, match } = this.props;
-    // const userNameFromRoute = match.params.userName;
-    // const visitingOwnProfile = userName === userNameFromRoute;
-    // setProfileOwner(visitingOwnProfile);
-    // fetchProfileDataStart(userNameFromRoute);
-  }
+  componentDidMount() {}
   async makeProfileRequest() {
     // const BASE_URL = `/api/v1/profile`;
     // const trades = await axios.post(`/api/v1/profile/`, requestObj);
@@ -143,7 +144,7 @@ class Profile extends Component {
     return (
       <DropdownMenu
         className="followDropDownMenu"
-        onClick={this.handleMenuClick}
+        onClick={this.changeFollowListModalClickVisibility}
       >
         <FollowDropDownMenuStyles />
         <MenuItem key="1">Edit Copy</MenuItem>
@@ -153,38 +154,27 @@ class Profile extends Component {
       </DropdownMenu>
     );
   }
-  handleFollowModalCancel() {
-    const { changeFollowModal } = this.props;
-    changeFollowModal(false);
+  changeFollowListModalVisibility(type) {
+    const { changeFollowListModal } = this.props;
+    changeFollowListModal(type);
   }
-  handleMenu(type) {
-    const { changeFollowModal } = this.props;
-    changeFollowModal(type);
+
+  handleFollowListModalCancel() {
+    const { changeFollowListModal } = this.props;
+    changeFollowListModal(false);
   }
 
   onRecordTypeChange(event) {
     const { changeTradesRecordType } = this.props;
     changeTradesRecordType(event.target.value);
-    // this.setState(
-    //   { recordType: event.target.value, tradesPageNumber: 1 },
-    //   () => {
-    //     this.makeTradesRequest();
-    //   }
-    // );
   }
   onTradesPageChange(tradesPageNumber) {
     const { changeTradesPageNumber } = this.props;
     changeTradesPageNumber(tradesPageNumber);
-    // this.setState({ tradesPageNumber }, () => {
-    //   this.makeTradesRequest();
-    // });
   }
-  avatarClick() {}
-  setModalData(val1, val2) {}
 
-  follow() {}
   async addTrade() {
-    this.setState({ modalVisible: true });
+    this.setState({ newTradeModalVisible: true });
 
     const response = await axios.get(`${BASE_URL}/api/v1/market/symbols`);
 
@@ -204,16 +194,12 @@ class Profile extends Component {
 
     this.setState({ symbols });
   }
-  showModal = () => {
-    this.setState({ modalVisible: true });
+  handleNewTradeModalCancel = () => {
+    this.setState({ newTradeModalVisible: false });
   };
 
-  handleCancel = () => {
-    this.setState({ modalVisible: false });
-  };
-
-  handleCreate = () => {
-    const { form } = this.formRef.props;
+  handleCreateNewTrade = () => {
+    const { form } = this.newTradeFormRef.props;
     form.validateFields(async (err, values) => {
       if (err) {
         return;
@@ -225,18 +211,84 @@ class Profile extends Component {
 
         notifications.success({
           message: "Trade Created",
-          description: "ssss",
+          // description: "ssss",
         });
-        this.setState({ modalVisible: false, createTradeLoading: false });
+        this.setState({
+          newTradeModalVisible: false,
+          createTradeLoading: false,
+        });
       } catch (error) {}
 
       // form.resetFields();
     });
   };
-  saveFormRef = (formRef) => {
-    this.formRef = formRef;
+  saveNewTradeFormRef = (formRef) => {
+    this.newTradeFormRef = formRef;
   };
 
+  saveFollowFormRef = (formRef) => {
+    this.followFormRef = formRef;
+  };
+
+  handleFollowUserModalCreate() {
+    const { auth, addFollowerToProfile } = this.props;
+    const { id, followers } = this.props.profile.profile;
+    console.log(
+      "Profile -> handleFollowUserModalCreate -> followers",
+      followers
+    );
+
+    const { form } = this.followFormRef.props;
+    form.validateFields(async (err, values) => {
+      if (err) {
+        return;
+      }
+      const traderId = id;
+
+      let isFollowed = false;
+
+      let arr = followers.filter((user) => user.id === auth.user.id);
+      if (arr.length) {
+        isFollowed = true;
+      }
+
+      try {
+        const requestObj = {
+          ...values,
+          traderId,
+          updating: isFollowed,
+        };
+        const response = await axios.post(
+          `${BASE_URL}/api/v1/profile/follow`,
+          requestObj
+        );
+
+        notifications.success({
+          message: "Success!",
+          // description: "ssss",
+        });
+        this.setState({
+          followUserModalVisible: false,
+        });
+
+        if (!isFollowed) {
+          addFollowerToProfile(auth.user);
+        }
+      } catch (error) {
+        console.log("Profile -> handleFollowUserModalCreate -> error", error);
+      }
+
+      // form.resetFields();
+    });
+  }
+
+  showFollowUserModal() {
+    this.setState({ followUserModalVisible: true });
+  }
+
+  handleFollowUserModalCancel() {
+    this.setState({ followUserModalVisible: false });
+  }
   render() {
     const { auth } = this.props;
     const {
@@ -246,7 +298,7 @@ class Profile extends Component {
       tradesPageNumber,
       tradesPageSize,
       tradesTotalRecord,
-      followModal,
+      followListModal,
       loading,
     } = this.props.profile;
     const { followers, followings } = profile;
@@ -274,13 +326,36 @@ class Profile extends Component {
     return (
       <Wrapper>
         <CreateCopyTradeModal
-          modalVisible={this.state.modalVisible}
-          wrappedComponentRef={this.saveFormRef}
-          onCancel={this.handleCancel}
-          onCreate={this.handleCreate}
+          modalVisible={this.state.newTradeModalVisible}
+          wrappedComponentRef={this.saveNewTradeFormRef}
+          onCancel={this.handleNewTradeModalCancel}
+          onCreate={this.handleCreateNewTrade}
           symbols={symbols}
           loading={createTradeLoading}
         />
+        <FollowUserModal
+          modalVisible={this.state.followUserModalVisible}
+          wrappedComponentRef={this.saveFollowFormRef}
+          onCancel={this.handleFollowUserModalCancel}
+          onCreate={this.handleFollowUserModalCreate}
+          symbols={symbols}
+          loading={createTradeLoading}
+        />
+
+        <Modal
+          wrapClassName="follow-modal"
+          visible={!!followListModal}
+          onCancel={this.handleFollowListModalCancel}
+          footer={null}
+        >
+          {followListModal === "followers" && (
+            <Followers list={followers} push={push} title="Followers" />
+          )}
+          {followListModal === "following" && (
+            <Followers list={followings} push={push} title="Following" />
+          )}
+        </Modal>
+
         {loading !== true ? (
           <>
             <Banner
@@ -309,7 +384,7 @@ class Profile extends Component {
                   <ul className="menu">
                     <li
                       className={"active"}
-                      // onClick={() => this.handleMenu("trades")}
+                      // onClick={() => this.changeFollowListModalVisibility("trades")}
                     >
                       Trades
                     </li>
@@ -319,7 +394,7 @@ class Profile extends Component {
                       })}
                       onClick={() => {
                         if (followers.length) {
-                          this.handleMenu("followers");
+                          this.changeFollowListModalVisibility("followers");
                         }
                       }}
                     >
@@ -331,7 +406,7 @@ class Profile extends Component {
                       })}
                       onClick={() => {
                         if (followings.length) {
-                          this.handleMenu("following");
+                          this.changeFollowListModalVisibility("following");
                         }
                       }}
                     >
@@ -374,7 +449,10 @@ class Profile extends Component {
                           </Button>
                         </Dropdown>
                       ) : (
-                        <Button type="primary" onClick={this.follow}>
+                        <Button
+                          type="primary"
+                          onClick={this.showFollowUserModal}
+                        >
                           Follow
                         </Button>
                       )}
@@ -392,20 +470,6 @@ class Profile extends Component {
               pageSize={tradesPageSize}
               totalRecord={tradesTotalRecord}
             />
-
-            <Modal
-              wrapClassName="follow-modal"
-              visible={!!followModal}
-              onCancel={this.handleFollowModalCancel}
-              footer={null}
-            >
-              {followModal === "followers" && (
-                <Followers list={followers} push={push} title="Followers" />
-              )}
-              {followModal === "following" && (
-                <Followers list={followings} push={push} title="Following" />
-              )}
-            </Modal>
           </>
         ) : (
           <div

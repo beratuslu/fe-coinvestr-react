@@ -12,14 +12,21 @@ const INITIAL_DATA = {
   tradesTotalRecord: null,
   tradesRecordType: "myTrades", //copiedTrades
 
-  followModal: false,
+  followListModal: false,
 };
 export default function profileReducer(state = INITIAL_DATA, action) {
   switch (action.type) {
-    case actions.CHANGE_FOLLOW_MODAL:
+    case actions.ADD_FOLLOWER_TO_PROFILE: {
+      const followers = state.profile.followers.push(action.payload);
       return {
         ...state,
-        followModal: action.payload,
+        profile: { ...state.profile, ...followers },
+      };
+    }
+    case actions.CHANGE_FOLLOW_LIST_MODAL:
+      return {
+        ...state,
+        followListModal: action.payload,
       };
     case actions.CHANGE_TRADES_PAGE_NUMBER:
       return {

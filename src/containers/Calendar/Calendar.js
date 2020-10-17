@@ -13,30 +13,30 @@ const Localizer = BigCalendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 const { changeView, changeEvents } = calendarActions;
 
-const mapToRBCFormat = e =>
+const mapToRBCFormat = (e) =>
   Object.assign({}, e, {
     start: new Date(e.start),
-    end: new Date(e.end)
+    end: new Date(e.end),
   });
 
 const getIndex = (events, selectedEvent) =>
-  events.findIndex(event => event.id === selectedEvent.id);
+  events.findIndex((event) => event.id === selectedEvent.id);
 
 class DndCalendar extends Component {
   state = {
     view: this.props.view,
     modalVisible: false,
-    selectedData: undefined
+    selectedData: undefined,
   };
 
-  onSelectEvent = selectedData => {
+  onSelectEvent = (selectedData) => {
     this.setState({ modalVisible: "update", selectedData });
   };
-  onSelectSlot = selectedData => {
+  onSelectSlot = (selectedData) => {
     this.setState({ modalVisible: "new", selectedData });
   };
 
-  onView = view => {
+  onView = (view) => {
     this.props.changeView(view);
   };
   moveEvent = ({ event, start, end, isAllDay: droppedOnAllDaySlot }) => {
@@ -64,7 +64,7 @@ class DndCalendar extends Component {
   resizeEvent = ({ event, start, end }) => {
     const { events, changeEvents } = this.props;
 
-    const nextEvents = events.map(existingEvent => {
+    const nextEvents = events.map((existingEvent) => {
       return existingEvent.id === event.id
         ? { ...existingEvent, start, end }
         : existingEvent;
@@ -86,7 +86,7 @@ class DndCalendar extends Component {
     if (type === "cancel") {
       this.setState({
         modalVisible: false,
-        selectedData: undefined
+        selectedData: undefined,
       });
     } else if (type === "delete") {
       const idx = getIndex(events, selectedData);
@@ -96,7 +96,7 @@ class DndCalendar extends Component {
       changeEvents(events);
       this.setState({
         modalVisible: false,
-        selectedData: undefined
+        selectedData: undefined,
       });
     } else if (type === "updateValue") {
       this.setState({ selectedData });
@@ -112,7 +112,7 @@ class DndCalendar extends Component {
       changeEvents(events);
       this.setState({
         modalVisible: false,
-        selectedData: undefined
+        selectedData: undefined,
       });
     }
   };
