@@ -7,7 +7,7 @@ export const ProjectInfo = styled.div`
 export const Avatar = styled.img`
   width: 40px;
   height: 40px;
-  border-radius: 6px;
+  border-radius: 20px;
   background-color: #00c6e6;
   margin-right: 16px;
   flex-shrink: 0;
