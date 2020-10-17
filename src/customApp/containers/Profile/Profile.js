@@ -77,14 +77,11 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    const { userName } = this.props.auth.user;
-    const { fetchProfileDataStart, setProfileOwner, match } = this.props;
-
-    const userNameFromRoute = match.params.userName;
-
-    const visitingOwnProfile = userName === userNameFromRoute;
-
-    setProfileOwner(visitingOwnProfile);
+    // const { userName } = this.props.auth.user;
+    // const { fetchProfileDataStart, setProfileOwner, match } = this.props;
+    // const userNameFromRoute = match.params.userName;
+    // const visitingOwnProfile = userName === userNameFromRoute;
+    // setProfileOwner(visitingOwnProfile);
     // fetchProfileDataStart(userNameFromRoute);
   }
   async makeProfileRequest() {

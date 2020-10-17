@@ -8,6 +8,7 @@ import actions from "./actions";
 const BASE_URL = `/api/v1/profile`;
 
 const getProfileState = (state) => state.profile;
+const getAuthState = (state) => state.auth;
 
 const profileTradesRequest = async (payload) => {
   return axios.post(`${BASE_URL}/user-trades`, payload);
@@ -76,19 +77,14 @@ export function* changeTradesPageNumber() {
 export function* listenForProfileLocationChange() {
   yield takeEvery("@@router/LOCATION_CHANGE", function*(action) {
     const { pathname } = action.payload.location;
-
-    let profileState = yield select(getProfileState); // <-- get the notifications
-
-    const { profile } = profileState;
-
-    const userName = pathname.split("/").pop();
-
-    if (
-      pathname.includes("/dashboard/profile/") &&
-      userName !== profile.userName
-    ) {
+    if (pathname.includes("/dashboard/profile/")) {
+      let authState = yield select(getAuthState); // <-- get the profile
+      const { user } = authState;
+      const userNameFromUrl = pathname.split("/").pop();
+      const visitingOwnProfile = userNameFromUrl === user.userName;
       yield put(actions.resetProfile());
-      yield put(actions.fetchProfileDataStart(userName));
+      yield put(actions.setProfileOwner(visitingOwnProfile));
+      yield put(actions.fetchProfileDataStart(userNameFromUrl));
     }
   });
 }
