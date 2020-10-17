@@ -89,6 +89,19 @@ class Profile extends Component {
     // const trades = await axios.post(`/api/v1/profile/`, requestObj);
     // this.setState({ trades });
   }
+
+  async updateLocalStorage(updatedPart) {
+    const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ ...userFromLocalStorage, ...updatedPart })
+    );
+
+    // const BASE_URL = `/api/v1/profile`;
+    // const trades = await axios.post(`/api/v1/profile/`, requestObj);
+    // this.setState({ trades });
+  }
+
   openUploadWidget(type) {
     const { updateProfilePhotoSuccess, updateCoverPhotoSuccess } = this.props;
     cloudinaryOptions.uploadPreset = type;
@@ -114,9 +127,11 @@ class Profile extends Component {
             );
             if (type === "coverPhoto") {
               updateCoverPhotoSuccess(response.user);
+              localStorage.setItem("user", JSON.stringify(response.user));
             }
             if (type === "profilePhoto") {
               updateProfilePhotoSuccess(response.user);
+              localStorage.setItem("user", JSON.stringify(response.user));
             }
           } catch (error) {}
         }
