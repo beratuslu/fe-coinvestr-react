@@ -41,9 +41,9 @@ export default Form.create({ name: "form_in_modal_follow" })(
       return (
         <div>
           <Modal
-            title={isFollowed ? "Enter Copy Amount" : "Edit Copy Amount"}
+            title={isFollowed ? "Edit Copy Amount" : "Enter Copy Amount"}
             visible={modalVisible}
-            okText="Create"
+            okText={isFollowed ? "Edit Amount" : "Copy Next Trades"}
             onCancel={onCancel}
             onOk={onCreate}
             confirmLoading={loading}

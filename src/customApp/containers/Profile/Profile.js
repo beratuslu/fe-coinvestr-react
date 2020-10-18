@@ -84,7 +84,6 @@ class Profile extends Component {
       createTradeLoading: false,
       profile: {},
       followAmount: null,
-      isFollowedFromState: null,
     };
   }
 
@@ -275,10 +274,6 @@ class Profile extends Component {
         });
 
         if (!isFollowed) {
-          console.log(
-            "Profile -> handleFollowUserModalCreate -> auth.user",
-            auth.user
-          );
           addFollowerToProfile(auth.user);
         }
       } catch (error) {
@@ -295,7 +290,6 @@ class Profile extends Component {
 
     this.setState({
       followUserModalVisible: true,
-      followUserModalTitle: "Enter Copy Amount",
     });
 
     const requestObj = { userId: auth.user.id, traderId: id };
@@ -308,7 +302,6 @@ class Profile extends Component {
     }
 
     if (isFollowed) {
-      this.setState({ isFollowedFromState: isFollowed });
       const result = await axios.post(
         `${BASE_URL}/api/v1/profile/get-follow-amount`,
         requestObj
@@ -326,6 +319,7 @@ class Profile extends Component {
         `${BASE_URL}/api/v1/profile/unfollow`,
         requestObj
       );
+      this.setState({ followAmount: null });
       removeFollowerFromProfile(auth.user.id);
     } catch (error) {
       console.log("Profile -> unfollow -> error", error);
@@ -333,7 +327,7 @@ class Profile extends Component {
   }
 
   handleFollowUserModalCancel() {
-    this.setState({ followUserModalVisible: false });
+    this.setState({ followUserModalVisible: false, followAmount: null });
   }
   render() {
     const { auth } = this.props;
@@ -359,7 +353,6 @@ class Profile extends Component {
         isFollowed = true;
       }
     }
-
     const { symbols, createTradeLoading } = this.state;
     const profilePhotoUri =
       profile && profile.profilePhoto
@@ -387,7 +380,7 @@ class Profile extends Component {
           onCreate={this.handleFollowUserModalCreate}
           symbols={symbols}
           loading={createTradeLoading}
-          isFollowed={isFollowedFromState}
+          isFollowed={isFollowed}
           followAmount={followAmount}
         />
 
