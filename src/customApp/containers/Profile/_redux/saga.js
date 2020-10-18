@@ -1,5 +1,6 @@
 // saga.js
 import { all, takeEvery, put, fork, call, select } from "redux-saga/effects";
+import { push } from "react-router-redux";
 import notifications from "../../../../components/feedback/notification";
 import profileActions from "./actions";
 import DemoProfileData from "./profile.data";
@@ -60,7 +61,15 @@ export function* getProfile() {
       });
       yield fork(getProfileTrades);
     } catch (error) {
-      yield put({ type: actions.FETCH_PROFILE_DATA_FAILURE });
+      console.log("yieldtakeEvery -> error", error.response);
+
+      notifications.error({
+        message: "Login Error",
+        description: error.response.data.message,
+      });
+      yield put(actions.resetProfile());
+      yield put(push(`/404`));
+      // yield put({ type: actions.FETCH_PROFILE_DATA_FAILURE });
     }
   });
 }
