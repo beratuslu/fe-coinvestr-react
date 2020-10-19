@@ -8,6 +8,7 @@ import CopyTradeActivityProfitSellOrderFilledPartially from "./CopyTradeActivity
 import CopyTradeActivityProfitSellOrderFilled from "./CopyTradeActivityProfitSellOrderFilled";
 import CopyTradeActivityStopSellOrderFilledPartially from "./CopyTradeActivityStopSellOrderFilledPartially";
 import CopyTradeActivityStopSellOrderFilled from "./CopyTradeActivityStopSellOrderFilled";
+import CopyTradeCompleted from "./CopyTradeCompleted";
 
 export default {
   INSUFFICIENT_BALANCE_FOR_SOCKET_CHECK: InsufficientBalanceForSocketCheck,
@@ -20,4 +21,5 @@ export default {
   COPY_TRADE_ACTIVITY_PROFIT_SELL_ORDER_FILLED: CopyTradeActivityProfitSellOrderFilled,
   COPY_TRADE_ACTIVITY_STOP_SELL_ORDER_FILLED_PARTIALLY: CopyTradeActivityStopSellOrderFilledPartially,
   COPY_TRADE_ACTIVITY_STOP_SELL_ORDER_FILLED: CopyTradeActivityStopSellOrderFilled,
+  COPY_TRADE_COMPLETED: CopyTradeCompleted,
 };
