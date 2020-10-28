@@ -6,6 +6,8 @@ import userpic from "../../image/user1.png";
 import authActions from "../../customApp/containers/Auth/_redux/actions";
 import appActions from "../../redux/app/actions";
 
+import profilePlaceHolder from "../../customApp/assets/profile-placeholder.png";
+
 import TopbarDropdownWrapper from "./topbarDropdown.style";
 
 const { logout } = authActions;
@@ -31,7 +33,8 @@ class TopbarUser extends Component {
     const profilePhotoUri = profilePhoto
       ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom,r_max/${profilePhoto ||
           ""}.jpg`
-      : "";
+      : profilePlaceHolder;
+
     const content = (
       <TopbarDropdownWrapper className="isoUserDropdown">
         <a className="isoDropdownLink" href="# ">
