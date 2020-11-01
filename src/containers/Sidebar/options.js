@@ -2,6 +2,16 @@ import appMenus from "../../customApp/sidebar";
 let options = [...appMenus];
 const devMenus = [
   {
+    key: "githubSearch",
+    label: "sidebar.githubSearch",
+    leftIcon: "ion-social-github",
+  },
+  {
+    key: "blank_page",
+    label: "sidebar.blankPage",
+    leftIcon: "ion-document",
+  },
+  {
     key: "mailbox",
     label: "sidebar.email",
     leftIcon: "ion-android-mail",

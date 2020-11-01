@@ -115,6 +115,9 @@ class Sidebar extends Component {
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
     const mode = collapsed === true ? "vertical" : "inline";
+
+    const env = process.env.REACT_APP_ENV;
+
     const onMouseEnter = (event) => {
       if (openDrawer === false) {
         toggleOpenDrawer();
@@ -164,40 +167,43 @@ class Sidebar extends Component {
                 this.getMenuItem({ submenuStyle, submenuColor, singleOption })
               )}
               {/* Demo Menu */}
-              <SubMenu
-                key="sub1"
-                title={
-                  <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="ion-android-options" />
-                    <span className="nav-text">
-                      <IntlMessages id="sidebar.menuLevels" />
+
+              {env === "DEV" && (
+                <SubMenu
+                  key="sub1"
+                  title={
+                    <span className="isoMenuHolder" style={submenuColor}>
+                      <i className="ion-android-options" />
+                      <span className="nav-text">
+                        <IntlMessages id="sidebar.menuLevels" /> sdfsdf
+                      </span>
                     </span>
-                  </span>
-                }
-              >
-                <MenuItemGroup
-                  key="g1"
-                  title={<IntlMessages id="sidebar.item1" />}
+                  }
                 >
-                  <Menu.Item style={submenuStyle} key="1">
-                    <IntlMessages id="sidebar.option1" />
-                  </Menu.Item>
-                  <Menu.Item style={submenuStyle} key="2">
-                    <IntlMessages id="sidebar.option2" />
-                  </Menu.Item>
-                </MenuItemGroup>
-                <MenuItemGroup
-                  key="g2"
-                  title={<IntlMessages id="sidebar.item2" />}
-                >
-                  <Menu.Item style={submenuStyle} key="3">
-                    <IntlMessages id="sidebar.option3" />
-                  </Menu.Item>
-                  <Menu.Item style={submenuStyle} key="4">
-                    <IntlMessages id="sidebar.option4" />
-                  </Menu.Item>
-                </MenuItemGroup>
-              </SubMenu>
+                  <MenuItemGroup
+                    key="g1"
+                    title={<IntlMessages id="sidebar.item1" />}
+                  >
+                    <Menu.Item style={submenuStyle} key="1">
+                      <IntlMessages id="sidebar.option1" />
+                    </Menu.Item>
+                    <Menu.Item style={submenuStyle} key="2">
+                      <IntlMessages id="sidebar.option2" />
+                    </Menu.Item>
+                  </MenuItemGroup>
+                  <MenuItemGroup
+                    key="g2"
+                    title={<IntlMessages id="sidebar.item2" />}
+                  >
+                    <Menu.Item style={submenuStyle} key="3">
+                      <IntlMessages id="sidebar.option3" />
+                    </Menu.Item>
+                    <Menu.Item style={submenuStyle} key="4">
+                      <IntlMessages id="sidebar.option4" />
+                    </Menu.Item>
+                  </MenuItemGroup>
+                </SubMenu>
+              )}
             </Menu>
           </Scrollbars>
         </Sider>
