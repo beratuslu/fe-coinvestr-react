@@ -4,7 +4,7 @@ export default {
 const siteConfig = {
   siteName: "COINVESTR",
   siteIcon: "ion-flash",
-  footerText: "Isomorphic ©2017 Created by RedQ, Inc",
+  footerText: "Coinvestr ©2021 Created by AENTIS, Inc",
 };
 
 const themeConfig = {
