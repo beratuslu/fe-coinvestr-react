@@ -19,9 +19,9 @@ const {
   toggleOpenDrawer,
   changeOpenKeys,
   changeCurrent,
-  toggleCollapsed
+  toggleCollapsed,
 } = appActions;
-const stripTrailingSlash = str => {
+const stripTrailingSlash = (str) => {
   if (str.substr(-1) === "/") {
     return str.substr(0, str.length - 1);
   }
@@ -46,10 +46,10 @@ class Sidebar extends Component {
   onOpenChange(newOpenKeys) {
     const { app, changeOpenKeys } = this.props;
     const latestOpenKey = newOpenKeys.find(
-      key => !(app.openKeys.indexOf(key) > -1)
+      (key) => !(app.openKeys.indexOf(key) > -1)
     );
     const latestCloseKey = app.openKeys.find(
-      key => !(newOpenKeys.indexOf(key) > -1)
+      (key) => !(newOpenKeys.indexOf(key) > -1)
     );
     let nextOpenKeys = [];
     if (latestOpenKey) {
@@ -60,9 +60,9 @@ class Sidebar extends Component {
     }
     changeOpenKeys(nextOpenKeys);
   }
-  getAncestorKeys = key => {
+  getAncestorKeys = (key) => {
     const map = {
-      sub3: ["sub2"]
+      sub3: ["sub2"],
     };
     return map[key] || [];
   };
@@ -82,7 +82,7 @@ class Sidebar extends Component {
             </span>
           }
         >
-          {children.map(child => {
+          {children.map((child) => {
             const linkTo = child.withoutDashboard
               ? `/${child.key}`
               : `${url}/${child.key}`;
@@ -115,7 +115,7 @@ class Sidebar extends Component {
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
     const mode = collapsed === true ? "vertical" : "inline";
-    const onMouseEnter = event => {
+    const onMouseEnter = (event) => {
       if (openDrawer === false) {
         toggleOpenDrawer();
       }
@@ -128,14 +128,14 @@ class Sidebar extends Component {
       return;
     };
     const styling = {
-      backgroundColor: customizedTheme.backgroundColor
+      backgroundColor: customizedTheme.backgroundColor,
     };
     const submenuStyle = {
       backgroundColor: "rgba(0,0,0,0.3)",
-      color: customizedTheme.textColor
+      color: customizedTheme.textColor,
     };
     const submenuColor = {
-      color: customizedTheme.textColor
+      color: customizedTheme.textColor,
     };
     return (
       <SidebarWrapper>
@@ -160,7 +160,7 @@ class Sidebar extends Component {
               selectedKeys={app.current}
               onOpenChange={this.onOpenChange}
             >
-              {options.map(singleOption =>
+              {options.map((singleOption) =>
                 this.getMenuItem({ submenuStyle, submenuColor, singleOption })
               )}
               {/* Demo Menu */}
@@ -207,10 +207,10 @@ class Sidebar extends Component {
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     app: state.App,
     customizedTheme: state.ThemeSwitcher.sidebarTheme,
-    height: state.App.height
+    height: state.App.height,
   }),
   { toggleOpenDrawer, changeOpenKeys, changeCurrent, toggleCollapsed }
 )(Sidebar);
