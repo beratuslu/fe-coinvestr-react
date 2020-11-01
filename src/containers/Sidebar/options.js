@@ -349,7 +349,8 @@ const devMenus = [
   },
 ];
 
-const env = process.env.REACT_APP_API_URL;
+const env = process.env.REACT_APP_ENV;
+console.log("env", env);
 if (env === "DEV") {
   options = [...appMenus, ...devMenus];
 }
