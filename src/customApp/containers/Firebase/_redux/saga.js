@@ -80,7 +80,7 @@ function subscribe(state) {
                 </Provider>
               ),
               placement: "bottomLeft",
-              duration: 5000,
+              duration: 5,
               // duration: 0,
             });
           }
