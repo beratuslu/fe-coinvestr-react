@@ -1,7 +1,7 @@
 const options = [
   {
-    key: "profile/user1",
-    label: "sidebar.profile",
+    key: "",
+    label: "sidebar.allUsers",
     leftIcon: "ion-android-person",
   },
 ];

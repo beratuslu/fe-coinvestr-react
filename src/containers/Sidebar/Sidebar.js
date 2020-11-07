@@ -111,12 +111,27 @@ class Sidebar extends Component {
     );
   };
   render() {
-    const { app, toggleOpenDrawer, customizedTheme, height } = this.props;
+    const {
+      app,
+      toggleOpenDrawer,
+      customizedTheme,
+      height,
+      userName,
+    } = this.props;
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
     const mode = collapsed === true ? "vertical" : "inline";
 
     const env = process.env.REACT_APP_ENV;
+
+    const optionsToRender = [
+      {
+        key: `profile/${userName}`,
+        label: "sidebar.profile",
+        leftIcon: "ion-android-person",
+      },
+      ...options,
+    ];
 
     const onMouseEnter = (event) => {
       if (openDrawer === false) {
@@ -163,7 +178,7 @@ class Sidebar extends Component {
               selectedKeys={app.current}
               onOpenChange={this.onOpenChange}
             >
-              {options.map((singleOption) =>
+              {optionsToRender.map((singleOption) =>
                 this.getMenuItem({ submenuStyle, submenuColor, singleOption })
               )}
               {/* Demo Menu */}
@@ -217,6 +232,7 @@ export default connect(
     app: state.App,
     customizedTheme: state.ThemeSwitcher.sidebarTheme,
     height: state.App.height,
+    userName: state.auth.user.userName,
   }),
   { toggleOpenDrawer, changeOpenKeys, changeCurrent, toggleCollapsed }
 )(Sidebar);

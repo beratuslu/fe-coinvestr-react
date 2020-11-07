@@ -6,7 +6,7 @@ export default class extends Component {
     return (
       <TableWrapper
         columns={this.props.tableInfo.columns}
-        dataSource={this.props.dataList.getAll()}
+        dataSource={this.props.dataList}
         className="isoGroupTable"
       />
     );

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 const PendingPool = {};
 const ReadyPool = {};
@@ -35,7 +36,7 @@ export default class ImageCell extends Component {
 
     const img = new Image();
     img.onload = () => {
-      PendingPool[src].forEach(callback => {
+      PendingPool[src].forEach((callback) => {
         callback(src);
       });
       delete PendingPool[src];
@@ -53,14 +54,23 @@ export default class ImageCell extends Component {
     }
   }
   render() {
+    const { url } = this.props;
     const style = this.state.src
       ? {
           backgroundImage: `url(${this.state.src})`,
-          width: '70px',
-          height: '70px',
-          backgroundSize: 'cover',
+          width: "70px",
+          height: "70px",
+          backgroundSize: "cover",
         }
       : undefined;
+
+    if (url) {
+      return (
+        <Link to={url}>
+          <div className="exampleImage" style={style} />
+        </Link>
+      );
+    }
     return <div className="exampleImage" style={style} />;
   }
 }

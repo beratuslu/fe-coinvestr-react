@@ -19,6 +19,16 @@ const routes = [
     component: asyncComponent(() => import("./containers/Profile/Profile")),
     exact: true,
   },
+  {
+    path: "",
+    component: asyncComponent(() => import("./containers/AllUsers/AllUsers")),
+  },
+
+  // {
+  //   path: "widgets",
+  //   component: asyncComponent(() => import("../Widgets/index.js")),
+  // },
+
   // {
   //   path: "profile/:userName/edit-copy",
   //   component: asyncComponent(() =>

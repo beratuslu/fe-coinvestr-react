@@ -360,7 +360,7 @@ const devMenus = [
 ];
 
 const env = process.env.REACT_APP_ENV;
-console.log("env", env);
+
 if (env === "DEV") {
   options = [...appMenus, ...devMenus];
 }

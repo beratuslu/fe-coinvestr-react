@@ -10,7 +10,7 @@ const routes = [
     exact: false,
   },
   {
-    path: "",
+    path: "widgets",
     component: asyncComponent(() => import("../Widgets/index.js")),
   },
   {
