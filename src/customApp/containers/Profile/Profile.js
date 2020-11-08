@@ -356,11 +356,11 @@ class Profile extends Component {
     const { symbols, createTradeLoading } = this.state;
     const profilePhotoUri =
       profile && profile.profilePhoto
-        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${profile.profilePhoto}.jpg`
+        ? `https://res.cloudinary.com/${REACT_APP_CLOUDINARY_NAME}/image/upload/w_300,h_300,c_fill,g_custom/${profile.profilePhoto}.jpg`
         : profilePlaceHolder;
     const coverPhotoUri =
       profile && profile.coverPhoto
-        ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_1500,h_150,c_crop,g_custom/${profile.coverPhoto}.jpg`
+        ? `https://res.cloudinary.com/${REACT_APP_CLOUDINARY_NAME}/image/upload/w_1500,h_150,c_crop,g_custom/${profile.coverPhoto}.jpg`
         : "";
 
     return (

@@ -57,7 +57,7 @@ class AllUsers extends Component {
       return {
         ...user,
         profilePhoto: user.profilePhoto
-          ? `https://res.cloudinary.com/dsmfye6yy/image/upload/w_300,h_300,c_fill,g_custom/${user.profilePhoto}.jpg`
+          ? `https://res.cloudinary.com/${REACT_APP_CLOUDINARY_NAME}/image/upload/w_300,h_300,c_fill,g_custom/${user.profilePhoto}.jpg`
           : profilePlaceHolder,
         key: user.id,
       };
