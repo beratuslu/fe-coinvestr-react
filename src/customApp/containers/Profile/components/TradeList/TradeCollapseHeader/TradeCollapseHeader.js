@@ -28,7 +28,7 @@ export default function TradeCollapseHeader({ trade }) {
 
   const profilePhotoUri =
     user && user.profilePhoto
-      ? `https://res.cloudinary.com/${REACT_APP_CLOUDINARY_NAME}/image/upload/w_300,h_300,c_fill,g_custom/${user.profilePhoto}.jpg`
+      ? `https://res.cloudinary.com/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload/w_300,h_300,c_fill,g_custom/${user.profilePhoto}.jpg`
       : profilePlaceHolder;
   return (
     <Table>

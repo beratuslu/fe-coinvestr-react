@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const AvatarCard = ({ className, fullName, profilePhoto, userName, push }) => {
   const profilePhotoUri = profilePhoto
-    ? `https://res.cloudinary.com/${REACT_APP_CLOUDINARY_NAME}/image/upload/w_300,h_300,c_fill,g_custom/${profilePhoto}.jpg`
+    ? `https://res.cloudinary.com/${process.env.REACT_APP_CLOUDINARY_NAME}/image/upload/w_300,h_300,c_fill,g_custom/${profilePhoto}.jpg`
     : profilePlaceHolder;
 
   return (

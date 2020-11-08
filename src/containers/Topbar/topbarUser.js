@@ -31,7 +31,9 @@ class TopbarUser extends Component {
   render() {
     const { profilePhoto } = this.props.auth.user;
     const profilePhotoUri = profilePhoto
-      ? `https://res.cloudinary.com/${REACT_APP_CLOUDINARY_NAME}/image/upload/w_300,h_300,c_fill,g_custom,r_max/${profilePhoto ||
+      ? `https://res.cloudinary.com/${
+          process.env.REACT_APP_CLOUDINARY_NAME
+        }/image/upload/w_300,h_300,c_fill,g_custom,r_max/${profilePhoto ||
           ""}.jpg`
       : profilePlaceHolder;
 

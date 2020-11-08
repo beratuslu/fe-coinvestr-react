@@ -96,12 +96,12 @@ self.__precacheManifest = [
     "url": "/dashboard/static/js/22.9b2f6688.chunk.js"
   },
   {
-    "revision": "7b36b519f03d02555fb3",
+    "revision": "b8486dfeef1c5e87f942",
     "url": "/dashboard/static/css/main.13155faf.chunk.css"
   },
   {
-    "revision": "7b36b519f03d02555fb3",
-    "url": "/dashboard/static/js/main.7b36b519.chunk.js"
+    "revision": "b8486dfeef1c5e87f942",
+    "url": "/dashboard/static/js/main.b8486dfe.chunk.js"
   },
   {
     "revision": "341d4a38ea0d87538d55",
@@ -412,16 +412,16 @@ self.__precacheManifest = [
     "url": "/dashboard/static/js/94.652701b2.chunk.js"
   },
   {
-    "revision": "931300dc136a7c261a51",
-    "url": "/dashboard/static/js/95.931300dc.chunk.js"
+    "revision": "c4a04797aac1782c8458",
+    "url": "/dashboard/static/js/95.c4a04797.chunk.js"
   },
   {
-    "revision": "d6e8f2c69dedcf1c5c8e",
-    "url": "/dashboard/static/js/96.d6e8f2c6.chunk.js"
+    "revision": "28e756a8fc1907c354e1",
+    "url": "/dashboard/static/js/96.28e756a8.chunk.js"
   },
   {
-    "revision": "ed4e9f1245abed05e6a2",
-    "url": "/dashboard/static/js/97.ed4e9f12.chunk.js"
+    "revision": "a3d6ce218d5f8d130b2f",
+    "url": "/dashboard/static/js/97.a3d6ce21.chunk.js"
   },
   {
     "revision": "dcbe559596558afe21ed",
@@ -708,8 +708,8 @@ self.__precacheManifest = [
     "url": "/dashboard/static/js/161.92abe11f.chunk.js"
   },
   {
-    "revision": "66518d5bfcab8e6b85f3",
-    "url": "/dashboard/static/js/runtime~main.66518d5b.js"
+    "revision": "1f68d210782c5654fe45",
+    "url": "/dashboard/static/js/runtime~main.1f68d210.js"
   },
   {
     "revision": "bc48afcc15d5d9d51255de0b2ee708be",
@@ -876,7 +876,7 @@ self.__precacheManifest = [
     "url": "/dashboard/static/media/algolia.fd4c766f.svg"
   },
   {
-    "revision": "799d0b43ae02428f0de19c06afa9757b",
+    "revision": "228f95b944b23eabd4d23dbfd09cb065",
     "url": "/dashboard/index.html"
   }
 ];
