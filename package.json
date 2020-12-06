@@ -29,6 +29,7 @@
     "history": "^4.6.3",
     "js-info-bubble": "git+https://github.com/RedQ/js-info-bubble.git",
     "js-rich-marker": "^1.1.2",
+    "jshint": "^2.12.0",
     "lodash": "^4.17.4",
     "moment": "^2.23.0",
     "node-sass": "^4.11.0",
