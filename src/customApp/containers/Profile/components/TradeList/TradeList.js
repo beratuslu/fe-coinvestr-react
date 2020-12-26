@@ -74,7 +74,6 @@ class TradeList extends Component {
         <span className="amountSymbol">
           {activity.symbol.split("BTC")[0]} <strong>{activity.qty}</strong>
         </span>
-        {/* TODO: createTime i moment ile formatlayalim */}
         <span className="createDate">
           {moment(activity.createTime).format("YYYY-MM-DD HH:mm:ss.SSS")}
         </span>
