@@ -96,12 +96,12 @@ self.__precacheManifest = [
     "url": "/dashboard/static/js/22.9b2f6688.chunk.js"
   },
   {
-    "revision": "b0428dbf02d850e12496",
+    "revision": "ed6c2175c722c269c230",
     "url": "/dashboard/static/css/main.13155faf.chunk.css"
   },
   {
-    "revision": "b0428dbf02d850e12496",
-    "url": "/dashboard/static/js/main.b0428dbf.chunk.js"
+    "revision": "ed6c2175c722c269c230",
+    "url": "/dashboard/static/js/main.ed6c2175.chunk.js"
   },
   {
     "revision": "3dc01856191245527ca1",
@@ -876,7 +876,7 @@ self.__precacheManifest = [
     "url": "/dashboard/static/media/algolia.fd4c766f.svg"
   },
   {
-    "revision": "772d9679bdc30a478b60237bfc61e294",
+    "revision": "aa2096686c42775d9c1d1dba93cc656f",
     "url": "/dashboard/index.html"
   }
 ];
