@@ -69,6 +69,7 @@ class Profile extends Component {
     this.onTradesPageChange = this.onTradesPageChange.bind(this);
 
     this.openUploadWidget = this.openUploadWidget.bind(this);
+    this.renderMenu = this.renderMenu.bind(this);
 
     this.state = {
       active: "trades",
