@@ -41,7 +41,7 @@ class GitSearch extends Component {
     const id = this.props.match.params.id;
 
     const trades = await axios.get(`/api/v1/trades/single-trade/${id}`);
-    this.setState({ trades });
+    this.setState({ trades: trades.data });
     console.log("GitSearch -> componentDidMount -> trades", trades);
   }
   render() {
