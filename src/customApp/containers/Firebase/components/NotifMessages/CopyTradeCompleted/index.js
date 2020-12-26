@@ -34,22 +34,6 @@ class CopyTradeStart extends Component {
         <div>
           <Link to={`/dashboard/copy-trade/${copyTradeId}`}>copy trade</Link>{" "}
           completed.
-          {(app.view === "DesktopView" || bar) &&
-            {
-              /* <div>
-              <br />
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Quantity:</td>
-                    <td>
-                      <strong>{lastExecutionQty}</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div> */
-            }}
         </div>
       </MessageWrapper>
     );
