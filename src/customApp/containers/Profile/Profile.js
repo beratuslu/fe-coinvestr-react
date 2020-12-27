@@ -88,7 +88,9 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    window.focus();
+  }
   async makeProfileRequest() {
     // const BASE_URL = `/api/v1/profile`;
     // const trades = await axios.post(`/api/v1/profile/`, requestObj);
