@@ -488,7 +488,10 @@ class Profile extends Component {
                           New Trade
                         </Button>
                       ) : isFollowed ? (
-                        <Dropdown overlay={this.renderMenu}>
+                        <Dropdown
+                          trigger={["click", "hover"]}
+                          overlay={this.renderMenu}
+                        >
                           <Button type="primary">
                             Following <Icon type="down" />
                           </Button>
