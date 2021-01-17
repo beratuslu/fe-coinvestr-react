@@ -66,8 +66,25 @@ class TradeList extends Component {
 
     profitSellOrderCanceled: "gray",
     stopSellOrderCanceled: "gray",
+
+    error: "red",
   };
   renderTradeActivityText(activity) {
+    if (activity.helpDeskRequestUrl) {
+      return (
+        <span>
+          We encountered an error while processing your copy trade. We created a{" "}
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href={activity.helpDeskRequestUrl}
+          >
+            help desk request
+          </a>{" "}
+          to solve the problem together.
+        </span>
+      );
+    }
     return (
       <ActivityWrapper>
         <span className="activity">{activity.title}</span>
@@ -96,12 +113,15 @@ class TradeList extends Component {
       if (activity.type === "stopSellOrderFilled") {
         dot = <Icon type="close-circle" style={{ fontSize: "16px" }} />;
       }
+      if (activity.helpDeskRequestUrl) {
+        dot = <Icon type="exclamation-circle" style={{ fontSize: "18px" }} />;
+      }
 
       return (
         <TimelineItem
           className="activity"
           dot={dot}
-          key={activity.id}
+          key={activity.id || activity.helpDeskRequestUrl}
           color={this.colors[activity.type]}
         >
           {text}
@@ -113,6 +133,16 @@ class TradeList extends Component {
   renderTrades(trades) {
     const { singleItem } = this.props;
     const tradesJsx = trades.map((trade) => {
+      let activities = trade.activities;
+      console.log(
+        "🚀 ~ file: TradeList.js ~ line 130 ~ TradeList ~ tradesJsx ~ trade",
+        trade
+      );
+      const { helpDeskRequestUrl } = trade;
+      if (trade.errored) {
+        activities.push({ helpDeskRequestUrl, type: "error" });
+      }
+
       return (
         <Panel
           showArrow={!singleItem}
@@ -121,7 +151,7 @@ class TradeList extends Component {
           key={trade.id}
         >
           <br />
-          <Timeline>{this.renderTradeActivities(trade.activities)}</Timeline>
+          <Timeline>{this.renderTradeActivities(activities)}</Timeline>
         </Panel>
       );
     });

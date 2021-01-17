@@ -91,6 +91,9 @@ const WDTradeListWrapper = styled.div`
   .collapseWrapper {
     overflow: hidden;
     overflow-x: auto;
+    .activity {
+      padding-top: 2px;
+    }
   }
 
   .isoTradeListWrapper {
