@@ -876,7 +876,7 @@ self.__precacheManifest = [
     "url": "/dashboard2/static/media/algolia.fd4c766f.svg"
   },
   {
-    "revision": "a8858e610ac0c86e2d6075f9f46df75d",
+    "revision": "b30b1822d07621194fbea3dc7a080fc9",
     "url": "/dashboard2/index.html"
   }
 ];
