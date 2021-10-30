@@ -108,7 +108,7 @@
     "redux-mock-store": "^1.2.3"
   },
   "scripts": {
-    "start": "env-cmd -f .env.dev react-scripts start",
+    "start": "env-cmd -f .env.production react-scripts start",
     "build": "env-cmd -f .env.production react-scripts build && cra-append-sw --skip-compile ./public/custom-sw.js",
     "build:staging": "env-cmd -f .env.staging react-scripts build && cra-append-sw --skip-compile ./public/custom-sw.js",
     "build:test": "env-cmd -f .env.test react-scripts build && cra-append-sw --skip-compile ./public/custom-sw.js",

@@ -7,7 +7,7 @@ import actions from "./actions";
 import axios from "axios";
 
 const onLoginRequest = async (payload) => {
-  return axios.post("/public/login", {
+  return axios.post("/auth/login", {
     email: payload.email,
     password: payload.password,
   });
