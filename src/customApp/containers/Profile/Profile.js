@@ -74,7 +74,6 @@ class Profile extends Component {
     this.state = {
       active: "trades",
       visible: false,
-
       recordType: "myTrades",
       pageSize: 10,
       tradesPageNumber: 1,

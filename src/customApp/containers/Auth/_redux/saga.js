@@ -41,7 +41,7 @@ export function* loginSuccess() {
     yield localStorage.setItem("token", payload.token);
     yield localStorage.setItem("user", JSON.stringify(payload.user));
     yield (axios.defaults.headers.common = {
-      Authorization: `Bearer ${payload.token}`,
+      Authorization: `bearer ${payload.token}`,
     });
 
     yield put(enumActions.fetchEnums());

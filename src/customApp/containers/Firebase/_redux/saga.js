@@ -33,7 +33,7 @@ firebase.initializeApp({
 });
 
 const firebaseCustomTokenRequest = async () => {
-  return axios.get("/api/v1/auth/get-firebase-custom-token");
+  return axios.get("/auth/get-firebase-custom-token");
 };
 
 function subscribe(state) {
